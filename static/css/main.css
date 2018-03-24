@@ -1,0 +1,72 @@
+:root {
+  /* fonts */
+  --base-font: 'Open Sans', -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Calibri, sans-serif;
+  --fw-light: 300;
+  --fw-normal: 400;
+  --fw-bold: 600;
+
+  /* colors */
+  --bg: #fff;
+  --text-color: #444;
+  --gray-light: #f9f9f9;
+  --gray-dark: #606060;
+  --gray: #e9e9e9;
+  --brand: #37bbe4;
+
+  /* sizing */
+  --container-width: 580px;
+  --spacing: 2.4rem;
+}
+
+
+/* base element styles */
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+}
+
+html {
+  font-size: 62.5%; /* 10px = 1rem */
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text-color);
+  font-family: var(--base-font);
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: 2.8rem;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-top: 1.2rem;
+}
+
+a {
+  color: var(--brand);
+}
+
+img {
+  max-width: 100%;
+}
+
+hr {
+  border-top: 1px solid var(--gray);
+  display: block;
+  height: 0;
+  padding: 0;
+}
+
+.container {
+  text-align: center;
+  margin-top: 8rem;
+}
