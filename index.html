@@ -28,9 +28,38 @@
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    L.marker([51.5, -0.09]).addTo(map)
-        .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    var pigIcon = L.icon({
+    iconUrl: 'pig.gif',
+    iconSize:     [38, 95], // size of the icon
+    });
+
+    L.marker([51.5, -0.09], {icon: pigIcon}).addTo(map)
         .openPopup();
+    L.marker([51.52, -0.087], {icon: pigIcon}).addTo(map)
+        .openPopup();
+    L.marker([51.51, -0.088], {icon: pigIcon}).addTo(map)
+        .openPopup();
+    L.marker([51.5, -0.098], {icon: pigIcon}).addTo(map)
+        .openPopup();
+    L.marker([51.51, -0.095], {icon: pigIcon}).addTo(map)
+        .openPopup();
+    L.marker([51.49, -0.082], {icon: pigIcon}).addTo(map)
+        .openPopup();
+    L.marker([51.48, -0.082], {icon: pigIcon}).addTo(map)
+        .openPopup();
+    L.marker([51.49, -0.107], {icon: pigIcon}).addTo(map)
+        .openPopup();
+    L.marker([51.49, -0.091], {icon: pigIcon}).addTo(map)
+        .openPopup();
+    L.marker([51.51, -0.101], {icon: pigIcon}).addTo(map)
+        .openPopup();
+    L.marker([51.52, -0.079], {icon: pigIcon}).addTo(map)
+        .openPopup();
+    L.marker([51.49, -0.088], {icon: pigIcon}).addTo(map)
+        .openPopup();
+
+
+
 
   </script>
 </body>
