@@ -1,3 +1,5 @@
+
+
 #mapContainer {
   position: absolute;
   top: 0;
@@ -12,8 +14,13 @@
   background-color: rgba(255,255,255,0.5);
   border-radius: 50%;
   box-shadow: 0px 0px 4px white;
-  transition: all 1s 
+  transition: all 1s; 
 }
 
+.leaflet-popup-tip {
+  background-color: #B7B7B7;
+}
 
-
+.leaflet-popup-content-wrapper{
+  background: #B7B7B7;
+}

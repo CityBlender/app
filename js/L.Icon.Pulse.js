@@ -5,8 +5,8 @@
         options: {
             className: '',
             iconSize: [12,12],
-            fillColor: 'red',
-            color: 'red',
+            fillColor: '#C70039',
+            color: '#C70039',
             animate: true,
             heartbeat: 1,
         },
