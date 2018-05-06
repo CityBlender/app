@@ -1,0 +1,23 @@
+{
+  "name": "fuinki-app",
+  "version": "1.0.0",
+  "description": "fuinki front-end",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CityBlender/app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CityBlender/app/issues"
+  },
+  "homepage": "https://github.com/CityBlender/app#readme",
+  "devDependencies": {
+    "browser-sync": "^2.24.4",
+    "gulp": "^3.9.1"
+  }
+}
