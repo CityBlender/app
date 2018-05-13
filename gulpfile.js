@@ -118,4 +118,4 @@ gulp.task('watch', function () {
 gulp.task('default', ['css', 'js', 'images', 'browserSync', 'watch'], function () {});
 
 // task for processing all the assets without starting a local server
-gulp.task('build', ['css', 'js', 'images'], function () { });
+gulp.task('build', ['css', 'js', 'images'], function () {});
