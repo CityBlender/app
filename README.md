@@ -18,9 +18,15 @@ Requirements:
 
 From root directory of the project run ``npm install`` or ``yarn install`` if you are using [Yarn](https://yarnpkg.com/en/).
 
-After you simply run ``gulp``.
+To start a development server run ``gulp`` from the command line.
 
-This will open a new browser window that will reload each time you save a change to project files.
+This opens a new browser window that reloads every time you make and save changes to project files.
+
+To only optimise assets without running a local development server run `gulp build`
+
+### Working with CSS
+The project uses [Sass CSS preprocessor](https://sass-lang.com/). All the styles are imported and controlled from the `app.scss`.
+
 
 ### Working with JavaScript
 
