@@ -20,6 +20,7 @@ const img_dest = './assets/img'
 
 const js_lib_src = [
   './assets_src/js/lib/jquery-3.3.1.slim.min.js',
+  './assets_src/js/lib/bootstrap.min.js',
   './assets_src/js/lib/leaflet.js',
   './assets_src/js/lib/leaflet-providers.js'
 ]
