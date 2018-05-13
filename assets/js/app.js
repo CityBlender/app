@@ -77,6 +77,24 @@
 })(window);
 $(document).ready(function () {
 
+
+
+    $.ajax({
+        contentType: "application/json",
+        dataType: "json",
+        type: 'GET',
+        url: "https://fuinki-api.herokuapp.com/london/events/today",
+        success: function (data) {
+            //Do stuff with the JSON data
+            console.log(data)
+        },
+        error: function (data, errorThrown) {
+            console.log('request failed :' + errorThrown);
+        }
+
+    });
+
+
     // configure leaflet
     var london_center = [51.5, -0.09];
     var initial_zoom = 13
