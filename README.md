@@ -24,6 +24,16 @@ This will open a new browser window that will reload each time you save a change
 
 ### Working with JavaScript
 
+The project relies on manually downloading and managing JS libraries and custom scripts.
+
+To add a new library list a path to the library in `js_lib_src` array in `gulpfile.js`.
+
+JS files in `assets_src/js/components/` are automatically concatenated in **alphabetical order** (you can use number prefix to control the order). Files in here should be entirely self-contained or only be comprised of functions that later get called from `app.js`.
+
+
+
+
+Please note that the order matters, so make sure you list any dependencies before files that require them.
 
 
 
