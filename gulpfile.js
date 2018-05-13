@@ -12,7 +12,7 @@ const uglify = require('gulp-uglify');
 
 
 // configure directories and files to be used with tasks
-const css_src = './assets_src/sass/**/*.scss'
+const css_src = './assets_src/sass/*.scss'
 const css_dest = './assets/css'
 
 const img_src = './assets_src/img/*'
@@ -60,7 +60,7 @@ gulp.task('css', function() {
     .pipe(sass().on('error', sass.logError)) // compile sass
     .pipe(autoprefixer({cascade: false})) // add vendor prefixes - supported browsers are listed in package.json
     .pipe(cleanCSS()) // minify CSS
-    .pipe(sourcemaps.write(css_dest)) // write sourcemaps
+    .pipe(sourcemaps.write('./')) // write sourcemaps
     .pipe(gulp.dest(css_dest)) // save
     .pipe(browserSync.stream()); // reload browser
 });
@@ -72,7 +72,7 @@ gulp.task('js-lib', function() {
     .pipe(plumber()) // prevent task from exiting the stream on error
     .pipe(sourcemaps.init()) // initialize sourcemaps
     .pipe(concat(js_lib_filename)) // concat
-    .pipe(sourcemaps.write()) // write sourcemaps
+    .pipe(sourcemaps.write('./')) // write sourcemaps
     .pipe(gulp.dest(js_lib_dest)) // save
     .pipe(browserSync.stream()); // reload browser
 });
@@ -84,7 +84,7 @@ gulp.task('js-custom', function() {
     .pipe(plumber()) // prevent task from exiting the stream on error
     .pipe(sourcemaps.init()) // initialize sourcemaps
     .pipe(concat(js_custom_filename)) // concat
-    .pipe(sourcemaps.write()) // write sourcemaps
+    .pipe(sourcemaps.write('./')) // write sourcemaps
     .pipe(gulp.dest(js_custom_dest)) // save
     .pipe(browserSync.stream()); // reload browser
 });
@@ -115,7 +115,7 @@ gulp.task('watch', function () {
 });
 
 // default task run using 'gulp'
-gulp.task('default', ['css', 'js', 'images', 'browserSync', 'watch'], function () {
+gulp.task('default', ['css', 'js', 'images', 'browserSync', 'watch'], function () {});
 
-
-});
+// task for processing all the assets without starting a local server
+gulp.task('build', ['css', 'js', 'images'], function () { });

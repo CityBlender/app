@@ -1,5 +1,11 @@
+// import Bootstrap
+@import 'bootstrap/bootstrap';
+
+// import Leaflet related CSS
 @import 'leaflet/_leaflet.scss';
 @import 'leaflet/_leaflet-icon.scss';
+
+
 
 #mapContainer {
   position: absolute;

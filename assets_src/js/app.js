@@ -1,14 +1,14 @@
-// set initial view
+// configure leaflet
 var london_center = [51.5, -0.09];
 var initial_zoom = 13
 
-// create a leaflet instance
-var map = L.map('mapContainer').setView(london_center, initial_zoom);
-
-// custom tiles settings
 var mapbox_tiles = 'https://api.mapbox.com/styles/v1/11soma/cjgry9jr3000z2roggiqpzehx/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiMTFzb21hIiwiYSI6ImNqZDBuMjV6dDF2bWcyeG8xNDByZXpjbjgifQ.5B5BJIcEtqFELPs36GUxcA';
 var map_attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>';
 var max_zoom = 18;
+
+
+// create a leaflet instance
+var map = L.map('mapContainer').setView(london_center, initial_zoom);
 
 // add custom tiles to the map
 L.tileLayer(mapbox_tiles, {
