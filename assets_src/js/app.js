@@ -2,22 +2,6 @@ $(document).ready(function () {
 
 
 
-    $.ajax({
-        contentType: "application/json",
-        dataType: "json",
-        type: 'GET',
-        url: "https://fuinki-api.herokuapp.com/london/events/today",
-        success: function (data) {
-            //Do stuff with the JSON data
-            console.log(data)
-        },
-        error: function (data, errorThrown) {
-            console.log('request failed :' + errorThrown);
-        }
-
-    });
-
-
     // configure leaflet
     var london_center = [51.5, -0.09];
     var initial_zoom = 13
@@ -45,8 +29,37 @@ $(document).ready(function () {
     // marker.bindPopup("a");
 
 
-    var marker = L.marker([51.5, -0.087], { icon: pulsingIcon }).addTo(map);
-    marker.bindPopup("Music desu");
+    // var marker = L.marker([51.5, -0.089], { icon: pulsingIcon }).addTo(map);
+    // marker.bindPopup("Music desu");
+
+
+    function addMarkers(data) {
+        $.each(data, function (data, e) {
+            var lat = e.location.y
+            var lng = e.location.x
+            var marker = L.marker([lat, lng], { icon: pulsingIcon }).addTo(map);
+        });
+    }
+
+    $.ajax({
+        contentType: "application/json",
+        dataType: "json",
+        type: 'GET',
+        url: "https://fuinki-api.herokuapp.com/london/events/today",
+        success: function (data) {
+            //Do stuff with the JSON data
+            // events = data
+            addMarkers(data)
+        },
+        error: function (data, errorThrown) {
+            console.log('request failed :' + errorThrown);
+        }
+
+    });
+
+
+
+
 
 // var marker = L.marker([51.51, -0.088],{icon: pulsingIcon}).addTo(map);
 // var marker = L.marker([51.5, -0.098],{icon: pulsingIcon}).addTo(map);
