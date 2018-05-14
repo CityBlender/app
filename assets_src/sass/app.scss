@@ -1,9 +1,13 @@
+// overide Bootstrap variables
+$primary: #e1e0dd;
+
 // import Bootstrap
 @import 'bootstrap/bootstrap';
 
 // import Leaflet related CSS
 @import 'leaflet/_leaflet.scss';
 @import 'leaflet/_leaflet-icon.scss';
+
 
 
 
@@ -30,4 +34,11 @@
 
 .leaflet-popup-content-wrapper{
   background: #B7B7B7;
+}
+
+.layer-switch {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 999;
 }
