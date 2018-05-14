@@ -112,8 +112,8 @@ $(document).ready(function () {
 
     function addMarkers(data) {
         $.each(data, function (data, e) {
-            var lat = e.location.y
-            var lng = e.location.x
+            var lat = e.location.lat
+            var lng = e.location.lng
             var marker = L.marker([lat, lng], { icon: pulsingIcon }).addTo(map);
         });
     }
@@ -136,18 +136,6 @@ $(document).ready(function () {
 
 
 
-
-
-// var marker = L.marker([51.51, -0.088],{icon: pulsingIcon}).addTo(map);
-// var marker = L.marker([51.5, -0.098],{icon: pulsingIcon}).addTo(map);
-// var marker = L.marker([51.51, -0.095],{icon: pulsingIcon}).addTo(map);
-// var marker = L.marker([51.49, -0.082],{icon: pulsingIcon}).addTo(map);
-// var marker = L.marker([51.48, -0.082],{icon: pulsingIcon}).addTo(map);
-// var marker = L.marker([51.49, -0.107],{icon: pulsingIcon}).addTo(map);
-// var marker = L.marker([51.49, -0.091],{icon: pulsingIcon}).addTo(map);
-// var marker = L.marker([51.51, -0.101],{icon: pulsingIcon}).addTo(map);
-// var marker = L.marker([51.52, -0.079],{icon: pulsingIcon}).addTo(map);
-// var marker = L.marker([51.49, -0.088],{icon: pulsingIcon}).addTo(map);
 
 
 
