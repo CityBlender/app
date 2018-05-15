@@ -114,7 +114,52 @@ $(document).ready(function () {
         $.each(data, function (data, e) {
             var lat = e.location.lat
             var lng = e.location.lng
+
+            // general
+            close_div = '</div>'
+
+            // event 
+            var event_name = e.name
+            var event_class = '<div class="event__event_name">'
+            var event = event_class + event_name + close_div
+
+            // venue
+            var venue_name = e.venue.name
+            var venue_class = '<div class="event__venue_name">'
+            var venue = venue_class + venue_name + close_div
+
+            // artist
+            var artists_name = e.artists
+            var artists_array_length = artists_name.length
+            var artists_list = []
+            for (var i = 0; i < artists_array_length; i++){
+                var artists_name_elem = artists_name[i].name
+                artists_list.push(" " + artists_name_elem)
+            }
+            var artist_class = '<div class="event__artist_name">'
+            var artist = artist_class + artists_list + close_div
+
+            // foursquare review
+            var foursquare_review = e.foursquare.description
+            var foursquare_class = '<div class="event__foursquare_name">'
+            if (foursquare_review) {
+                var foursquare = foursquare_class + foursquare_review + close_div
+            }
+            else {
+                var foursquare = ''
+            }
+
+            // foursquare likes
+
+            // foursquare rating
+
+
+
+            // finally build the marker
+            var final = event + venue + artist + foursquare;
             var marker = L.marker([lat, lng], { icon: pulsingIcon }).addTo(map);
+            marker.bindPopup(final).openPopup();
+
         });
     }
 
@@ -122,7 +167,7 @@ $(document).ready(function () {
         contentType: "application/json",
         dataType: "json",
         type: 'GET',
-        url: "https://fuinki-api.herokuapp.com/london/events/today",
+        url: "https://fuinki-api.herokuapp.com/london/events/2018-05-18",
         success: function (data) {
             //Do stuff with the JSON data
             // events = data
