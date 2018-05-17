@@ -32,16 +32,102 @@ $primary: #e1e0dd;
 }
 
 .leaflet-popup-tip {
-  background-color: #B7B7B7;
+  background-color: #448f6e;
 }
 
 .leaflet-popup-content-wrapper{
-  background: #B7B7B7;
+  background: #448f6e;
 }
-
 .layer-switch {
   position: fixed;
   top: 1rem;
   right: 1rem;
   z-index: 999;
+}
+.leaflet-popup-content{
+  width:30vw !important;
+}
+.event__event_page {
+  font-weight: bold;
+  font-size: 125%;
+  margin-bottom: 2vh;
+  font-style: italic;
+  background-color: #fcd000;
+}
+.event__event_page a{
+  color: #0d384d;
+
+}
+.event__artist {
+  font-weight: bold;
+  margin: 1vw;
+  text-align: right;
+  padding: 1vw;
+  position: relative;
+}
+.event__artist img{
+  display: inline-block;
+  vertical-align: middle;
+  width: 4vw;
+  height:4vw;
+  position: absolute;
+  left: 1vw;
+  top: 0;
+}
+.event__artist h4 {
+  font-size: 125%;
+  display: inline-block;
+  position: absolute;
+  left: 6vw;
+}
+.event__songkick_button{
+  padding: 1vw;
+  background-image: url("../../../assets_src/img/songkick_logo.jpeg");
+  margin: 0 0.5vw;
+  background-size:cover;
+  display: inline-block; 
+  vertical-align: bottom; 
+}
+.event__spotify_button{
+  padding: 1vw;
+  background-image: url("../../../assets_src/img/spotify_logo.jpeg");
+  margin: 0 0.5vw;
+  background-size:cover;
+  display: inline-block; 
+  vertical-align: bottom; 
+}
+.event__lastfm_button{
+  padding: 1vw;
+  background-image: url("../../../assets_src/img/lastfm_logo.jpeg");
+  margin: 0 0.5vw;
+  background-size:cover;
+  display: inline-block; 
+  vertical-align: bottom; 
+}
+.event__artist_section h3{
+  font-size: 150%;
+  text-align: left;
+  font-weight: bold;
+}
+.event__venue_section h3{
+  font-size: 150%;
+  text-align: left;
+  font-weight: bold;
+}
+.event__artist_section {
+  margin: 4vh 0;
+}
+.event__page h2 {
+  font-size: 125%;
+  font-weight: bold;
+}
+.event__venue_name h4{
+  margin-top: 2vh;
+  margin-left: 2vh;
+  font-size: 125%;
+}
+.event__venue_section h5{
+  font-size: 125%;
+  margin-left: 2vh;
+  display: inline-block; 
 }
