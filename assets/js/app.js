@@ -77,7 +77,8 @@
 })(window);
 $(document).ready(function () {
 
-
+    // area
+    var area = "London"
 
     // configure leaflet
     var london_center = [51.5, -0.09];
@@ -139,47 +140,49 @@ $(document).ready(function () {
                 // event title
                 var event_name = e.name
                 var event_url = e.url
-                var event_page = '<a class="event__page" href="' + event_url + '"><h2>' + event_name + '</h2></a>'
-                var event_class = '<div class="event__event_page">'
-                var event_name_div = event_class + event_page + close_div
+                var event_name_text = '<a class="event__title" href="' + event_url + '"><h2>' + event_name + '</h2></a>'
+                var event_name_class = '<div class="event__event_title">'
+                var event_name_div = event_name_class + event_name_text + close_div
 
                 // create venue section
                 var venue_section_class = '<div class="event__venue_section">'
                 var venue_title_div = '<h3> Venue </h3>'
 
-
                 // venue name
                 var venue_name = e.venue.name
-                var venue_name_link = '<h4>' + venue_name + '</h4>'
-                var venue_class = '<div class="event__venue_name">'
-                var venue_name_div = venue_class + venue_name_link + close_div
+                var venue_name_text = '<a href = "https://www.google.com/maps/search/?api=1&query=' + venue_name + '">' + '<h4>' + venue_name + '</h4>' + '</a>'
+                var venue_name_class = '<div class="event__venue_name">'
+                var venue_name_div = venue_name_class + venue_name_text + close_div
 
                 // event time
-                var event_time = e.time
-                var event_time_h5 = '<h5>' + event_time + '</h5>'
-                var time_class = '<div class="event__time">'
-                var event_time_div = time_class + '<h5>Time:</h5>' +  event_time_h5 + close_div
-
-                
+                if (e.time !== null){
+                    var event_time = e.time
+                } else {
+                    event_time = "Time not specified"
+                }
+                var event_time_text = '<h5>Time: ' + event_time + '</h5>'
+                var event_time_class = '<div class="event__time">'
+                var event_time_div = event_time_class  +  event_time_text + close_div
 
                 // foursquare rate
                 if (typeof e.foursquare.rating !== "undefined"){
                     var foursquare_rate = e.foursquare.rating
                     var foursquare_rate_color = e.foursquare.rating_color
-                    var foursquare_rate_with_color = '<h5>FourSquare rate:</h5>' + '<h5 style="color:#' + foursquare_rate_color + ';">' + foursquare_rate + '</h5>'
+                    var foursquare_rate_text= '<h5>FourSquare rate:</h5>' + '<h5 style="color:#' + foursquare_rate_color + ';">' + foursquare_rate + '</h5>'
                     var foursquare_rate_class = '<div class="event__foursquare_rate">'
-                    var foursquare_rate_div = foursquare_rate_class + foursquare_rate_with_color + close_div
+                    var foursquare_rate_div = foursquare_rate_class + foursquare_rate_text + close_div
                 } else {
                     var foursquare_rate_div = ''
                 }
 
                 // foursquare tips
                 var foursquare_tips = e.foursquare.tips
-                var foursquare_class = '<div class="event__foursquare_tips">'
+                var foursquare_tips_class = '<div class="event__foursquare_tips">'
                 if (typeof foursquare_tips !== "undefined"){
                     if (typeof foursquare_tips[0] !== "undefined") {
                         if (typeof foursquare_tips[0].text !== "undefined") {
-                            var foursquare_tips_div = foursquare_class + '<h5>Visitor tips:</h5>' + '<h5>' + foursquare_tips[0].text + '</h5>' + close_div
+                            var foursquare_tips_text = '<h5>Visitor tips:</h5>' + '<h5>' + foursquare_tips[0].text + '</h5>'
+                            var foursquare_tips_div = foursquare_tips_class + foursquare_tips_text + close_div
                         } else {
                             var foursquare_tips_div = ''
                         }
@@ -192,8 +195,7 @@ $(document).ready(function () {
                 }
 
                 // construct venue section 
-
-                var venue_section = venue_section_class + venue_title_div + venue_name_div + event_time_div + foursquare_rate_with_color + foursquare_tips_div
+                var venue_section = venue_section_class + venue_title_div + venue_name_div + event_time_div + foursquare_rate_div + foursquare_tips_div + close_div
 
                 // create artist section
                 var artist_section_class = '<div class="event__artist_section">'
@@ -213,13 +215,13 @@ $(document).ready(function () {
 
                     // artist name
                     var artist_name = artists[i].name
-                    var artist_name_div = '<h4>' + artist_name + '</h4>'
-                    artists_name_list.push(artist_name_div)
+                    var artist_name_text = '<h4>' + artist_name + '</h4>'
+                    artists_name_list.push(artist_name_text)
 
                     // artist songkick page
                     var artists_songkick_page_url = artists[i].songkick_url
-                    var artists_songkick_page = '<a class="event__songkick_button" href="' + artists_songkick_page_url + '"></a>'
-                    artists_songkick_page_list.push(artists_songkick_page)
+                    var artists_songkick_text = '<a class="event__artist_songkick" href="' + artists_songkick_page_url + '"></a>'
+                    artists_songkick_page_list.push(artists_songkick_text)
                 }
 
                 // artist info
@@ -250,14 +252,13 @@ $(document).ready(function () {
                         }
                         var artist_image = '<img src="' + artist_image_url + '">'
 
-
                         // artist spotify page
                         var artist_spotify_page_url = artist_info.spotify.href
-                        var artist_spotify_page = '<a class="event__spotify_button" href="' + artist_spotify_page_url + '"></a>'
+                        var artist_spotify_page = '<a class="event__artist_spotify" href="' + artist_spotify_page_url + '"></a>'
 
                         // artist lastfm page
                         var artist_lastfm_page_url = artist_info.lastfm.url
-                        var artist_lastfm_page = '<a class="event__lastfm_button" href="' + artist_lastfm_page_url + '"></a>'
+                        var artist_lastfm_page = '<a class="event__artist_lastfm" href="' + artist_lastfm_page_url + '"></a>'
 
                         // construct artist section
                         var artist_elem = artist_class + artist_image + artists_name_list[i] + 
@@ -272,8 +273,7 @@ $(document).ready(function () {
 
                 }, 500);
                     
-                    
-            
+
                 })
             }
             marker.on('click', onMarkerClick);

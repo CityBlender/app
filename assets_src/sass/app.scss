@@ -11,9 +11,6 @@ $primary: #e1e0dd;
 @import 'leaflet/_leaflet.scss';
 @import 'leaflet/_leaflet-icon.scss';
 
-
-
-
 #mapContainer {
   position: absolute;
   top: 0;
@@ -21,7 +18,6 @@ $primary: #e1e0dd;
   bottom: 0;
   left: 0;
 }
-
 .animated-icon {
   width: 20px;
   height: 20px;
@@ -30,13 +26,13 @@ $primary: #e1e0dd;
   box-shadow: 0px 0px 4px white;
   transition: all 1s;
 }
-
 .leaflet-popup-tip {
-  background-color: #448f6e;
+  background-color: #000;
 }
-
 .leaflet-popup-content-wrapper{
-  background: #448f6e;
+  background: #000;
+  border-style: solid;
+  border-color: #50a882;;
 }
 .layer-switch {
   position: fixed;
@@ -47,87 +43,113 @@ $primary: #e1e0dd;
 .leaflet-popup-content{
   width:30vw !important;
 }
-.event__event_page {
-  font-weight: bold;
+
+// event title related css
+.event__event_title {
   font-size: 125%;
+  font-weight: bold;
   margin-bottom: 2vh;
   font-style: italic;
-  background-color: #fcd000;
+  text-align: center;
+  // background-color: #fcd000;
 }
-.event__event_page a{
-  color: #0d384d;
-
+.event__event_title a{
+  color: #50a882;
 }
-.event__artist {
+.event__title h2 {
+  font-size: 125%;
   font-weight: bold;
-  margin: 1vw;
+}
+
+// event artist related css
+.event__artist {
+  margin: 4vw 0;
+  font-weight: bold;
   text-align: right;
-  padding: 1vw;
   position: relative;
 }
 .event__artist img{
-  display: inline-block;
-  vertical-align: middle;
   width: 4vw;
   height:4vw;
+  display: inline-block;
+  vertical-align: middle;
   position: absolute;
-  left: 1vw;
-  top: 0;
+  left: 0vw;
+  bottom: 0;
+}
+.event__artist_section h3{
+  font-size: 150%;
+  font-weight: bold;
+  text-align: left;
+  color: #fff;
+  border-bottom: solid 3px#50a882;
+  display: inline-block;
+  font-family: 'Roboto', sans-serif;
+
 }
 .event__artist h4 {
   font-size: 125%;
   display: inline-block;
   position: absolute;
-  left: 6vw;
-}
-.event__songkick_button{
-  padding: 1vw;
-  background-image: url("../../../assets_src/img/songkick_logo.jpeg");
-  margin: 0 0.5vw;
-  background-size:cover;
-  display: inline-block; 
-  vertical-align: bottom; 
-}
-.event__spotify_button{
-  padding: 1vw;
-  background-image: url("../../../assets_src/img/spotify_logo.jpeg");
-  margin: 0 0.5vw;
-  background-size:cover;
-  display: inline-block; 
-  vertical-align: bottom; 
-}
-.event__lastfm_button{
-  padding: 1vw;
-  background-image: url("../../../assets_src/img/lastfm_logo.jpeg");
-  margin: 0 0.5vw;
-  background-size:cover;
-  display: inline-block; 
-  vertical-align: bottom; 
-}
-.event__artist_section h3{
-  font-size: 150%;
-  text-align: left;
-  font-weight: bold;
-}
-.event__venue_section h3{
-  font-size: 150%;
-  text-align: left;
-  font-weight: bold;
+  left: 5vw;
+  bottom: 2vh;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
 }
 .event__artist_section {
   margin: 4vh 0;
 }
-.event__page h2 {
-  font-size: 125%;
+.event__artist_songkick{
+  padding: 0.75vw;
+  margin: 0vh 0.25vw 0;
+  background-image: url("../../../assets_src/img/songkick_logo.jpeg");
+  background-size:cover;
+  display: inline-block; 
+  vertical-align: bottom; 
+}
+.event__artist_spotify{
+  padding: 0.75vw;
+  margin: 0vh 0.25vw 0;
+  background-image: url("../../../assets_src/img/spotify_logo.jpeg");
+  background-size:cover;
+  display: inline-block; 
+  vertical-align: bottom; 
+}
+.event__artist_lastfm{
+  padding: 0.75vw;
+  margin: 0vh 1vw 0 0.25vw;
+  background-image: url("../../../assets_src/img/lastfm_logo.jpeg");
+  background-size:cover;
+  display: inline-block; 
+  vertical-align: bottom; 
+}
+
+// event venue related css
+.event__venue_section h3{
+  font-size: 150%;
   font-weight: bold;
+  text-align: left;
+  color: #fff;
+  border-bottom: solid 3px#50a882;
+  font-family: 'Roboto', sans-serif;
+  display: inline-block; 
 }
 .event__venue_name h4{
-  margin-top: 2vh;
-  margin-left: 2vh;
   font-size: 125%;
+  margin-top: 2vh;
+  // margin-left: 1vh;
+  font-weight: bold;
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+  display: inline-block; 
+}
+.event__venue_name h4:hover{
+  color: #50a882;
 }
 .event__venue_section h5{
   font-size: 125%;
-  margin-left: 2vh;
+  margin-left: 6vh;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
   display: inline-block; 
 }
