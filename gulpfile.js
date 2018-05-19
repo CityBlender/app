@@ -18,12 +18,7 @@ const css_dest = './assets/css'
 const img_src = './assets_src/img/*'
 const img_dest = './assets/img'
 
-const js_lib_src = [
-  './assets_src/js/lib/jquery-3.3.1.min.js',
-  './assets_src/js/lib/bootstrap.min.js',
-  './assets_src/js/lib/leaflet.js',
-  './assets_src/js/lib/leaflet-providers.js'
-]
+const js_lib_src = './assets_src/js/lib/*.js'
 const js_lib_filename = 'libraries.js'
 const js_lib_dest = './assets/js'
 
@@ -33,6 +28,8 @@ const js_custom_src = [
 ]
 const js_custom_filename = 'app.js'
 const js_custom_dest = './assets/js'
+
+const js_watch = './assets_src/js/*'
 
 
 
@@ -109,8 +106,7 @@ gulp.task('images', function () {
 // watch
 gulp.task('watch', function () {
   gulp.watch(css_src, ['css']);
-  gulp.watch(js_lib_src, ['js']);
-  gulp.watch(js_custom_src, ['js']);
+  gulp.watch(js_watch, ['js']);
   gulp.watch(img_src, ['images']);
   gulp.watch('*.html', ['reload']);
 });
