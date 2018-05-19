@@ -108,7 +108,7 @@ gulp.task('watch', function () {
   gulp.watch(css_src, ['css']);
   gulp.watch(js_watch, ['js']);
   gulp.watch(img_src, ['images']);
-  gulp.watch('*.html', ['reload']);
+  gulp.watch('./**/**/*.html', ['reload']);
 });
 
 // default task run using 'gulp'
