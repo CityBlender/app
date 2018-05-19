@@ -3,6 +3,8 @@
 //  - don't change anything in original files
 //  - instead just copy the variable name here and assing your desired value
 $primary: #e1e0dd;
+$sidebar-width: 15vw;
+$map-width: 100vw - $sidebar-width;
 
 // import Bootstrap
 @import 'bootstrap/bootstrap';
@@ -16,8 +18,19 @@ $primary: #e1e0dd;
   top: 0;
   right: 0;
   bottom: 0;
-  left: 0;
+  // left: 0;
+  width: $map-width;
 }
+
+.sidebar {
+  width: $sidebar-width;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  border: 3px solid red;
+}
+
 .animated-icon {
   width: 20px;
   height: 20px;
