@@ -7,19 +7,26 @@ $(document).ready(function () {
     var london_center = [51.5, -0.09];
     var initial_zoom = 13
 
-    var mapbox_tiles = 'https://api.mapbox.com/styles/v1/11soma/cjgry9jr3000z2roggiqpzehx/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiMTFzb21hIiwiYSI6ImNqZDBuMjV6dDF2bWcyeG8xNDByZXpjbjgifQ.5B5BJIcEtqFELPs36GUxcA';
+    var mapbox_tiles = 'https://api.mapbox.com/styles/v1/iljapanic/cjhdhn7di1tm22rs58tce6hju/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaWxqYXBhbmljIiwiYSI6ImNqOG9zdXk5cTA4NjEzM28zZmZmeGE4eDAifQ.4QdssXJs5l6Hw3Uk0fVeoA';
     var map_attribution = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>';
     var max_zoom = 18;
 
 
     // create a leaflet instance
-    var map = L.map('mapContainer').setView(london_center, initial_zoom);
+    var map = L.map('mapContainer', {
+        zoomControl: false // disable default zoom
+    }).setView(london_center, initial_zoom);
 
     // add custom tiles to the map
     L.tileLayer(mapbox_tiles, {
         attribution: map_attribution,
         maxZoom: max_zoom,
         id: 'mapbox.mapbox-streets-v7',
+    }).addTo(map);
+
+    // position zoom button
+    L.control.zoom({
+        position: 'bottomright'
     }).addTo(map);
 
 
@@ -117,7 +124,7 @@ $(document).ready(function () {
                     var foursquare_tips_div = ''
                 }
 
-                // construct venue section 
+                // construct venue section
                 var venue_section = venue_section_class + venue_title_div + venue_name_div + event_time_div + foursquare_rate_div + foursquare_tips_div + close_div
 
                 // create artist section
@@ -152,8 +159,8 @@ $(document).ready(function () {
                 setTimeout(function() {
                     var artist = '<h3>Artists</h3>'
                     for (var i = 0; i < output.length; i++){
-                        
-                        // got the artist data 
+
+                        // got the artist data
                         var artist_info = output[i]
 
                         // artist image
@@ -184,7 +191,7 @@ $(document).ready(function () {
                         var artist_lastfm_page = '<a class="event__artist_lastfm" href="' + artist_lastfm_page_url + '"></a>'
 
                         // construct artist section
-                        var artist_elem = artist_class + artist_image + artists_name_list[i] + 
+                        var artist_elem = artist_class + artist_image + artists_name_list[i] +
                             artists_songkick_page_list[i] + artist_spotify_page + artist_lastfm_page + close_div
                         artist += artist_elem
                         var artist_section = artist_section_class + artist + close_div
@@ -195,7 +202,7 @@ $(document).ready(function () {
                     marker.bindPopup(final).openPopup()
 
                 }, 500);
-                    
+
 
                 })
             }

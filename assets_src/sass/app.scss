@@ -44,6 +44,14 @@ $primary: #e1e0dd;
   width:30vw !important;
 }
 
+.leaflet-control-attribution {
+  background:rgba(#333, 0.75) !important;
+  color: #999;
+  a {
+    color: #ccc;
+  }
+}
+
 // event title related css
 .event__event_title {
   font-size: 125%;
@@ -104,24 +112,24 @@ $primary: #e1e0dd;
   margin: 0vh 0.25vw 0;
   background-image: url("../../../assets_src/img/songkick_logo.jpeg");
   background-size:cover;
-  display: inline-block; 
-  vertical-align: bottom; 
+  display: inline-block;
+  vertical-align: bottom;
 }
 .event__artist_spotify{
   padding: 0.75vw;
   margin: 0vh 0.25vw 0;
   background-image: url("../../../assets_src/img/spotify_logo.jpeg");
   background-size:cover;
-  display: inline-block; 
-  vertical-align: bottom; 
+  display: inline-block;
+  vertical-align: bottom;
 }
 .event__artist_lastfm{
   padding: 0.75vw;
   margin: 0vh 1vw 0 0.25vw;
   background-image: url("../../../assets_src/img/lastfm_logo.jpeg");
   background-size:cover;
-  display: inline-block; 
-  vertical-align: bottom; 
+  display: inline-block;
+  vertical-align: bottom;
 }
 
 // event venue related css
@@ -132,7 +140,7 @@ $primary: #e1e0dd;
   color: #fff;
   border-bottom: solid 3px#50a882;
   font-family: 'Roboto', sans-serif;
-  display: inline-block; 
+  display: inline-block;
 }
 .event__venue_name h4{
   font-size: 125%;
@@ -141,7 +149,7 @@ $primary: #e1e0dd;
   font-weight: bold;
   color: #fff;
   font-family: 'Roboto', sans-serif;
-  display: inline-block; 
+  display: inline-block;
 }
 .event__venue_name h4:hover{
   color: #50a882;
@@ -151,5 +159,5 @@ $primary: #e1e0dd;
   margin-left: 6vh;
   font-family: 'Roboto', sans-serif;
   color: #fff;
-  display: inline-block; 
+  display: inline-block;
 }
