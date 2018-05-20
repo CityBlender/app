@@ -31,11 +31,11 @@
           <section v-else>
             <div v-if="loading">Loading...</div>
 
-            <ol v-else class="event-list">
-              <li v-for="event in events" class="event">
+            <div v-else class="event-list">
+              <div v-for="event in events" class="event">
                 {{ event.name }}
-              </li>
-            </ol>
+              </div>
+            </div>
 
           </section>
         </div>
