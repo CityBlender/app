@@ -18,6 +18,7 @@
 
   <!-- app -->
   <div id="app">
+
     <div class="row no-gutters">
 
       <!-- sidebar -->
@@ -25,7 +26,8 @@
         <div class="sidebar">
           <ol class="event-list">
             <li v-for="event in events" class="event">
-              {{ event.name }}
+              {{ event.name }}<br>
+              {{ event.time }}
             </li>
           </ol>
         </div>

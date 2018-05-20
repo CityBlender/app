@@ -22,8 +22,9 @@ new Vue({
 
     getEvents() {
       axios
-        .get('https://fuinki-api.herokuapp.com/london/events/2018-05-20')
+        .get('https://fuinki-api.herokuapp.com/london/events/2018-05-19')
         .then(response => (this.events = response.data))
+        .catch(error => console.log(error))
     },
 
     // initialize a Leaflet instance
