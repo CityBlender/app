@@ -25,11 +25,11 @@
       <div class="col-md-2">
         <div class="sidebar">
           <section v-if="errored">
-            <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+            <p>We're sorry, we're not able to retrieve events at the moment, please try again later</p>
           </section>
 
           <section v-else>
-            <div v-if="loading">Loading...</div>
+            <div v-if="loading" class="loading">Loading...</div>
 
             <ul v-else class="list-group event-list">
               <li v-for="event in events" class="list-group-item event">{{ event.name }}</li>

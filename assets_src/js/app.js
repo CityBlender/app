@@ -1,9 +1,6 @@
 import { config } from './config';
 import './components/pulsingIcon'
-import { EventCard } from './components/eventCard'
-
-
-Vue.component('eventCard', EventCard)
+import { getEventCard } from './components/eventCard'
 
 new Vue({
   el: '#app',
@@ -26,7 +23,6 @@ new Vue({
   mounted() {
     this.initMap();
     this.getEvents();
-    // this.plotEvents();
   },
   methods: {
 
@@ -74,9 +70,9 @@ new Vue({
       events.forEach(function(event) {
         var lat = event.location.lat;
         var lng = event.location.lng;
-        // // create a custom pulsating marker
         var pulsingIcon = L.icon.pulse({ iconSize: [8, 8], color: '#C70039' });
-        L.marker([lat, lng], { icon: pulsingIcon }).bindPopup(event.name).addTo(map);
+        // create a marker
+        L.marker([lat, lng], { icon: pulsingIcon }).bindPopup(getEventCard(event)).addTo(map);
       });
     }
 
