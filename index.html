@@ -16,28 +16,55 @@
 
 <body>
 
-  <div class="container-fluid">
+  <!-- app -->
+  <div id="app">
+    <div class="row no-gutters">
 
-    <div class="layer-switch">
-      <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn active btn-primary">Gigs</button>
-        <button type="button" class="btn btn-primary">Genres</button>
-        <button type="button" class="btn btn-primary">Vibes</button>
+      <!-- sidebar -->
+      <div class="col-md-2">
+        <div class="sidebar">
+          <ol class="event-list">
+            <li v-for="event in events" class="event">
+              {{ event.name }}
+            </li>
+          </ol>
+        </div>
       </div>
+      <!-- /sidebar -->
+
+      <!-- main -->
+      <div class="col-md-10">
+        <div class="main">
+
+          <!-- layer-switch -->
+          <div class="layer-switch">
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" class="btn active btn-primary">Gigs</button>
+              <button type="button" class="btn btn-primary">Genres</button>
+              <button type="button" class="btn btn-primary">Vibes</button>
+            </div>
+          </div>
+          <!-- /layer-switch -->
+
+          <!-- map -->
+          <div id="map" class="map"></div>
+          <!-- /map -->
+        </div>
+      </div>
+      <!-- /main -->
+
     </div>
-
-    <div class="sidebar">
-      <h1>Fuinki</h1>
-    </div>
-
-    <!-- leaflet.js map -->
-    <div id="mapContainer"></div>
-
   </div>
+  <!-- /app -->
 
 
   <!-- load libraries -->
   <script src="assets/js/libraries.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
 
   <!-- load custom scripts -->
   <script src="assets/js/app.js"></script>
