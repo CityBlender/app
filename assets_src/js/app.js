@@ -1,12 +1,9 @@
 import { config } from './config';
 import './components/pulsingIcon'
+import { EventCard } from './components/eventCard'
 
-const EventCard = {
-  attributes: null,
-  template: '<h2>{{ event.name }}</h2>'
-}
 
-Vue.component('event-card', EventCard)
+Vue.component('eventCard', EventCard)
 
 new Vue({
   el: '#app',
