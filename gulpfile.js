@@ -1,14 +1,21 @@
 const autoprefixer = require('gulp-autoprefixer');
 const browserSync = require('browser-sync');
+const buffer = require('vinyl-buffer');
 const cleanCSS = require('gulp-clean-css');
 const concat = require('gulp-concat');
 const gulp = require('gulp');
 const imagemin = require('gulp-imagemin');
 const notify = require('gulp-notify');
 const plumber = require('gulp-plumber');
+const rollup = require('rollup-stream');
 const sass = require('gulp-sass');
+const source = require('vinyl-source-stream');
 const sourcemaps = require('gulp-sourcemaps');
-const uglify = require('gulp-uglify');
+const uglify = require('gulp-uglify-es').default;
+
+// rollup plugins
+const resolveNodeModules = require('rollup-plugin-node-resolve');
+const babel = require('rollup-plugin-babel');
 
 
 // configure directories and files to be used with tasks
@@ -30,6 +37,10 @@ const js_custom_filename = 'app.js'
 const js_custom_dest = './assets/js'
 
 const js_watch = './assets_src/js/*'
+
+const rollup_file = 'app.js'
+const rollup_src = './assets_src/js/'
+const rollup_dest = './assets/js/'
 
 
 
@@ -87,11 +98,43 @@ gulp.task('js-custom', function() {
     .pipe(browserSync.stream()); // reload browser
 });
 
+
+// rollup
+const rollupJS = (inputFile, options) => {
+  return () => {
+    return rollup({
+      input: options.basePath + inputFile,
+      format: options.format,
+      sourcemap: options.sourcemap,
+      plugins: [
+        babel(),
+        resolveNodeModules()
+      ]
+    })
+      .pipe(plumber()) // prevent task from exiting the stream on error
+      .pipe(source(inputFile, options.basePath)) // point to the entry file.
+      .pipe(buffer()) // we need to buffer the output, since many gulp plugins don't support streams.
+      .pipe(sourcemaps.init({ loadMaps: true }))
+      .pipe(uglify())
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest(options.distPath))
+      .pipe(browserSync.stream());
+  };
+}
+
+gulp.task('js-rollup', rollupJS(rollup_file, {
+  basePath: rollup_src,
+  format: 'iife',
+  distPath: rollup_dest,
+  sourcemap: true
+}));
+
 // js
 gulp.task('js', function () {
   gulp.start('js-lib');
-  gulp.start('js-custom');
+  gulp.start('js-rollup');
 });
+
 
 // images
 gulp.task('images', function () {
