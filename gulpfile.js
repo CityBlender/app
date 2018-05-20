@@ -107,7 +107,7 @@ const rollupJS = (inputFile, options) => {
       format: options.format,
       sourcemap: options.sourcemap,
       plugins: [
-        babel(),
+        babel({ runtimeHelpers: true }),
         resolveNodeModules()
       ]
     })
