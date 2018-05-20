@@ -31,11 +31,9 @@
           <section v-else>
             <div v-if="loading">Loading...</div>
 
-            <div v-else class="event-list">
-              <div v-for="event in events" class="event">
-                {{ event.name }}
-              </div>
-            </div>
+            <ul v-else class="list-group event-list">
+              <li v-for="event in events" class="list-group-item event">{{ event.name }}</li>
+            </ul>
 
           </section>
         </div>
@@ -45,6 +43,20 @@
       <!-- main -->
       <div class="col-md-10">
         <div class="main">
+
+          <!-- day-switch -->
+          <div class="day-switch">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <button class="btn btn-primary" type="button">&lt;</button>
+              </div>
+              <input type="text" class="form-control" placeholder="Day of the week" aria-label="" aria-describedby="basic-addon1" readonly="readonly">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">&gt;</button>
+              </div>
+            </div>
+          </div>
+          <!-- /day-switch -->
 
           <!-- layer-switch -->
           <div class="layer-switch">

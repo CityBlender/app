@@ -20,7 +20,7 @@ $map-width: 100vw - $sidebar-width;
   width: 100%;
   height: 100vh;
   overflow: scroll;
-  padding: 1rem;
+  // padding: 1rem;
 }
 
 .main {
@@ -33,6 +33,24 @@ $map-width: 100vw - $sidebar-width;
   height: 100vh;
 }
 
+.main {
+  position: relative;
+}
+
+.layer-switch {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 999;
+}
+
+.day-switch {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  z-index: 999;
+  max-width: 16rem;
+}
 
 
 
@@ -52,12 +70,7 @@ $map-width: 100vw - $sidebar-width;
   border-style: solid;
   border-color: #50a882;;
 }
-.layer-switch {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: 999;
-}
+
 .leaflet-popup-content{
   width:30vw !important;
 }
