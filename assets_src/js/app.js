@@ -1,4 +1,5 @@
 import { config } from './config';
+
 new Vue({
   el: '#app',
   data: {
