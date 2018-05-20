@@ -24,11 +24,20 @@
       <!-- sidebar -->
       <div class="col-md-2">
         <div class="sidebar">
-          <ol class="event-list">
-            <li v-for="event in events" class="event">
-              {{ event.name }}
-            </li>
-          </ol>
+          <section v-if="errored">
+            <p>We're sorry, we're not able to retrieve this information at the moment, please try back later</p>
+          </section>
+
+          <section v-else>
+            <div v-if="loading">Loading...</div>
+
+            <ol v-else class="event-list">
+              <li v-for="event in events" class="event">
+                {{ event.name }}
+              </li>
+            </ol>
+
+          </section>
         </div>
       </div>
       <!-- /sidebar -->
@@ -50,6 +59,7 @@
           <!-- map -->
           <div id="map" class="map"></div>
           <!-- /map -->
+
         </div>
       </div>
       <!-- /main -->
@@ -64,7 +74,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
 
 
   <!-- load custom scripts -->

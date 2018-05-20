@@ -1,8 +1,19 @@
 import { config } from './config';
+import './components/pulsingIcon'
+
+const EventCard = {
+  attributes: null,
+  template: '<h2>{{ event.name }}</h2>'
+}
+
+Vue.component('event-card', EventCard)
 
 new Vue({
   el: '#app',
   data: {
+    loading: true,
+    errored: false,
+    isLoaded: false,
     events: null,
     map: null,
     tileLayer: null,
@@ -18,15 +29,9 @@ new Vue({
   mounted() {
     this.initMap();
     this.getEvents();
+    // this.plotEvents();
   },
   methods: {
-
-    getEvents() {
-      axios
-        .get('https://fuinki-api.herokuapp.com/london/events/2018-05-19')
-        .then(response => (this.events = response.data))
-        .catch(error => console.log(error))
-    },
 
     // initialize a Leaflet instance
     initMap() {
@@ -48,11 +53,36 @@ new Vue({
         position: 'bottomright'
       }).addTo(this.map);
 
+    },
 
+    getEvents() {
+      this.isLoaded = false
+      axios
+        .get('https://fuinki-api.herokuapp.com/london/events/2018-05-19')
+        .then(response => {
+          this.events = response.data;
+          this.isLoaded = true
+          this.plotEvents()
+        })
+        .catch(error => {
+          console.log(error)
+          this.errored = true
+        })
+        .finally(() => this.loading = false)
+    },
 
-      // // create a custom pulsating marker
-      // var pulsingIcon = L.icon.pulse({ iconSize: [8, 8], color: '#C70039' });
+    plotEvents() {
+      const events = this.events;
+      const map = this.map;
+      events.forEach(function(event) {
+        var lat = event.location.lat;
+        var lng = event.location.lng;
+        // // create a custom pulsating marker
+        var pulsingIcon = L.icon.pulse({ iconSize: [8, 8], color: '#C70039' });
+        L.marker([lat, lng], { icon: pulsingIcon }).bindPopup(event.name).addTo(map);
+      });
     }
+
   }
 });
 
