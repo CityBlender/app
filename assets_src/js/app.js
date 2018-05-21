@@ -1,6 +1,7 @@
 import { config } from './config';
-import './components/pulsingIcon'
-import { getEventCard } from './components/eventCard'
+import './components/pulsingIcon';
+import { getEventCard } from './components/eventCard';
+// import { getArtists } from './components/getArtists';
 
 new Vue({
   el: '#app',
@@ -54,22 +55,62 @@ new Vue({
         .get('https://fuinki-api.herokuapp.com/london/events/2018-05-19')
         .then(response => {
           this.events = response.data;
-          this.isLoaded = true
-          this.plotEvents()
+          this.isLoaded = true;
+          this.plotEvents();
         })
         .catch(error => {
-          console.log(error)
-          this.errored = true
+          console.log(error);
+          this.errored = true;
         })
         .finally(() => this.loading = false)
+    },
+
+    getArtist(artist_id) {
+      axios
+        .get('https://fuinki-api.herokuapp.com/artist/' + artist_id)
+        .then(response => {
+          var artist_data = response.data;
+          return artist_data;
+        })
+        .catch(error => {
+          console.log(error);
+          return;
+        })
+    },
+
+    getArtistArray(argument) {
+
+      return argument
+
+      // create empty artist array
+      // var artist_array = [];
+
+      // if (artists === undefined || artists.length == 0) {
+      //   return artist_array;
+      // } else {
+      //   // loop through artists
+      //   artists.forEach(function (artist) {
+      //     var artist_data = artist.name;
+      //     artist_array.push(artist_data);
+      //   });
+
+      //   return artist_array;
+      // }
+
     },
 
     plotEvents() {
       const events = this.events;
       const map = this.map;
+      const lala = this.getArtistArray('muuuuu');
+      console.log(lala);
       events.forEach(function(event) {
         var lat = event.location.lat;
         var lng = event.location.lng;
+        var event_artists = event.artists;
+        // console.log(event_artists)
+        // var artists = getArtistArray('llaaaa');
+        // console.log(artists)
         var pulsingIcon = L.icon.pulse({ iconSize: [8, 8], color: '#C70039' });
         // create a marker
         L.marker([lat, lng], { icon: pulsingIcon }).bindPopup(getEventCard(event)).addTo(map);
