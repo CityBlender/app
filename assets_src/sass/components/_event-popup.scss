@@ -1,0 +1,165 @@
+$popup-width: 420px;
+
+// container
+.leaflet-popup-tip-container {
+  // border: 3px solid red;
+  bottom: -18px;
+}
+
+.leaflet-popup-tip {
+  background-color: #f1f1f1;
+  border: 1px solid #333;
+}
+
+.leaflet-popup-content-wrapper{
+  background: #f1f1f1;
+  border: 2px solid #333;
+  padding: 1rem 0;
+}
+
+.leaflet-popup-content{
+  min-width: $popup-width;
+}
+
+.leaflet-control-attribution {
+  background:rgba(#333, 0.75) !important;
+  color: #999;
+  a {
+    color: #ccc;
+  }
+}
+
+
+// artist
+.artists {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+  justify-items: stretch;
+}
+
+
+.artist {
+
+  text-align: center;
+
+  .artist__image img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .artist__name {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+  }
+
+}
+
+// // event title related css
+// .event__event_title {
+//   font-size: 125%;
+//   font-weight: bold;
+//   margin-bottom: 2vh;
+//   font-style: italic;
+//   text-align: center;
+//   // background-color: #fcd000;
+// }
+// .event__event_title a{
+//   color: #50a882;
+// }
+// .event__title h2 {
+//   font-size: 125%;
+//   font-weight: bold;
+// }
+
+// // event artist related css
+// .event__artist {
+//   margin: 4vw 0;
+//   font-weight: bold;
+//   text-align: right;
+//   position: relative;
+// }
+// .event__artist img{
+//   width: 4vw;
+//   height:4vw;
+//   display: inline-block;
+//   vertical-align: middle;
+//   position: absolute;
+//   left: 0vw;
+//   bottom: 0;
+// }
+// .event__artist_section h3{
+//   font-size: 150%;
+//   font-weight: bold;
+//   text-align: left;
+//   color: #fff;
+//   border-bottom: solid 3px#50a882;
+//   display: inline-block;
+
+// }
+// .event__artist h4 {
+//   font-size: 125%;
+//   display: inline-block;
+//   position: absolute;
+//   left: 5vw;
+//   bottom: 2vh;
+//   color: #fff;
+//   font-family: 'Roboto', sans-serif;
+// }
+// .event__artist_section {
+//   margin: 4vh 0;
+// }
+// .event__artist_songkick{
+//   padding: 0.75vw;
+//   margin: 0vh 0.25vw 0;
+//   background-image: url("../../../assets_src/img/songkick_logo.jpeg");
+//   background-size:cover;
+//   display: inline-block;
+//   vertical-align: bottom;
+// }
+// .event__artist_spotify{
+//   padding: 0.75vw;
+//   margin: 0vh 0.25vw 0;
+//   background-image: url("../../../assets_src/img/spotify_logo.jpeg");
+//   background-size:cover;
+//   display: inline-block;
+//   vertical-align: bottom;
+// }
+// .event__artist_lastfm{
+//   padding: 0.75vw;
+//   margin: 0vh 1vw 0 0.25vw;
+//   background-image: url("../../../assets_src/img/lastfm_logo.jpeg");
+//   background-size:cover;
+//   display: inline-block;
+//   vertical-align: bottom;
+// }
+
+// // event venue related css
+// .event__venue_section h3{
+//   font-size: 150%;
+//   font-weight: bold;
+//   text-align: left;
+//   color: #fff;
+//   border-bottom: solid 3px#50a882;
+//   font-family: 'Roboto', sans-serif;
+//   display: inline-block;
+// }
+// .event__venue_name h4{
+//   font-size: 125%;
+//   margin-top: 2vh;
+//   // margin-left: 1vh;
+//   font-weight: bold;
+//   color: #fff;
+//   font-family: 'Roboto', sans-serif;
+//   display: inline-block;
+// }
+// .event__venue_name h4:hover{
+//   color: #50a882;
+// }
+// .event__venue_section h5{
+//   font-size: 125%;
+//   margin-left: 6vh;
+//   font-family: 'Roboto', sans-serif;
+//   color: #fff;
+//   display: inline-block;
+// }
