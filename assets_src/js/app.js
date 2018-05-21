@@ -1,3 +1,4 @@
+import { map } from 'asyncro';
 import { config } from './config';
 import './components/pulsingIcon';
 // import { getEventCard } from './components/eventCard';
@@ -10,6 +11,7 @@ new Vue({
     errored: false,
     isLoaded: false,
     events: null,
+    currentArtists: null,
     map: null,
     tileLayer: null,
     heatmapLayer: null,
@@ -65,47 +67,11 @@ new Vue({
         .finally(() => this.loading = false)
     },
 
-    getArtist(artist_id) {
-      axios
-        .get('https://fuinki-api.herokuapp.com/artist/' + artist_id)
-        .then(response => {
-          var artist_data = response.data;
-          return artist_data;
-        })
-        .catch(error => {
-          console.log(error);
-          return;
-        })
-    },
-
-    getArtistArray(argument) {
-
-      return argument
-
-      // create empty artist array
-      // var artist_array = [];
-
-      // if (artists === undefined || artists.length == 0) {
-      //   return artist_array;
-      // } else {
-      //   // loop through artists
-      //   artists.forEach(function (artist) {
-      //     var artist_data = artist.name;
-      //     artist_array.push(artist_data);
-      //   });
-
-      //   return artist_array;
-      // }
-
-    },
-
     plotEvents() {
-      const events = this.events;
-      const map = this.map;
-      const lala = this.getArtistArray('muuuuu');
+      var events = this.events;
+      var map = this.map;
       var _this = this;
 
-      console.log(lala);
       events.forEach(function(event) {
         var lat = event.location.lat;
         var lng = event.location.lng;
@@ -114,21 +80,99 @@ new Vue({
         // var artists = getArtistArray('llaaaa');
         // console.log(artists)
         var pulsingIcon = L.icon.pulse({ iconSize: [8, 8], color: '#C70039' });
-        // create a marker
+
+        // add marker to the map
         var marker = L.marker([lat, lng], { icon: pulsingIcon }).addTo(map);
 
-
-        // attach event listener to marker
-        marker.on('click', console.log('meh..'))
-        // marker.addEventListener('click', _this.getEventCard('hahaha'), false);
-
+        // add onClick event
+        marker.on('click', async function() {
+          var event_info = await _this.getEventCard(event);
+          // console.log(evenet_info);
+        });
 
       });
     },
 
-    getEventCard(para) {
-      console.log(para);
+    async getEventCard(event) {
+
+      var artist_array = await this.getArtistArray(event.artists);
+      console.log(artist_array);
+
+
     },
+
+    async getArtistArray(artists) {
+      var _this = this;
+
+      var artist_array = await map(artists, async function(artist) {
+        var artist_info = await _this.getArtist(artist.id);
+        return artist_info;
+      });
+
+      return artist_array;
+
+      // const getArray = async() => {
+      //   // create empty artist array that will contain artist info
+      //   var artist_array = await Promise.all();
+
+      //   this.asyncForEach(artists, async function(artist) {
+      //     var artist_info = await _this.getArtist(artist.id);
+      //     // console.log(artist_info);
+      //     await artist_array.push(artist_info);
+      //   });
+
+      //   return artist_array;
+      // }
+
+      // loop throught all the event artists
+      // artists.forEach(async function (artist) {
+      //   var artist_info = await _this.getArtist(artist.id);
+      //   // console.log(artist_info);
+      //   artist_array.push(artist_info);
+      // });
+
+      getArray();
+
+      // return await artist_array;
+
+
+    },
+
+    async getArtist(artist_id) {
+      try {
+        var response = await axios.get('https://fuinki-api.herokuapp.com/artist/' + artist_id);
+        var artist_data = await response.data;
+        return artist_data;
+      } catch(error) {
+        console.log(error);
+      }
+    },
+
+    // async asyncForEach(array, callback) {
+    //   for (let index = 0; index < array.length; index++) {
+    //     await callback(array[index], index, array)
+    //   }
+    // },
+
+    // getArtistArray(artists) {
+
+    //   // var _this = this;
+    //   // create empty artist array
+    //   var artist_array = [];
+
+    //   if (artists === undefined || artists.length == 0) {
+    //     return artist_array;
+    //   } else {
+    //     // loop through artists
+    //     artists.forEach(function (artist) {
+    //       this.getArtist(artist.id);
+    //       artist_array.push(artist_data);
+    //     });
+    //     // console.log(artist_array);
+    //     return artist_array;
+    //   }
+    // },
+
 
     // create heatmap
     initLayer() {
@@ -179,32 +223,3 @@ new Vue({
     }
   }
 });
-
-
-// $(document).ready(function () {
-
-//     var date_format = 'YYYY-MM-DD';
-//     var timezone = 'Europe/London';
-//     var today = moment().tz(timezone).format(date_format);
-
-//     // function plusDay(days) {
-//     //     var new_date = moment().tz(timezone).add(days, 'days').calendar();
-//     //     return new_date;
-//     // }
-
-//     // function minusDay(days) {
-//     //     var new_date = moment().tz(timezone).substract(days, 'days').calendar().format(date_format);
-//     //     return new_date;
-//     // }
-
-//     // var tomorrow = plusDay(1);
-
-//     // console.log(today);
-//     // console.log(tomorrow);
-
-
-//     getEvents(today);
-
-// });
-
-
