@@ -47,13 +47,8 @@
     </section>
 
 <!-- This is the count graph  -->
-      <iframe
-      width="700"
-      height="500"
-      frameborder="0"
-       scrolling="no"
-       src="//plot.ly/~cohenjota/73.embed">
-      </iframe>
+  <iframe width="900" height="800" frameborder="0" 
+  scrolling="no" src="//plot.ly/~cohenjota/77.embed"></iframe>
 
     <section>
       <h4>Daily vibe?</h4>
@@ -191,12 +186,32 @@
     </div>
   </div>
 
+  <p>Some findings of this part... to justify the spider part
+  </p>
+
+  <iframe width="900" height="800" frameborder="0" 
+  scrolling="no" src="//plot.ly/~cohenjota/84.embed"></iframe>
+
+
   <section>
 
   <h4>Where are these occuring?</h4>
-  <p>
+  <p>For different resons, certain economic activities tend to locate themselves generating clusters.
+    Certain businesses might benefit of what is known as Economies of agglomeration. In other cases, the city
+    characteristics such of real state, population demographics or proximity to transport nodes, contribute
+    to the creation of natural cluster. 
+    </p>
+  <p>By making the differnt API calls, it was able to map the different gigs and study their spatial distribution of the lotaions.
+    In the following panel, a map of all the gigs gathered during a month was created. Followed by this, each point was allocated to it's
+    corresponding borough and ward. These results can be found below. 
+  </p>
 
+  <p> In general, more events were found in the North and East of the city. During this period of time, in Hackney there were
+    355 events, followed by Islington with 282. Camden and Westminister also showed high level of musical activity.
     
+
+
+
   </p>
 
 
@@ -207,8 +222,12 @@
         href="#map" role="tab" aria-controls="map" aria-selected="true">Heatmap</a>
       </li>
       <li class="nav-item">
+          <a class="nav-link" id="boroughs-tab" data-toggle="tab"
+          href="#boroughs" role="tab" aria-controls="boroughs" aria-selected="false">Distribution by Boroughs</a>
+        </li>
+      <li class="nav-item">
         <a class="nav-link" id="hist-tab" data-toggle="tab"
-        href="#hist" role="tab" aria-controls="hist" aria-selected="false">Spatial Distribution</a>
+        href="#hist" role="tab" aria-controls="hist" aria-selected="false">Distribution by Ward</a>
       </li>
   </ul>
 
@@ -231,6 +250,17 @@
             src="//plot.ly/~cohenjota/75.embed">
           </iframe>
       </div>
+
+    <div class="tab-pane fade" id="boroughs" role="tabpanel" aria-labelledby="boroughs-tab">
+        <iframe
+        width="700"
+        height="500"
+        frameborder="0"
+         scrolling="no"
+          src="//plot.ly/~cohenjota/79.embed">
+        </iframe>
+    </div>
+  </div>
 
 
       
