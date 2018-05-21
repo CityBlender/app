@@ -12,6 +12,7 @@ $map-width: 100vw - $sidebar-width;
 // import Leaflet related CSS
 @import 'leaflet/_leaflet.scss';
 @import 'leaflet/_leaflet-icon.scss';
+@import 'leaflet/_leaflet-visual-click.scss';
 
 @import 'components/_event-list';
 

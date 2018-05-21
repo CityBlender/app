@@ -32,7 +32,9 @@
             <div v-if="loading" class="loading">Loading...</div>
 
             <ul v-else class="list-group event-list">
-              <li v-for="event in events" class="list-group-item event">{{ event.name }}</li>
+              <li v-for="event in events" class="list-group-item event">
+                <span @click="getEvent(event.id)">{{ event.name }}</span>
+              </li>
             </ul>
 
           </section>

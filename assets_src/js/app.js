@@ -1,6 +1,6 @@
 import { config } from './config';
 import './components/pulsingIcon';
-import { getEventCard } from './components/eventCard';
+// import { getEventCard } from './components/eventCard';
 // import { getArtists } from './components/getArtists';
 
 new Vue({
@@ -103,6 +103,8 @@ new Vue({
       const events = this.events;
       const map = this.map;
       const lala = this.getArtistArray('muuuuu');
+      var _this = this;
+
       console.log(lala);
       events.forEach(function(event) {
         var lat = event.location.lat;
@@ -113,10 +115,19 @@ new Vue({
         // console.log(artists)
         var pulsingIcon = L.icon.pulse({ iconSize: [8, 8], color: '#C70039' });
         // create a marker
-        L.marker([lat, lng], { icon: pulsingIcon }).bindPopup(getEventCard(event)).addTo(map);
+        var marker = L.marker([lat, lng], { icon: pulsingIcon }).addTo(map);
+
+
+        // attach event listener to marker
+        marker.on('click', console.log('meh..'))
+        // marker.addEventListener('click', _this.getEventCard('hahaha'), false);
 
 
       });
+    },
+
+    getEventCard(para) {
+      console.log(para);
     },
 
     // create heatmap
@@ -161,6 +172,10 @@ new Vue({
       } else {
         this.heatmapLayer.removeFrom(this.map);
       }
+    },
+
+    getEvent(event_id) {
+      console.log(event_id);
     }
   }
 });
