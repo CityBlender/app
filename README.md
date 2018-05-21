@@ -48,4 +48,4 @@ Please note that the order matters, so make sure you list any dependencies befor
 - Jony Cohen
 - Alfie Long
 - Ilja Panic [[web](https://iljapanic.com)] [[twitter](https://twitter.com/iljapanic)]
-- Soma Suzuki
+- Soma Suzuki [[web](https://soma11soma11.github.io/)] [[twitter](https://twitter.com/11_soma_)]
