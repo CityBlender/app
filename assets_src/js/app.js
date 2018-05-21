@@ -11,12 +11,11 @@ new Vue({
     events: null,
     map: null,
     tileLayer: null,
+    heatmapLayer: null,
     layers: [
       {
-        id: 0,
-        name: 'Gigs',
-        active: true,
-        features: []
+        name: 'Vibes',
+        active: false,
       }
     ],
   },
@@ -45,7 +44,6 @@ new Vue({
       L.control.zoom({
         position: 'bottomright'
       }).addTo(this.map);
-
     },
 
     getEvents() {
@@ -53,9 +51,11 @@ new Vue({
       axios
         .get('https://fuinki-api.herokuapp.com/london/events/2018-05-19')
         .then(response => {
-          this.events = response.data;
           this.isLoaded = true
+          this.events = response.data;
           this.plotEvents()
+          this.initLayer()
+
         })
         .catch(error => {
           console.log(error)
@@ -73,9 +73,54 @@ new Vue({
         var pulsingIcon = L.icon.pulse({ iconSize: [8, 8], color: '#C70039' });
         // create a marker
         L.marker([lat, lng], { icon: pulsingIcon }).bindPopup(getEventCard(event)).addTo(map);
-      });
-    }
+        
 
+      });
+    },
+
+    // create heatmap 
+    initLayer() {
+      var cfg = {
+        "radius": 0.01,
+        "maxOpacity": .8, 
+        "scaleRadius": true, 
+        "useLocalExtrema": true,
+        latField: 'lat',
+        lngField: 'lng',
+        valueField: 'count'
+      };
+      const heatmapData = []
+      this.events.forEach(function(event, i) {
+        if (typeof event.spotify !== "undefined"){
+          heatmapData[i] = {
+            lat: event.location.lat,
+            lng: event.location.lng,
+            count: event.spotify.danceability_median
+          }
+        } else {
+          heatmapData[i] = {
+            lat: event.location.lat,
+            lng: event.location.lng,
+            count: 0
+          }
+        }
+      });
+      var vibesData = {
+        max: 1.0,
+        data: heatmapData,
+      };
+      this.heatmapLayer = new HeatmapOverlay(cfg);
+      this.heatmapLayer.setData(vibesData);
+    },
+
+    // layer change
+    layerChanged(active) {
+      if (active) {   
+        this.heatmapLayer.addTo(this.map);
+      } else {
+        this.heatmapLayer.removeFrom(this.map);
+      }
+    }
   }
 });
 

@@ -59,13 +59,17 @@
           <!-- /day-switch -->
 
           <!-- layer-switch -->
-          <div class="layer-switch">
-            <div class="btn-group" role="group" aria-label="Basic example">
-              <button type="button" class="btn active btn-primary">Gigs</button>
-              <button type="button" class="btn btn-primary">Genres</button>
-              <button type="button" class="btn btn-primary">Vibes</button>
-            </div>
-          </div>
+          <div class="layer-switch" v-for="layer in layers">
+          <label class="form-check-label">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              v-model="layer.active"
+              @change="layerChanged(layer.active)"
+            />
+            {{ layer.name }}
+        </label>
+        </div>
           <!-- /layer-switch -->
 
           <!-- map -->
@@ -85,6 +89,7 @@
   <script src="assets/js/libraries.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
 

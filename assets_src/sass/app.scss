@@ -39,9 +39,11 @@ $map-width: 100vw - $sidebar-width;
 
 .layer-switch {
   position: absolute;
-  top: 1rem;
+  bottom: 1rem;
   right: 1rem;
   z-index: 999;
+  color: #fff;
+
 }
 
 .day-switch {
