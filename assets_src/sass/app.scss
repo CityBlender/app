@@ -2,12 +2,17 @@
 //  - look into bootstrap/bootstrap/_variables.scss
 //  - don't change anything in original files
 //  - instead just copy the variable name here and assing your desired value
+
 $primary: #e1e0dd;
-$sidebar-width: 15vw;
-$map-width: 100vw - $sidebar-width;
+
+
 
 // import Bootstrap
 @import 'bootstrap/bootstrap';
+
+// import custom audio player
+@import 'plyr/plyr';
+
 
 // import Leaflet related CSS
 @import 'leaflet/_leaflet.scss';

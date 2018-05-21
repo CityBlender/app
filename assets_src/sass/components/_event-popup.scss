@@ -1,4 +1,4 @@
-$popup-width: 420px;
+$popup-width: 640px;
 
 // container
 .leaflet-popup-tip-container {
@@ -33,7 +33,7 @@ $popup-width: 420px;
 // artist
 .artists {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 1rem;
   justify-items: stretch;
 }
@@ -53,6 +53,12 @@ $popup-width: 420px;
     font-size: 1rem;
   }
 
+}
+
+.top-tracks {
+  audio {
+    max-width: 90%;
+  }
 }
 
 // // event title related css

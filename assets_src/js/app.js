@@ -88,6 +88,9 @@ new Vue({
           var event_card = await _this.getEventCard(event);
           marker.bindPopup(event_card);
 
+          const players = Array.from(document.querySelectorAll('.audio-player')).map(p => new Plyr(p, {
+            controls: ['play', 'progress']
+          }));
         });
       })
       // events.forEach(function(event) {
