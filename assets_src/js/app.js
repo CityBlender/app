@@ -99,8 +99,8 @@ new Vue({
       const heatmapData = []
       var heatmapConfig = {
         max:0.1,
-        radius: 50, 
-        blur:10, 
+        radius: 100, 
+        blur:30, 
         gradient:{0.0: 'green', 0.5: 'yellow', 1.0: 'red'}
       }
       this.events.forEach(function(event, i) {
@@ -156,7 +156,7 @@ new Vue({
 
       // construct speechiness layer 
       var speechinessData = heatmapData.map(function(a) {
-        return [a.lat, a.lng, (a.speechiness-0.33)/0.33]; //  speechiness ranges from 0.33 to 0.66
+        return [a.lat, a.lng, a.speechiness]; //  speechiness ranges from 0 to 1
       });
       this.speechinessLayer = L.heatLayer(speechinessData, heatmapConfig)
 
