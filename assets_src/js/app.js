@@ -109,42 +109,33 @@ new Vue({
             lat: event.location.lat,
             lng: event.location.lng,
             // store vibes data
-            liveness: event.spotify.liveness,
             energy: event.spotify.energy_median,
             danceability: event.spotify.danceability_median,
             loudness: event.spotify.loudness_median,
             speechiness: event.spotify.speechiness_median,
             acousticness: event.spotify.acousticness_median,
-            instrumentalness: event.spotify.instrumentalness,
-            
-            valence: event.spotify.valence,
-            tempo: event.spotify.tempo
+            liveness: event.spotify.liveness_median,
+            instrumentalness: event.spotify.instrumentalness_median,
+            valence: event.spotify.valence_median,
+            tempo: event.spotify.tempo_median
           }
         } else {
           heatmapData[i] = {
             lat: event.location.lat,
             lng: event.location.lng,
             // store vibes data
-            liveness: 0,
             energy: 0,
             danceability: 0,
             loudness: 0,
             speechiness: 0,
             acousticness: 0,
+            liveness: 0,
             instrumentalness: 0,
-            
             valence: 0,
             tempo: 0
           }
         }
       });
-
-      // construct liveness layer
-      // var livenessData = heatmapData.map(function(a) {
-      //   return [a.lat, a.lng, a.liveness];
-      // });
-      // this.livenessLayer = L.heatLayer(livenessData, heatmapConfig)
-
       // construct energy layer
       var energyData = heatmapData.map(function(a) {
         return [a.lat, a.lng, a.energy];
@@ -175,41 +166,44 @@ new Vue({
       });
       this.acousticnessLayer = L.heatLayer(acousticnessData, heatmapConfig)
 
+      // construct liveness layer
+      var livenessData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.liveness];
+      });
+      this.livenessLayer = L.heatLayer(livenessData, heatmapConfig)
+
       // construct instrumentalness layer
-      // var instrumentalnessData = heatmapData.map(function(a) {
-      //   return [a.lat, a.lng, a.instrumentalness];
-      // });
-      // this.instrumentalnessLayer = L.heatLayer(instrumentalnessData, heatmapConfig)
+      var instrumentalnessData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.instrumentalness];
+      });
+      this.instrumentalnessLayer = L.heatLayer(instrumentalnessData, heatmapConfig)
 
+      // construct valence layer
+      var valenceData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.valence];
+      });
+      this.valenceLayer = L.heatLayer(valenceData, heatmapConfig)
 
-
-      // // construct valence layer
-      // var valenceData = heatmapData.map(function(a) {
-      //   return [a.lat, a.lng, a.valence];
-      // });
-      // this.valenceLayer = L.heatLayer(valenceData, heatmapConfig)
-
-      // // construct tempo layer
-      // var tempoData = heatmapData.map(function(a) {
-      //   return [a.lat, a.lng, (a.tempo-80)/70]; // tempo ranges from around 80 to 150
-      // });
-      // this.tempoLayer = L.heatLayer(tempoData, heatmapConfig)
+      // construct tempo layer
+      var tempoData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, (a.tempo-80)/70]; // tempo ranges from around 80 to 150
+      });
+      this.tempoLayer = L.heatLayer(tempoData, heatmapConfig)
 
       // set the layer list property to the map object
       this.map._layers = []
 
       // construct the layer switch buttons
       var layer_list = {
-        // "Liveness": this.livenessLayer,
         "Energy": this.energyLayer,
         "Danceability": this.danceabilityLayer,
         "Loudness": this.loudnessLayer,
         "Speechiness": this.speechinessLayer,
         "Acousticness": this.acousticnessLayer,
-        // "Instrumentalness": this.instrumentalnessLayer,
-        
-        // "Valence": this.valenceLayer,
-        // "Tempo": this.tempoLayer,
+        "Liveness": this.livenessLayer,
+        "Instrumentalness": this.instrumentalnessLayer,
+        "Valence": this.valenceLayer,
+        "Tempo": this.tempoLayer,
       }
       this.layerSwitch = L.control.layers(layer_list);
     },
@@ -218,10 +212,10 @@ new Vue({
     layerChanged(active) {
       // construct layer list
       if (active) {
-        // this.energyLayer.addTo(this.map);
+        this.energyLayer.addTo(this.map);
         this.layerSwitch.addTo(this.map);
       } else {
-        // this.energyLayer.removeFrom(this.map);
+        this.energyLayer.removeFrom(this.map);
         this.layerSwitch.remove(this.map);
       }
     }
