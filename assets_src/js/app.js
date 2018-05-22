@@ -11,9 +11,6 @@ new Vue({
     events: null,
     map: null,
     tileLayer: null,
-    energyLayer: null,
-    danceabilityLayer: null,
-    laudnessLayer: null,
     layerSwitch: null,
     layers: [
       {
@@ -98,98 +95,135 @@ new Vue({
 
     // create heatmap
     initLayer() {
-      // var cfg = {
-      //   "radius": 0.01,
-      //   "maxOpacity": .8,
-      //   "scaleRadius": true,
-      //   "useLocalExtrema": true,
-      //   latField: 'lat',
-      //   lngField: 'lng',
-      //   valueField: 'energy'
-      // };
+
+      // set heatmap
       const heatmapData = []
+      var heatmapConfig = {
+        max:0.1,
+        radius: 50, 
+        blur:10, 
+        gradient:{0.0: 'green', 0.5: 'yellow', 1.0: 'red'}
+      }
       this.events.forEach(function(event, i) {
         if (typeof event.spotify !== "undefined"){
           heatmapData[i] = {
             lat: event.location.lat,
             lng: event.location.lng,
             // store vibes data
+            liveness: event.spotify.liveness,
             energy: event.spotify.energy_median,
             danceability: event.spotify.danceability_median,
-            laudness: event.spotify.loudness_median,
+            loudness: event.spotify.loudness_median,
+            speechiness: event.spotify.speechiness_median,
+            acousticness: event.spotify.acousticness_median,
+            instrumentalness: event.spotify.instrumentalness,
+            
+            valence: event.spotify.valence,
+            tempo: event.spotify.tempo
           }
         } else {
           heatmapData[i] = {
             lat: event.location.lat,
             lng: event.location.lng,
             // store vibes data
+            liveness: 0,
             energy: 0,
             danceability: 0,
-            laudness: 0
+            loudness: 0,
+            speechiness: 0,
+            acousticness: 0,
+            instrumentalness: 0,
+            
+            valence: 0,
+            tempo: 0
           }
         }
       });
-      // var vibesData = {
-      //   max: 1.0,
-      //   data: heatmapData,
-      // };
 
-      this.energyLayer = L.heatLayer([
-        [51.530067, -0.121631, 0.5],
-        [51.530067, -0.121632, 0.3],
-        [51.530067, -0.12, 0.2],
+      // construct liveness layer
+      var livenessData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.liveness];
+      });
+      this.livenessLayer = L.heatLayer(livenessData, heatmapConfig)
 
-      ], {radius: 25}).addTo(this.map);
-      
-
-      // this.danceabilityLayer = L.heatLayer([
-      //   [51.517286, -0.100752, 0.2],
-      // ], {radius: 25})
-
-      // this.laudnessLayer = L.heatLayer([
-      //   [51.517286, -0.100752, 0.3],
-      // ], {radius: 25})
-
-      // this.energyLayer = new HeatmapOverlay(cfg);
-      // this.energyLayer.setData(vibesData);
-      
+      // construct energy layer
+      var energyData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.energy];
+      });
+      this.energyLayer = L.heatLayer(energyData, heatmapConfig)
 
       // construct danceability layer
-      // cfg.valueField = 'danceability';
-      // this.danceabilityLayer = new HeatmapOverlay(cfg);
-      // this.danceabilityLayer.setData(vibesData);
+      var danceabilityData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.danceability];
+      });
+      this.danceabilityLayer = L.heatLayer(danceabilityData, heatmapConfig)
 
       // construct loudness layer 
-      // cfg.valueField = 'laudness';
-      // this.laudnessLayer = new HeatmapOverlay(cfg);
-      // this.laudnessLayer.setData(vibesData);
+      var loudnessData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.loudness/60 + 1]; // loudness ranges from around -60 to 0
+      });
+      this.loudnessLayer = L.heatLayer(loudnessData, heatmapConfig)
+
+      // construct speechiness layer 
+      var speechinessData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, (a.speechiness-0.33)/0.33]; //  speechiness ranges from 0.33 to 0.66
+      });
+      this.speechinessLayer = L.heatLayer(speechinessData, heatmapConfig)
+
+      // construct acousticness layer
+      var acousticnessData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.acousticness];
+      });
+      this.acousticnessLayer = L.heatLayer(acousticnessData, heatmapConfig)
+
+      // construct instrumentalness layer
+      // var instrumentalnessData = heatmapData.map(function(a) {
+      //   return [a.lat, a.lng, a.instrumentalness];
+      // });
+      // this.instrumentalnessLayer = L.heatLayer(instrumentalnessData, heatmapConfig)
+
+
+
+      // // construct valence layer
+      // var valenceData = heatmapData.map(function(a) {
+      //   return [a.lat, a.lng, a.valence];
+      // });
+      // this.valenceLayer = L.heatLayer(valenceData, heatmapConfig)
+
+      // // construct tempo layer
+      // var tempoData = heatmapData.map(function(a) {
+      //   return [a.lat, a.lng, (a.tempo-80)/70]; // tempo ranges from around 80 to 150
+      // });
+      // this.tempoLayer = L.heatLayer(tempoData, heatmapConfig)
 
       // set the layer list property to the map object
       this.map._layers = []
 
       // construct the layer switch buttons
-      // var layer_list = {
-      //   "Energy": this.energyLayer,
-      //   "Danceability": this.danceabilityLayer,
-      //   "Laudness": this.laudnessLayer,
-      // }
-      // this.layerSwitch = L.control.layers(layer_list);
+      var layer_list = {
+        "Liveness": this.livenessLayer,
+        "Energy": this.energyLayer,
+        "Danceability": this.danceabilityLayer,
+        "Loudness": this.loudnessLayer,
+        "Speechiness": this.speechinessLayer,
+        "Acousticness": this.acousticnessLayer,
+        // "Instrumentalness": this.instrumentalnessLayer,
+        
+        // "Valence": this.valenceLayer,
+        // "Tempo": this.tempoLayer,
+      }
+      this.layerSwitch = L.control.layers(layer_list);
     },
 
     // layer change
     layerChanged(active) {
       // construct layer list
       if (active) {
-
-        
-
-
-        
-        // this.laudnessLayer.addTo(this.map);
-        // this.layerSwitch.addTo(this.map);
+        // this.energyLayer.addTo(this.map);
+        this.layerSwitch.addTo(this.map);
       } else {
-        // this.laudnessLayer.removeFrom(this.map);
-        // this.layerSwitch.remove(this.map);
+        // this.energyLayer.removeFrom(this.map);
+        this.layerSwitch.remove(this.map);
       }
     }
   }
