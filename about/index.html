@@ -41,27 +41,26 @@
       <p>It's true that every single city has it's own identity,
         but no matter where are you from, life has it's own rithm.
         As expected, Friday's and Saturday's are the busiest days of the week to listen to live music.
-        Also, as odd as it might look like, people in London actually work,
+        Also, as odd as it might look like, Londoners actually work!!!,
         making Mondays the less Fuiki days</p>
 
     </section>
 
 <!-- This is the count graph  -->
-      <iframe
-      width="700"
-      height="500"
-      frameborder="0"
-       scrolling="no"
-       src="//plot.ly/~cohenjota/43.embed">
-      </iframe>
+  <iframe width="900" height="800" frameborder="0" 
+  scrolling="no" src="//plot.ly/~cohenjota/77.embed"></iframe>
 
+    <section>
       <h4>Daily vibe?</h4>
-      <body>Using Last.fm and Spotify, we were able to retrive different characterisitcs of the songs of the bands.
+      <p>Using Last.fm and Spotify, we were able to retrive different characterisitcs of the songs of the bands.
         Features such of danceability, speachness or loudness, can be accessed by using this type of services.
         As a result, we wanted to understand how this variables were changind during the week. <br/>
         In order to this, all the song data was aggrupped by date and then statitics were computed.
         In the following set of box plots, the distribution of these variables by date is represented.
-      </body>
+      </p>
+
+    </section>
+
 <!-- This are going to be panels  -->
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
@@ -187,25 +186,93 @@
     </div>
   </div>
 
+  <p>Some findings of this part... to justify the spider part
+  </p>
+
+  <iframe width="900" height="800" frameborder="0" 
+  scrolling="no" src="//plot.ly/~cohenjota/84.embed"></iframe>
+
+
+  <section>
+
   <h4>Where are these occuring?</h4>
+  <p>For different resons, certain economic activities tend to locate themselves generating clusters.
+    Certain businesses might benefit of what is known as Economies of agglomeration. In other cases, the city
+    characteristics such of real state, population demographics or proximity to transport nodes, contribute
+    to the creation of natural cluster. 
+    </p>
+  <p>By making the differnt API calls, it was able to map the different gigs and study their spatial distribution of the lotaions.
+    In the following panel, a map of all the gigs gathered during a month was created. Followed by this, each point was allocated to it's
+    corresponding borough and ward. These results can be found below. 
+  </p>
+
+  <p> In general, more events were found in the North and East of the city. During this period of time, in Hackney there were
+    355 events, followed by Islington with 282. Camden and Westminister also showed high level of musical activity.
+    
 
 
-      <iframe
+
+  </p>
+
+
+
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="map-tab" data-toggle="tab"
+        href="#map" role="tab" aria-controls="map" aria-selected="true">Heatmap</a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" id="boroughs-tab" data-toggle="tab"
+          href="#boroughs" role="tab" aria-controls="boroughs" aria-selected="false">Distribution by Boroughs</a>
+        </li>
+      <li class="nav-item">
+        <a class="nav-link" id="hist-tab" data-toggle="tab"
+        href="#hist" role="tab" aria-controls="hist" aria-selected="false">Distribution by Ward</a>
+      </li>
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
+          <iframe
       width="700"
       height="500"
       frameborder="0"
        scrolling="no"
-       src="/about/map/heatmap-of-gigs.html"
-       >
+       src="/about/map/heatmap-of-gigs.html">
       </iframe>
+      </div>
+      <div class="tab-pane fade" id="hist" role="tabpanel" aria-labelledby="hist-tab">
+          <iframe
+          width="700"
+          height="500"
+          frameborder="0"
+           scrolling="no"
+            src="//plot.ly/~cohenjota/75.embed">
+          </iframe>
+      </div>
 
-      <h4>Where are these occuring?</h4>
-      <body>
-          .................<br/>
-          ......<br/>
-          ......<br/>
-      </body>
+    <div class="tab-pane fade" id="boroughs" role="tabpanel" aria-labelledby="boroughs-tab">
+        <iframe
+        width="700"
+        height="500"
+        frameborder="0"
+         scrolling="no"
+          src="//plot.ly/~cohenjota/79.embed">
+        </iframe>
+    </div>
+  </div>
 
+
+      
+
+      <h4>What type of music is out there?</h4>
+      <p>
+        
+      </p>
+
+      <img src="/about/map/word_cloud.png" alt="Word Cloud" width="700" height="600">
+
+    </section>
 
   <!-- load libraries  -->
   <script src="/assets/js/libraries.js"></script>
