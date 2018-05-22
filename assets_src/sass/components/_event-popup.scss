@@ -37,7 +37,7 @@ $popup-width: 480px;
 .event {
   .event__date {
     text-align: center;
-    margin-bottom: 1.75rem;
+    margin-bottom: 0.75rem;
   }
 
   .date {
@@ -60,7 +60,6 @@ $popup-width: 480px;
 // artist
 .artists {
   display: grid;
-  // grid-template-columns: repeat(2, 1fr);
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 1rem;
   place-content: center;
@@ -68,7 +67,7 @@ $popup-width: 480px;
 
 
 .artist {
-  margin-bottom: 1rem;
+  margin-top: 1rem;
   text-align: center;
 
   .artist__image img {
@@ -86,8 +85,12 @@ $popup-width: 480px;
     font-weight: bold;
     text-transform: uppercase;
     display: inline-block;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     margin-top: 0.5rem;
+  }
+
+  .collapse {
+    // padding-top: 0.75rem;
   }
 
 
@@ -142,6 +145,33 @@ $popup-width: 480px;
     font-size: 0.8rem;
     margin: 0 0.25rem 0.5rem 0.25rem;
     font-weight: 400;
+  }
+}
+
+// venue
+.venue {
+
+  .venue__title {
+    text-align: center;
+
+    .venue__name {
+      margin-bottom: 0.25rem;
+      font-size: 1.75rem;
+    }
+
+    .rating {
+      display: inline-block;
+      line-height: 1;
+      border-radius: 0.15rem;
+      padding: 0.25rem 0.2rem;
+    }
+  }
+
+
+  .venue__contact {
+    svg {
+      width: 16px;
+    }
   }
 }
 
