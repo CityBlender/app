@@ -75,9 +75,7 @@ new Vue({
         var lat = event.location.lat;
         var lng = event.location.lng;
         var event_artists = event.artists;
-        // console.log(event_artists)
-        // var artists = getArtistArray('llaaaa');
-        // console.log(artists)
+
         var pulsingIcon = L.icon.pulse({ iconSize: [10, 10], color: '#C70039' });
 
         // add marker to the map
@@ -117,17 +115,18 @@ new Vue({
       var _this = this;
 
       var artist_array = await map(artists, async function(artist) {
-        var artist_info = await _this.getArtist(artist.id);
+        var artist_info = await _this.getArtist(artist.id, artist.songkick_url);
         return artist_info;
       });
 
       return artist_array;
     },
 
-    async getArtist(artist_id) {
+    async getArtist(artist_id, artist_url) {
       try {
         var response = await axios.get('https://fuinki-api.herokuapp.com/artist/' + artist_id);
         var artist_data = await response.data[0];
+        artist_data['songkick_url'] = artist_url;
         return artist_data;
       } catch(error) {
         console.log(error);

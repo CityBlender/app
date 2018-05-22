@@ -58,8 +58,44 @@ $popup-width: 640px;
     text-transform: uppercase;
     display: inline-block;
     margin-bottom: 1rem;
+    margin-top: 0.5rem;
   }
 
+
+  .links .link {
+    display: inline-block;
+    margin-right: 0.45rem;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
+  .links svg {
+    width: 16px;
+    fill: lighten($secondary, 20%);
+    transition: all 0.25s ease-in-out;
+  }
+
+  .links:hover svg {
+    transition: all 0.25s ease-in-out;
+  }
+
+  .songkick:hover svg {
+    fill: $songkick;
+  }
+
+  .lastfm:hover svg {
+    fill: $lastfm;
+  }
+
+  .spotify:hover svg {
+    fill: $spotify;
+  }
+
+  .youtube:hover svg {
+    fill: $youtube;
+  }
 
 
 }
