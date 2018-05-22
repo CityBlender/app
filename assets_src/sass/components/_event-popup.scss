@@ -40,7 +40,7 @@ $popup-width: 640px;
 
 
 .artist {
-
+  margin-bottom: 1rem;
   text-align: center;
 
   .artist__image img {
@@ -53,11 +53,20 @@ $popup-width: 640px;
     font-size: 1rem;
   }
 
+  .show-more {
+    color: white;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+
+
 }
 
 .top-tracks {
-  audio {
-    max-width: 90%;
+  .track {
+    margin-bottom: 0.25rem;
   }
 }
 

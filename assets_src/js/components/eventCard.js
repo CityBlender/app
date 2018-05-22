@@ -18,35 +18,29 @@ export async function getEventCardTemplate(event) {
 
 function getArtistCard(artist) {
 
-  getTopTracks(artist);
-
   var artist_card =
     // artist
     '<div class="artist">'
 
-    // image
-    + '<div class="artist__image">'
-    + '<img src="' + getImageUrl(artist) + '" alt="' + artist.name + '" />'
-    + '</div>'
-    // /image
+      // image
+      + '<div class="artist__image">'
+        + '<img src="' + getImageUrl(artist) + '" alt="' + artist.name + '" />'
+      + '</div>'
+      // /image
 
-    // info
-    + '<div class="artist__info">'
+      // info
+      + '<div class="artist__info">'
 
-    // name
-    + '<h3 class="artist__name">'
-    + artist.name
-    + '</h3>'
-    // /name
+        // name
+        + '<h3 class="artist__name">'
+        + artist.name
+        + '</h3>'
+        // /name
 
-    + '</div>'
-    // /info
+      + '</div>'
+      // /info
 
-    // links
-    + '<div class="artist__links">'
-    + getTopTracks(artist)
-    + '</div>'
-    // /links
+      + getTopTracksWidget(artist)
 
     // /artist
     + '</div>'
@@ -95,6 +89,28 @@ function getImageUrl(artist) {
 
 }
 
+function getTopTracksWidget(artist) {
+  var top_tracks = getTopTracks(artist);
+
+  if (top_tracks.length > 1) {
+    var top_tracks_widget =
+      // more
+      '<div class="artist__more">'
+        + '<a class="show-more badge badge-dark" data-toggle="collapse" href="#panel-' + artist.id + '" role="button" aria-expanded="false" aria-controls="' + artist.id + '">Show top tracks</a>'
+        // panel
+        + '<div class="collapse" id="panel-' + artist.id + '">'
+          + top_tracks
+        + '</div>'
+        // /panel
+      + '</div>'
+    // /more
+  } else {
+    var top_tracks_widget = ''
+  }
+
+  return top_tracks_widget
+}
+
 function getTopTracks(artist) {
 
   var top_tracks = []
@@ -125,7 +141,8 @@ function getTopTracks(artist) {
 
   var top_tracks_array = getTopTracksArray(top_tracks);
 
-  if (top_tracks_array) {
+  if (top_tracks_array.length > 0) {
+
     var top_tracks_card = '<div class="top-tracks">'
 
     top_tracks_array.forEach(function (track) {
