@@ -106,6 +106,15 @@ $popup-width: 640px;
   }
 }
 
+.genres {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  .genre {
+    font-size: 0.8rem;
+    margin: 0.5rem;
+  }
+}
+
 // // event title related css
 // .event__event_title {
 //   font-size: 125%;

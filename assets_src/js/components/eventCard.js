@@ -5,9 +5,23 @@ export async function getEventCardTemplate(event) {
   var eventCard =
     // open div
     '<div class="event">'
+
+      // genres
+      + '<div class="genres">'
+        + getEventGenres(event)
+      + '</div>'
+      // /genres
+
+      // artists
       + '<div class="artists">'
         + printArtistCards(event.artist_array)
       + '</div>'
+      // /artists
+
+      // venue
+
+      // /venue
+
 
     // close div
     + '</div>'
@@ -275,7 +289,66 @@ function getArtistLinks(artist) {
 
   return links_string
 
+}
 
+function getEventGenres(event) {
+
+  var genres_array = []
+
+  if(event.spotify) {
+    if(event.spotify.genres.length > 0) {
+      var genres = event.spotify.genres
+      genres.forEach(function(genre) {
+        genres_array.push(genre);
+      })
+    }
+  }
+
+  if(event.lastm) {
+    if(event.lastfm.tags.length > 0) {
+      var tags = event.lastfm.tags
+      tags.forEach(function(tag) {
+        genres_array.push(tag);
+      })
+    }
+  }
+
+  var genres_string = ''
+
+  if(genres_array.length > 0) {
+
+    // remove duplicates
+    var genres_reduced = genres_array.filter(function(elem, pos) {
+      return genres_array.indexOf(elem) == pos;
+    });
+
+    // remove specific strings
+    var genres_clean = removeFromArray(genres_reduced, 'seen live');
+
+    // set max number of elements
+    var genres_final = genres_clean.slice(0, 15);
+
+    // attach genre to final string
+    genres_final.forEach(function(genre) {
+      var genre = '<span class="genre badge badge-dark">' + genre + '</span>'
+      genres_string = genres_string + genre
+    })
+
+  }
+
+  return genres_string
+
+}
+
+function removeFromArray(arr) {
+  var what, a = arguments, L = a.length, ax;
+  while (L > 1 && arr.length) {
+    what = a[--L];
+    while ((ax = arr.indexOf(what)) !== -1) {
+      arr.splice(ax, 1);
+    }
+  }
+  return arr;
 }
 
 function textTruncate (str, length, ending) {
