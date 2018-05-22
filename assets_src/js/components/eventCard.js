@@ -6,6 +6,12 @@ export async function getEventCardTemplate(event) {
     // open div
     '<div class="event">'
 
+      // date
+      + '<div class="event__date">'
+        + getEventDate(event)
+      + '</div>'
+      // /date
+
       // genres
       + '<div class="genres">'
         + getEventGenres(event)
@@ -29,6 +35,31 @@ export async function getEventCardTemplate(event) {
 
   return eventCard
 };
+
+function getEventDate(event) {
+
+  var date = event.date;
+
+  var date_formated = moment(date).format('dddd, MMMM DD');
+
+  var date_string = '<div class="date"><span class="day">' + date_formated + '</span> ' + getEventTime(event) + '</div>'
+
+  return date_string;
+}
+
+function getEventTime(event) {
+
+  var time = event.time
+
+  if (time) {
+    var time_formated = time.slice(0, -3);
+    var time_string = '<span class="time">' + time_formated + '</span>'
+    return time_string
+  } else {
+    return ''
+  }
+
+}
 
 function getArtistCard(artist) {
 
@@ -116,7 +147,7 @@ function getTopTracksWidget(artist) {
     var top_tracks_widget =
       // more
       '<div class="artist__more">'
-        + '<a class="show-more badge badge-dark" data-toggle="collapse" href="#panel-' + artist.id + '" role="button" aria-expanded="false" aria-controls="' + artist.id + '">Play top tracks</a>'
+        + '<a class="show-more" data-toggle="collapse" href="#panel-' + artist.id + '" role="button" aria-expanded="false" aria-controls="' + artist.id + '">Play top tracks</a>'
         // panel
         + '<div class="collapse" id="panel-' + artist.id + '">'
           + top_tracks

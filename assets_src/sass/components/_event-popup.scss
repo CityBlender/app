@@ -1,4 +1,4 @@
-$popup-width: 640px;
+$popup-width: 540px;
 
 // container
 .leaflet-popup-tip-container {
@@ -14,7 +14,7 @@ $popup-width: 640px;
 .leaflet-popup-content-wrapper{
   background: #f1f1f1;
   border: 2px solid #333;
-  padding: 1rem 0;
+  padding: 0.35rem 0;
 }
 
 .leaflet-popup-content{
@@ -29,11 +29,37 @@ $popup-width: 640px;
   }
 }
 
+// event
+.event {
+  .event__date {
+    text-align: center;
+    margin-bottom: 1.75rem;
+  }
+
+  .date {
+    display: inline-block;
+    line-height: 1;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .time {
+    display: inline-block;
+    line-height: 1;
+    font-weight: 500;
+    margin-left: 0.25rem;
+    font-size: 1.15rem;
+    &:before {
+      content: '@';
+    }
+  }
+}
+
 
 // artist
 .artists {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
   justify-items: stretch;
 }
@@ -54,7 +80,8 @@ $popup-width: 640px;
   }
 
   .show-more {
-    color: white;
+    letter-spacing: 0.015rem;
+    font-weight: bold;
     text-transform: uppercase;
     display: inline-block;
     margin-bottom: 1rem;
@@ -112,6 +139,7 @@ $popup-width: 640px;
   .genre {
     font-size: 0.8rem;
     margin: 0.5rem;
+    font-weight: 400;
   }
 }
 
