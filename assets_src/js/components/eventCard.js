@@ -12,17 +12,17 @@ export async function getEventCardTemplate(event) {
       + '</div>'
       // /date
 
-      // genres
-      + '<div class="genres">'
-        + getEventGenres(event)
-      + '</div>'
-      // /genres
-
       // artists
       + '<div class="artists">'
         + printArtistCards(event.artist_array)
       + '</div>'
       // /artists
+
+      // genres
+      + '<div class="genres">'
+        + getEventGenres(event)
+      + '</div>'
+      // /genres
 
       // venue
 
@@ -53,7 +53,7 @@ function getEventTime(event) {
 
   if (time) {
     var time_formated = time.slice(0, -3);
-    var time_string = '<span class="time">' + time_formated + '</span>'
+    var time_string = '<span class="time">(' + time_formated + ')</span>'
     return time_string
   } else {
     return ''
