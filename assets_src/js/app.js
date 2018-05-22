@@ -1,6 +1,7 @@
+import { map } from 'asyncro';
 import { config } from './config';
 import './components/pulsingIcon';
-import { getEventCard } from './components/eventCard';
+import { getEventCardTemplate } from './components/eventCard';
 
 new Vue({
   el: '#app',
@@ -9,12 +10,13 @@ new Vue({
     errored: false,
     isLoaded: false,
     events: null,
+    currentArtists: null,
     map: null,
     tileLayer: null,
     layerSwitch: null,
     layers: [
       {
-        name: 'Vibes',
+        name: 'Turn on the vibes',
         active: false,
       }
     ],
@@ -27,7 +29,7 @@ new Vue({
 
     // initialize a Leaflet instance
     initMap() {
-      
+
       // configure map
       this.map = L.map('map', {
         zoomControl: false // disable default zoom
@@ -49,7 +51,7 @@ new Vue({
     getEvents() {
       this.isLoaded = false
       axios
-        .get('https://fuinki-api.herokuapp.com/london/events/2018-05-19')
+        .get('https://fuinki-api.herokuapp.com/london/events/2018-05-22')
         .then(response => {
           this.isLoaded = true
           this.events = response.data;
@@ -64,32 +66,77 @@ new Vue({
         .finally(() => this.loading = false)
     },
 
-    getArtist(artist_id) {
-      axios
-        .get('https://fuinki-api.herokuapp.com/artist/' + artist_id)
-        .then(response => {
-          var artist_data = response.data;
-          return artist_data;
-        })
-        .catch(error => {
-          console.log(error);
-          return;
-        })
-    },
+    async plotEvents() {
+      var events = this.events;
+      var map = this.map;
+      var _this = this;
 
-    plotEvents() {
-      const events = this.events;
-      const map = this.map;
-      events.forEach(function(event) {
+      this.asyncForEach(events, function(event) {
         var lat = event.location.lat;
         var lng = event.location.lng;
         var event_artists = event.artists;
-        var pulsingIcon = L.icon.pulse({ iconSize: [8, 8], color: '#C70039' });
-        // create a marker
-        L.marker([lat, lng], { icon: pulsingIcon }).bindPopup(getEventCard(event)).addTo(map);
+
+        var pulsingIcon = L.icon.pulse({ iconSize: [10, 10], color: '#C70039' });
+
+        // add marker to the map
+        var marker = L.marker([lat, lng], { icon: pulsingIcon }).addTo(map);
+
+        // add onClick event
+        marker.on('click mouseover', async function () {
+          var event_card = await _this.getEventCard(event);
+          marker.bindPopup(event_card);
+
+          const players = Array.from(document.querySelectorAll('.audio-player')).map(p => new Plyr(p, {
+            controls: ['play', 'progress']
+          }));
+        });
+      })
+      // events.forEach(function(event) {
 
 
+      // });
+    },
+
+    async getEventCard(event) {
+
+      // get artist array
+      var artist_array = await this.getArtistArray(event.artists);
+
+      // append artist array to event object
+      event.artist_array = await artist_array;
+
+      var event_card = await getEventCardTemplate(event);
+
+      return event_card;
+
+    },
+
+    async getArtistArray(artists) {
+      var _this = this;
+
+      var artist_array = await map(artists, async function(artist) {
+        var artist_info = await _this.getArtist(artist.id, artist.songkick_url);
+        return artist_info;
       });
+
+      return artist_array;
+    },
+
+    async getArtist(artist_id, artist_url) {
+      try {
+        var response = await axios.get('https://fuinki-api.herokuapp.com/artist/' + artist_id);
+        var artist_data = await response.data[0];
+        artist_data['songkick_url'] = artist_url;
+        return artist_data;
+      } catch(error) {
+        console.log(error);
+      }
+    },
+
+    async asyncForEach(array, callback) {
+      for (let index = 0; index < array.length; index++) {
+        await callback(array[index], index, array)
+      }
     },
 
     // create heatmap
@@ -99,8 +146,13 @@ new Vue({
       const heatmapData = []
       var heatmapConfig = {
         max:0.1,
+<<<<<<< HEAD
         radius: 100, 
         blur:30, 
+=======
+        radius: 50,
+        blur:10,
+>>>>>>> fc777953da81d9a4a9aa643f1e6fe86de55dc616
         gradient:{0.0: 'green', 0.5: 'yellow', 1.0: 'red'}
       }
       this.events.forEach(function(event, i) {
@@ -148,13 +200,13 @@ new Vue({
       });
       this.danceabilityLayer = L.heatLayer(danceabilityData, heatmapConfig)
 
-      // construct loudness layer 
+      // construct loudness layer
       var loudnessData = heatmapData.map(function(a) {
         return [a.lat, a.lng, a.loudness/60 + 1]; // loudness ranges from around -60 to 0
       });
       this.loudnessLayer = L.heatLayer(loudnessData, heatmapConfig)
 
-      // construct speechiness layer 
+      // construct speechiness layer
       var speechinessData = heatmapData.map(function(a) {
         return [a.lat, a.lng, a.speechiness]; //  speechiness ranges from 0 to 1
       });

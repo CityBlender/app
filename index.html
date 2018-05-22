@@ -4,15 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Fuinki</title>
+  <title>City Blender</title>
 
-  <link rel="icon" type="image/png" href="assets/img/favicon.png">
+  <link rel="icon" type="image/png" href="/assets/img/favicon.png">
 
 
   <!-- load CSS -->
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="assets/css/app.css">
-  <style> .leaflet-zoom-hide { position: absolute!important; } </style>
+  <link rel="stylesheet" type="text/css" href="/assets/css/app.css">
 </head>
 
 <body>
@@ -33,7 +32,9 @@
             <div v-if="loading" class="loading">Loading...</div>
 
             <ul v-else class="list-group event-list">
-              <li v-for="event in events" class="list-group-item event">{{ event.name }}</li>
+              <li v-for="event in events" class="list-group-item event">
+                <span @click="getEvent(event.id)">{{ event.name }}</span>
+              </li>
             </ul>
 
           </section>
@@ -61,22 +62,24 @@
 
           <!-- layer-switch -->
           <div class="layer-switch" v-for="layer in layers">
-          <label class="form-check-label">
+
             <input
+              id="vibe-checkbox"
               class="form-check-input"
               type="checkbox"
               v-model="layer.active"
               @change="layerChanged(layer.active)"
             />
-            {{ layer.name }}
-        </label>
-        </div>
+            <label for="vibe-checkbox" class="form-check-label">
+              {{ layer.name }}
+            </label>
+          </div>
           <!-- /layer-switch -->
 
           <!-- map -->
-          <div id="map" class="map"></div>          
+          <div id="map" class="map"></div>
 
-          
+
           <!-- /map -->
 
         </div>
@@ -89,7 +92,7 @@
 
 
   <!-- load libraries -->
-  <script src="assets/js/libraries.js"></script>
+  <script src="/assets/js/libraries.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
@@ -97,7 +100,7 @@
 
 
   <!-- load custom scripts -->
-  <script src="assets/js/app.js"></script>
+  <script src="/assets/js/app.js"></script>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119170917-1"></script>

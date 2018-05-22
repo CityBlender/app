@@ -1,11 +1,13 @@
 {
   "presets": [
     ["env", {
-      "modules": false
+      "modules": false,
+      "targets": {
+        "node": "current"
+      }
     }]
   ],
   "plugins": [
-    "external-helpers",
-    "transform-runtime"
+    "external-helpers"
   ]
 }

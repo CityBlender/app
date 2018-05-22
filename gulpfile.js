@@ -21,10 +21,12 @@ const babel = require('rollup-plugin-babel');
 // configure directories and files to be used with tasks
 const css_src = './assets_src/sass/*.scss'
 const css_dest = './assets/css'
-const css_watch = "./assets_src/sass/**/**/*.scss"
+const css_watch = './assets_src/sass/**/**/*.scss'
 
 const img_src = './assets_src/img/*'
 const img_dest = './assets/img'
+
+const html_watch = './**/**/*.html'
 
 const js_lib_src = './assets_src/js/lib/*.js'
 const js_lib_filename = 'libraries.js'
@@ -37,7 +39,7 @@ const js_custom_src = [
 const js_custom_filename = 'app.js'
 const js_custom_dest = './assets/js'
 
-const js_watch = './assets_src/js/*'
+const js_watch = './assets_src/js/**/**/*.js'
 
 const rollup_file = 'app.js'
 const rollup_src = './assets_src/js/'
@@ -108,7 +110,7 @@ const rollupJS = (inputFile, options) => {
       format: options.format,
       sourcemap: options.sourcemap,
       plugins: [
-        babel({ runtimeHelpers: true }),
+        babel(),
         resolveNodeModules()
       ]
     })
@@ -152,7 +154,7 @@ gulp.task('watch', function () {
   gulp.watch(css_watch, ['css']);
   gulp.watch(js_watch, ['js']);
   gulp.watch(img_src, ['images']);
-  gulp.watch('./**/**/*.html', ['reload']);
+  gulp.watch(html_watch, ['reload']);
 });
 
 // default task run using 'gulp'
