@@ -74,13 +74,13 @@ new Vue({
       var _this = this;
       var energyAve = this.energyAve
       var danceabilityAve = this.danceabilityAve
-      var loudnessAve = this.loudnessAve
+      var loudnessAve = this.loudnessAve/60 + 1
       var speechinessAve = this.speechinessAve
       var acousticnessAve = this.acousticnessAve
       var livenessAve = this.livenessAve
       var instrumentalnessAve = this.instrumentalnessAve
       var valenceAve = this.valenceAve
-      var tempoAve = this.tempoAve
+      var tempoAve = (this.tempoAve-80)/70
       
       this.asyncForEach(events, function(event) {
         var lat = event.location.lat;
@@ -104,52 +104,62 @@ new Vue({
         // add spider chart
         marker.on('mouseover', async function () {
           if (document.getElementById('vibe-checkbox').checked) {
-            // create spider chart
-
 
             // prepare data for spider chat
-            var energy_data = event.spotify.energy_median
-            var danceability_data = event.spotify.danceability_median
-            var loudness_data = event.spotify.loudness_median/60 + 1
-            var speechiness_data = event.spotify.speechiness_median
-            var acousticness_data = event.spotify.acousticness_median
-            var liveness_data = event.spotify.liveness_median
-            var instrumentalness_data = event.spotify.instrumentalness_median
-            var valence_data = event.spotify.valence_median
-            var tempo_data = (event.spotify.tempo_median-80)/70
+            if (typeof event.spotify !== "undefined"){
+              var energy_data = event.spotify.energy_median
+              var danceability_data = event.spotify.danceability_median
+              var loudness_data = event.spotify.loudness_median/60 + 1
+              var speechiness_data = event.spotify.speechiness_median
+              var acousticness_data = event.spotify.acousticness_median
+              var liveness_data = event.spotify.liveness_median
+              var instrumentalness_data = event.spotify.instrumentalness_median
+              var valence_data = event.spotify.valence_median
+              var tempo_data = (event.spotify.tempo_median-80)/70
 
+              // construct spider chart
 
-            // construct spider chart
-            var canvas = document.createElement('canvas');
-            var ctx = canvas.getContext('2d');
-            var color = 'rgb(244, 53, 48, 0.4)';
-            var myChart = new Chart(ctx, {
-              type: 'radar',
-              data: {
-                labels: [
-                  "Energy", "Danceability", "Loudness", "Speechiness", "Acousticness",
-                  "Liveness", "Instrumentalness", "Valence", "Tempo"],
-                datasets: [{
-                  label: "Vibes of this event",
-                  pointHitRadius: 2,
-                  pointHoverRadius: 3,
-                  pointHoverBackgroundColor:'rgb(244, 53, 200)',
-                  backgroundColor: color,
-                  borderColor: color,
-                  pointBackgroundColor: color,
-                  data: [energy_data,danceability_data,loudness_data
-                    ,speechiness_data,acousticness_data,liveness_data
-                    ,instrumentalness_data,valence_data,],
-                }, ],
-                options: {
-                  title: {
-                    display: true,
-                    text: 'Chart.js Outcome Graph'
-                  },
+              var canvas = document.createElement('canvas');
+              var ctx = canvas.getContext('2d');
+              var color = 'rgb(244, 53, 48, 0.4)';
+              var color_ave = 'rgb(0, 152, 216, 0.4)'
+              var myChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                  labels: [
+                    "Energy", "Danceability", "Loudness", "Speechiness", "Acousticness",
+                    "Liveness", "Instrumentalness", "Valence", "Tempo"],
+                  datasets: [{
+                    label: "Vibes of this event",
+                    pointHitRadius: 2,
+                    pointHoverRadius: 3,
+                    // pointHoverBackgroundColor:'rgb(244, 53, 200)',
+                    backgroundColor: color,
+                    borderColor: color,
+                    pointBackgroundColor: color,
+                    data: [energy_data,danceability_data,loudness_data
+                      ,speechiness_data,acousticness_data,liveness_data
+                      ,instrumentalness_data,valence_data,],
+                  }, {
+                    label: "Average vibes",
+                    pointHitRadius: 2,
+                    pointHoverRadius: 3,
+                    // pointHoverBackgroundColor:'rgb(200, 53, 200)',
+                    backgroundColor: color_ave,
+                    borderColor: color_ave,
+                    pointBackgroundColor: color_ave,
+                    data: [energyAve,danceabilityAve,loudnessAve
+                      ,speechinessAve,acousticnessAve,livenessAve
+                      ,instrumentalnessAve,valenceAve,],
+                  }],
                 }
-              }
-            });
-            marker.bindPopup(canvas).openPopup();
+              });
+              marker.bindPopup(canvas).openPopup();
+            } else {
+              var noVibe = '<div class="no-vibe">'+"No vibes data available for this event"+'</div>'
+              marker.bindPopup(noVibe).openPopup();
+            }
+            
           } else {
             // do nothing
           }
