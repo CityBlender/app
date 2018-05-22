@@ -1,5 +1,9 @@
 $popup-width: 540px;
 
+.leaflet-popup-close-button {
+  display: none;
+}
+
 // container
 .leaflet-popup-tip-container {
   // border: 3px solid red;
