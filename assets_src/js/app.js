@@ -206,6 +206,7 @@ new Vue({
         "Tempo": this.tempoLayer,
       }
       this.layerSwitch = L.control.layers(layer_list);
+
     },
 
     // layer change
@@ -215,8 +216,16 @@ new Vue({
         this.energyLayer.addTo(this.map);
         this.layerSwitch.addTo(this.map);
       } else {
-        this.energyLayer.removeFrom(this.map);
         this.layerSwitch.remove(this.map);
+        this.energyLayer.removeFrom(this.map);
+        this.danceabilityLayer.removeFrom(this.map);
+        this.loudnessLayer.removeFrom(this.map);
+        this.speechinessLayer.removeFrom(this.map);
+        this.acousticnessLayer.removeFrom(this.map);
+        this.livenessLayer.removeFrom(this.map);
+        this.instrumentalnessLayer.removeFrom(this.map);
+        this.valenceLayer.removeFrom(this.map);
+        this.tempoLayer.removeFrom(this.map);
       }
     }
   }
