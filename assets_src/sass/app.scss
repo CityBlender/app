@@ -194,3 +194,10 @@ $map-width: 100vw - $sidebar-width;
   color: #fff;
   display: inline-block;
 }
+.heatmap{
+  width:100%;
+  height:100%;
+}
+.leaflet-zoom-hide { 
+  position: absolute!important;
+} 
