@@ -284,12 +284,7 @@
 	text-decoration: none;
 	color: black;
 	}
-.leaflet-bar a,
-.leaflet-control-layers-toggle {
-	background-position: 50% 50%;
-	background-repeat: no-repeat;
-	display: block;
-	}
+
 .leaflet-bar a:hover {
 	background-color: #f4f4f4;
 	}
@@ -334,7 +329,6 @@
 	font-size: 22px;
 	}
 
-
 /* layers control */
 
 .leaflet-control-layers {
@@ -342,29 +336,14 @@
 	background: #fff;
 	border-radius: 5px;
 	}
-.leaflet-control-layers-toggle {
-	background-image: url(images/layers.png);
-	width: 36px;
-	height: 36px;
-	}
-.leaflet-retina .leaflet-control-layers-toggle {
-	background-image: url(images/layers-2x.png);
-	background-size: 26px 26px;
-	}
-.leaflet-touch .leaflet-control-layers-toggle {
-	width: 44px;
-	height: 44px;
-	}
+
 .leaflet-control-layers .leaflet-control-layers-list,
-.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
-	display: none;
-	}
+
 .leaflet-control-layers-expanded .leaflet-control-layers-list {
 	display: block;
 	position: relative;
 	}
 .leaflet-control-layers-expanded {
-	padding: 6px 10px 6px 6px;
 	color: #333;
 	background: #fff;
 	}
@@ -374,7 +353,7 @@
 	padding-right: 5px;
 	}
 .leaflet-control-layers-selector {
-	margin-top: 2px;
+	// margin-top: 2px;
 	position: relative;
 	top: 1px;
 	}
@@ -453,6 +432,7 @@
 .leaflet-touch .leaflet-bar {
 	border: 2px solid rgba(0,0,0,0.2);
 	background-clip: padding-box;
+	padding:0.5rem 1rem;
 	}
 
 
@@ -634,3 +614,8 @@
 	margin-left: -12px;
 	border-right-color: #fff;
 	}
+.leaflet-zoom-hide { 
+	position: absolute!important; 
+	width: 600px;
+	height:600px;
+}

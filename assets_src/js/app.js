@@ -1,7 +1,6 @@
 import { config } from './config';
 import './components/pulsingIcon';
 import { getEventCard } from './components/eventCard';
-// import { getArtists } from './components/getArtists';
 
 new Vue({
   el: '#app',
@@ -12,7 +11,10 @@ new Vue({
     events: null,
     map: null,
     tileLayer: null,
-    heatmapLayer: null,
+    energyLayer: null,
+    danceabilityLayer: null,
+    laudnessLayer: null,
+    layerSwitch: null,
     layers: [
       {
         name: 'Vibes',
@@ -28,6 +30,7 @@ new Vue({
 
     // initialize a Leaflet instance
     initMap() {
+      
 
       // configure map
       this.map = L.map('map', {
@@ -43,7 +46,7 @@ new Vue({
 
       // position zoom button
       L.control.zoom({
-        position: 'bottomright'
+        position: 'bottomleft'
       }).addTo(this.map);
     },
 
@@ -78,39 +81,13 @@ new Vue({
         })
     },
 
-    getArtistArray(argument) {
-
-      return argument
-
-      // create empty artist array
-      // var artist_array = [];
-
-      // if (artists === undefined || artists.length == 0) {
-      //   return artist_array;
-      // } else {
-      //   // loop through artists
-      //   artists.forEach(function (artist) {
-      //     var artist_data = artist.name;
-      //     artist_array.push(artist_data);
-      //   });
-
-      //   return artist_array;
-      // }
-
-    },
-
     plotEvents() {
       const events = this.events;
       const map = this.map;
-      const lala = this.getArtistArray('muuuuu');
-      console.log(lala);
       events.forEach(function(event) {
         var lat = event.location.lat;
         var lng = event.location.lng;
         var event_artists = event.artists;
-        // console.log(event_artists)
-        // var artists = getArtistArray('llaaaa');
-        // console.log(artists)
         var pulsingIcon = L.icon.pulse({ iconSize: [8, 8], color: '#C70039' });
         // create a marker
         L.marker([lat, lng], { icon: pulsingIcon }).bindPopup(getEventCard(event)).addTo(map);
@@ -121,75 +98,102 @@ new Vue({
 
     // create heatmap
     initLayer() {
-      var cfg = {
-        "radius": 0.01,
-        "maxOpacity": .8,
-        "scaleRadius": true,
-        "useLocalExtrema": true,
-        latField: 'lat',
-        lngField: 'lng',
-        valueField: 'count'
-      };
+      // var cfg = {
+      //   "radius": 0.01,
+      //   "maxOpacity": .8,
+      //   "scaleRadius": true,
+      //   "useLocalExtrema": true,
+      //   latField: 'lat',
+      //   lngField: 'lng',
+      //   valueField: 'energy'
+      // };
       const heatmapData = []
       this.events.forEach(function(event, i) {
         if (typeof event.spotify !== "undefined"){
           heatmapData[i] = {
             lat: event.location.lat,
             lng: event.location.lng,
-            count: event.spotify.danceability_median
+            // store vibes data
+            energy: event.spotify.energy_median,
+            danceability: event.spotify.danceability_median,
+            laudness: event.spotify.loudness_median,
           }
         } else {
           heatmapData[i] = {
             lat: event.location.lat,
             lng: event.location.lng,
-            count: 0
+            // store vibes data
+            energy: 0,
+            danceability: 0,
+            laudness: 0
           }
         }
       });
-      var vibesData = {
-        max: 1.0,
-        data: heatmapData,
-      };
-      this.heatmapLayer = new HeatmapOverlay(cfg);
-      this.heatmapLayer.setData(vibesData);
+      // var vibesData = {
+      //   max: 1.0,
+      //   data: heatmapData,
+      // };
+
+      this.energyLayer = L.heatLayer([
+        [51.530067, -0.121631, 0.5],
+        [51.530067, -0.121632, 0.3],
+        [51.530067, -0.12, 0.2],
+
+      ], {radius: 25}).addTo(this.map);
+      
+
+      // this.danceabilityLayer = L.heatLayer([
+      //   [51.517286, -0.100752, 0.2],
+      // ], {radius: 25})
+
+      // this.laudnessLayer = L.heatLayer([
+      //   [51.517286, -0.100752, 0.3],
+      // ], {radius: 25})
+
+      // this.energyLayer = new HeatmapOverlay(cfg);
+      // this.energyLayer.setData(vibesData);
+      
+
+      // construct danceability layer
+      // cfg.valueField = 'danceability';
+      // this.danceabilityLayer = new HeatmapOverlay(cfg);
+      // this.danceabilityLayer.setData(vibesData);
+
+      // construct loudness layer 
+      // cfg.valueField = 'laudness';
+      // this.laudnessLayer = new HeatmapOverlay(cfg);
+      // this.laudnessLayer.setData(vibesData);
+
+      // set the layer list property to the map object
+      this.map._layers = []
+
+      // construct the layer switch buttons
+      // var layer_list = {
+      //   "Energy": this.energyLayer,
+      //   "Danceability": this.danceabilityLayer,
+      //   "Laudness": this.laudnessLayer,
+      // }
+      // this.layerSwitch = L.control.layers(layer_list);
     },
 
     // layer change
     layerChanged(active) {
+      // construct layer list
       if (active) {
-        this.heatmapLayer.addTo(this.map);
+
+        
+
+
+        
+        // this.laudnessLayer.addTo(this.map);
+        // this.layerSwitch.addTo(this.map);
       } else {
-        this.heatmapLayer.removeFrom(this.map);
+        // this.laudnessLayer.removeFrom(this.map);
+        // this.layerSwitch.remove(this.map);
       }
     }
   }
 });
 
-
-// $(document).ready(function () {
-
-//     var date_format = 'YYYY-MM-DD';
-//     var timezone = 'Europe/London';
-//     var today = moment().tz(timezone).format(date_format);
-
-//     // function plusDay(days) {
-//     //     var new_date = moment().tz(timezone).add(days, 'days').calendar();
-//     //     return new_date;
-//     // }
-
-//     // function minusDay(days) {
-//     //     var new_date = moment().tz(timezone).substract(days, 'days').calendar().format(date_format);
-//     //     return new_date;
-//     // }
-
-//     // var tomorrow = plusDay(1);
-
-//     // console.log(today);
-//     // console.log(tomorrow);
-
-
-//     getEvents(today);
-
-// });
 
 

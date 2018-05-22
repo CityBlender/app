@@ -21,6 +21,7 @@ const babel = require('rollup-plugin-babel');
 // configure directories and files to be used with tasks
 const css_src = './assets_src/sass/*.scss'
 const css_dest = './assets/css'
+const css_watch = "./assets_src/sass/**/**/*.scss"
 
 const img_src = './assets_src/img/*'
 const img_dest = './assets/img'
@@ -148,7 +149,7 @@ gulp.task('images', function () {
 
 // watch
 gulp.task('watch', function () {
-  gulp.watch(css_src, ['css']);
+  gulp.watch(css_watch, ['css']);
   gulp.watch(js_watch, ['js']);
   gulp.watch(img_src, ['images']);
   gulp.watch('./**/**/*.html', ['reload']);
