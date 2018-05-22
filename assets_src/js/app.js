@@ -146,13 +146,8 @@ new Vue({
       const heatmapData = []
       var heatmapConfig = {
         max:0.1,
-<<<<<<< HEAD
         radius: 100, 
         blur:30, 
-=======
-        radius: 50,
-        blur:10,
->>>>>>> fc777953da81d9a4a9aa643f1e6fe86de55dc616
         gradient:{0.0: 'green', 0.5: 'yellow', 1.0: 'red'}
       }
       this.events.forEach(function(event, i) {
