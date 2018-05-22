@@ -28,21 +28,21 @@
     <section>
     <h3>About the vibe of a place</h3>
 
-      <p>Each city has a different set of characteristics which make it unique.
+      <p>Each city has a different set of characteristics that make it unique.
        The musical ecosystem is an important dimension of the cultural environment of urban areas.</p>
 
-       <p>The attractiviness or wealth of a society can be meassured by the amount of recreational activities
+       <p>The attractiveness or wealth of a society can be meassured by the amount of recreational activities
        they can afford (not just in the monetery aspect) to have.
-       The diversity of these events, will also contribute to enahnce the cultural prosperity of cities.
-       In particular, London has understood that their night activities are one of the fatcts that
+       The diversity of these events will also contribute to enahnce the cultural prosperity of cities.
+       In particular, London has understood that their night activities are one of the facets that
        makes London such a vibrant and exciting place.</p>
 
       <h4>When should you go out?</h4>
       <p>It's true that every single city has it's own identity,
-        but no matter where are you from, life has it's own rithm.
-        As expected, Friday's and Saturday's are the busiest days of the week to listen to live music.
-        Also, as odd as it might look like, Londoners actually work!!!,
-        making Mondays the less Fuiki days</p>
+        but no matter where are you from, life has it's own rhythm.
+        As expected, Fridays and Saturdays are the busiest days of the week to listen to live music.
+        Also, as odd as it might seem, Londoners actually work!!!,
+        making Mondays the less Fuinki days</p>
 
     </section>
 
@@ -52,10 +52,10 @@
 
     <section>
       <h4>Daily vibe?</h4>
-      <p>Using Last.fm and Spotify, we were able to retrive different characterisitcs of the songs of the bands.
-        Features such of danceability, speachness or loudness, can be accessed by using this type of services.
-        As a result, we wanted to understand how this variables were changind during the week. <br/>
-        In order to this, all the song data was aggrupped by date and then statitics were computed.
+      <p>Using Last.fm and Spotify, we were able to retreive different characterisitcs of the songs by the performing artists.
+        Features such as danceability, speachiness, or loudness, can be accessed by using this type of services.
+        As a result, we wanted to understand how these variables were changind during the week. <br/>
+        In order to this, all the song data was grouped by date and then statitics were computed.
         In the following set of box plots, the distribution of these variables by date is represented.
       </p>
 
@@ -196,14 +196,14 @@
   <section>
 
   <h4>Where are these occuring?</h4>
-  <p>For different resons, certain economic activities tend to locate themselves generating clusters.
-    Certain businesses might benefit of what is known as Economies of agglomeration. In other cases, the city
-    characteristics such of real state, population demographics or proximity to transport nodes, contribute
-    to the creation of natural cluster. 
+  <p>For different reasons, certain economic activities tend to locate themselves generating clusters.
+    Certain businesses might benefit from what is known as Economies of agglomeration. In other cases, the city
+    characteristics such as real state, population demographics, or proximity to transport nodes contribute
+    to the creation of natural clusters.  
     </p>
-  <p>By making the differnt API calls, it was able to map the different gigs and study their spatial distribution of the lotaions.
-    In the following panel, a map of all the gigs gathered during a month was created. Followed by this, each point was allocated to it's
-    corresponding borough and ward. These results can be found below. 
+  <p>By making the differnt API calls, it becomes possible to map the different gigs and study their spatial distribution.
+    In the following panel, a map of all the gigs gathered during a month was created. Following this, each point was allocated to its
+    corresponding borough and ward. These results can be found below.
   </p>
 
   <p> In general, more events were found in the North and East of the city. During this period of time, in Hackney there were
@@ -273,17 +273,34 @@
 
 
 
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="words-tab" data-toggle="tab"
+          href="#words" role="tab" aria-controls="words" aria-selected="true">Word Cloud</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="Genre-tab" data-toggle="tab"
+            href="#Genre" role="tab" aria-controls="Genre" aria-selected="false">Genre of Gigs</a>
+          </li>
+      </ul>
+  
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="words" role="tabpanel" aria-labelledby="words-tab">
+          
+            <img src="/about/map/word_cloud.png" alt="Word Cloud" width="700" height="600">
 
-      <img src="/about/map/word_cloud.png" alt="Word Cloud" width="700" height="600">
-
-   <iframe
-          width="700"
-          height="500"
-          frameborder="0"
-           scrolling="no"
-            src="//plot.ly/~cohenjota/88.embed">
-          </iframe>
-
+        </div>
+        <div class="tab-pane fade" id="Genre" role="tabpanel" aria-labelledby="Genre-tab">
+            <iframe
+            width="700"
+            height="500"
+            frameborder="0"
+             scrolling="no"
+              src="//plot.ly/~cohenjota/88.embed">
+            </iframe>
+        </div>
+      </div>
+    
 
     </section>
 
