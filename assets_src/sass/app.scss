@@ -50,11 +50,31 @@ $youtube: #FF0000;
 
 .layer-switch {
   position: absolute;
-  bottom: 1rem;
+  top: 1rem;
   right: 1rem;
   z-index: 999;
   color: #fff;
+  border: 1px solid $gray-600;
+  border-radius: 5px;
+  min-width: 140px;
+  padding: 0.25rem 1rem 0.25rem 2rem;
+  background-color: rgba(#000, 0.5);
 
+  input {
+    display: inline-block;
+    margin-top: 0.25rem;
+  }
+
+  label {
+    line-height: 1;
+
+    display: inline-block;
+    margin-left: 0.15rem;
+  }
+}
+
+.leaflet-control-layers {
+  top: 3rem;
 }
 
 .day-switch {
@@ -64,7 +84,6 @@ $youtube: #FF0000;
   z-index: 999;
   max-width: 16rem;
 }
-
 
 
 .animated-icon {

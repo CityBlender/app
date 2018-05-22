@@ -16,7 +16,7 @@ new Vue({
     layerSwitch: null,
     layers: [
       {
-        name: 'Vibes',
+        name: 'Turn on the vibes',
         active: false,
       }
     ],
@@ -51,7 +51,7 @@ new Vue({
     getEvents() {
       this.isLoaded = false
       axios
-        .get('https://fuinki-api.herokuapp.com/london/events/2018-05-19')
+        .get('https://fuinki-api.herokuapp.com/london/events/2018-05-22')
         .then(response => {
           this.isLoaded = true
           this.events = response.data;

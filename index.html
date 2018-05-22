@@ -62,16 +62,18 @@
 
           <!-- layer-switch -->
           <div class="layer-switch" v-for="layer in layers">
-          <label class="form-check-label">
+
             <input
+              id="vibe-checkbox"
               class="form-check-input"
               type="checkbox"
               v-model="layer.active"
               @change="layerChanged(layer.active)"
             />
-            {{ layer.name }}
-        </label>
-        </div>
+            <label for="vibe-checkbox" class="form-check-label">
+              {{ layer.name }}
+            </label>
+          </div>
           <!-- /layer-switch -->
 
           <!-- map -->
