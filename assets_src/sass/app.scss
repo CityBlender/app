@@ -9,6 +9,14 @@ $songkick: #F80046;
 $lastfm: #D51007;
 $spotify: #1ED760;
 $youtube: #FF0000;
+$facebook: #3B5998;
+$instagram:#E4405F;
+$foursquare: #F94877;
+$google: #4285F4;
+
+$fw-base: 400;
+$fw-medium: 500;
+$fw-bold: 700;
 
 
 // import Bootstrap
@@ -84,8 +92,6 @@ $youtube: #FF0000;
   z-index: 999;
   max-width: 16rem;
 }
-
-
 .animated-icon {
   width: 20px;
   height: 20px;
@@ -93,4 +99,11 @@ $youtube: #FF0000;
   border-radius: 50%;
   box-shadow: 0px 0px 4px white;
   transition: all 1s;
+}
+.spider-chart {
+  width: 1500px;
+  color: #1ED760;
+}
+.no-vibe {
+  text-align: center;
 }
