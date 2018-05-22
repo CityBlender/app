@@ -53,7 +53,7 @@ var icon_instagram = '<svg aria-labelledby="simpleicons-instagram-icon" viewBox=
 
 var icon_foursquare = '<svg aria-labelledby="simpleicons-foursquare-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.727 3.465l-.535 2.799c-.064.303-.445.623-.801.623H11.41c-.562 0-.963.391-.963.945v.614c0 .569.405.96.966.96h4.23c.395 0 .785.436.697.855l-.535 2.76c-.051.24-.314.63-.785.63h-3.457c-.63 0-.818.091-1.239.601-.42.524-4.206 5.069-4.206 5.069-.037.045-.074.029-.074-.015V3.42c0-.359.311-.78.776-.78h10.274c.375 0 .73.356.633.821v.004zm.451 10.98c.145-.578 1.746-8.784 2.281-11.385M18.486 0H5.683C3.918 0 3.4 1.328 3.4 2.164v20.34c0 .94.504 1.291.789 1.405.284.117 1.069.214 1.541-.328 0 0 6.044-7.014 6.146-7.117.165-.157.165-.157.315-.157h3.914c1.65 0 1.906-1.17 2.086-1.86.15-.569 1.754-8.774 2.279-11.385C20.875 1.08 20.365 0 18.49 0h-.004z"/></svg>'
 
-var icon_website = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"><g class="nc-icon-wrapper" fill="#111"><path d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0zm0 22c-2.5 0-4.783-.929-6.538-2.451.008-.013.019-.024.026-.037 1.652-2.768.613-4.459-.154-5.221a7.115 7.115 0 0 0-.671-.568c-.622-.483-1.034-.802-1.034-1.723 0-.434.242-.604 1.437-1.012.822-.281 1.753-.599 2.354-1.376 1.395-1.804-.139-4.586-.461-5.126a9.065 9.065 0 0 0-.53-.786 9.945 9.945 0 0 1 5.225-1.683c.312.529.827.975 1.333 1.41.432.372 1.118.528 1.471.968.202.252.104.738.111 1.056.014.631.396 1.546 1.684 1.546.057 0 .116-.002.177-.006.498-.035 2.052-.391 3.614-.907A9.934 9.934 0 0 1 22 12c0 5.514-4.486 10-10 10z"/><path data-color="color-2" d="M15.514 8.903c-1.576 0-3.185.749-4.003 1.863-.549.748-.709 1.613-.451 2.436.515 1.642.565 2.61.243 3.695-.286.964-.314 2.362 1.319 3.028.308.126.646.19 1.002.19 1.214 0 2.651-.751 3.944-2.062 1.554-1.575 2.468-3.505 2.446-5.165-.03-2.234-2.007-3.985-4.5-3.985z"/></g></svg>'
+var icon_website = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g class="nc-icon-wrapper"><path d="M12 0C5.383 0 0 5.383 0 12s5.383 12 12 12 12-5.383 12-12S18.617 0 12 0zm0 22c-2.5 0-4.783-.929-6.538-2.451.008-.013.019-.024.026-.037 1.652-2.768.613-4.459-.154-5.221a7.115 7.115 0 0 0-.671-.568c-.622-.483-1.034-.802-1.034-1.723 0-.434.242-.604 1.437-1.012.822-.281 1.753-.599 2.354-1.376 1.395-1.804-.139-4.586-.461-5.126a9.065 9.065 0 0 0-.53-.786 9.945 9.945 0 0 1 5.225-1.683c.312.529.827.975 1.333 1.41.432.372 1.118.528 1.471.968.202.252.104.738.111 1.056.014.631.396 1.546 1.684 1.546.057 0 .116-.002.177-.006.498-.035 2.052-.391 3.614-.907A9.934 9.934 0 0 1 22 12c0 5.514-4.486 10-10 10z"/><path data-color="color-2" d="M15.514 8.903c-1.576 0-3.185.749-4.003 1.863-.549.748-.709 1.613-.451 2.436.515 1.642.565 2.61.243 3.695-.286.964-.314 2.362 1.319 3.028.308.126.646.19 1.002.19 1.214 0 2.651-.751 3.944-2.062 1.554-1.575 2.468-3.505 2.446-5.165-.03-2.234-2.007-3.985-4.5-3.985z"/></g></svg>'
 
 function getEventDate(event) {
 
@@ -91,18 +91,9 @@ function getVenueCard(event) {
     var name = ''
   }
 
-  // get google url
-  if (event.venue.location) {
-    var venue_lng = event.venue.location.lng
-    var venue_lat = event.venue.location.lat
-    var google_url = getMapUrl(venue_lng, venue_lat)
-    var google_link = '<a class="google-maps" href="' + google_url +'" target="_blank">Show on Google Maps</a>'
-  } else {
-    var google_link = ''
-  }
 
   // get foursquare info
-  if (event.foursquare) {
+  if (Object.keys(event.foursquare).length > 0) {
 
     // description
     var fq_description = event.foursquare.description
@@ -131,6 +122,12 @@ function getVenueCard(event) {
     // contact
     var contact = getFqContact(event)
 
+  } else {
+    var description = '';
+    var rating = '';
+    var address = '';
+    var tips = '';
+    var contact = '';
   }
 
   // construct card
@@ -140,10 +137,9 @@ function getVenueCard(event) {
         + name
         + rating
       + '</div>'
-    + contact
-    + description
     + address
-    + google_link
+    + description
+    + contact
     + tips
     + '</div>'
 
@@ -159,6 +155,18 @@ function getMapUrl(long, lat) {
 }
 
 function getFqAddress(event) {
+
+
+  // get google url
+  if (event.venue.location) {
+    var venue_lng = event.venue.location.lng
+    var venue_lat = event.venue.location.lat
+    var google_url = getMapUrl(venue_lng, venue_lat)
+    var google_link = ' <a class="google-maps" href="' + google_url + '" target="_blank">Google Maps</a>'
+  } else {
+    var google_link = ''
+  }
+
   var fq_location = event.foursquare.location
   if (fq_location) {
 
@@ -174,14 +182,8 @@ function getFqAddress(event) {
     } else {
       var zip = ''
     }
-    if (fq_location.city) {
-      var city = fq_location.city
-      var city = '<span class="city">' + city + '</span>'
-    } else {
-      var city = ''
-    }
 
-    var address_string = '<div class="venue__address">' + address + zip + city + '</div>'
+    var address_string = '<div class="venue__address">' + address + zip + google_link + '</div>'
 
     return address_string
   } else { // return empty string if there is no location data
@@ -197,13 +199,14 @@ function getFqTips(event) {
 
     fq_tips.forEach(function(tip) {
       // text
-      var tip_text = '<div class="tip__text">' + tip.text + '</div>'
+      var tip_text = '<blockquote class="tip__text">' + tip.text + '</blockquote>'
 
       // user
       var user = tip.user
+      var user_image_dimensions = '25x25'
       if (user) {
         var user_name = user.first_name
-        var user_image_url = user.photo.prefix + '50x50' + user.photo.suffix
+        var user_image_url = user.photo.prefix + user_image_dimensions + user.photo.suffix
         var user_string =
           '<div class="tip__author">'
             + '<img src="' + user_image_url + '" alt="' + user_name + '">'

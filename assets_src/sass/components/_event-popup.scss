@@ -1,4 +1,7 @@
 $popup-width: 480px;
+$icon-fill: lighten($secondary, 20%);
+$icon-size: 20px;
+$icon-spacing: 0.45rem;
 
 .leaflet-popup-close-button {
   display: none;
@@ -44,13 +47,13 @@ $popup-width: 480px;
     display: inline-block;
     line-height: 1;
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: $fw-bold;
   }
 
   .time {
     display: inline-block;
     line-height: 1;
-    font-weight: 500;
+    font-weight: $fw-medium;
     margin-left: 0.25rem;
     font-size: 1.15rem;
   }
@@ -82,21 +85,16 @@ $popup-width: 480px;
 
   .show-more {
     letter-spacing: 0.015rem;
-    font-weight: bold;
+    font-weight: $fw-medium;
     text-transform: uppercase;
     display: inline-block;
     margin-bottom: 0.5rem;
     margin-top: 0.5rem;
   }
 
-  .collapse {
-    // padding-top: 0.75rem;
-  }
-
-
   .links .link {
     display: inline-block;
-    margin-right: 0.45rem;
+    margin-right: $icon-spacing;
 
     &:last-of-type {
       margin-right: 0;
@@ -104,8 +102,8 @@ $popup-width: 480px;
   }
 
   .links svg {
-    width: 20px;
-    fill: lighten($secondary, 20%);
+    width: $icon-size;
+    fill: $icon-fill;
     transition: all 0.25s ease-in-out;
   }
 
@@ -139,12 +137,13 @@ $popup-width: 480px;
 }
 
 .genres {
-  margin-bottom: 1.5rem;
+  margin-top: 0.75rem;
+  margin-bottom: 1rem;
   text-align: center;
   .genre {
     font-size: 0.8rem;
     margin: 0 0.25rem 0.5rem 0.25rem;
-    font-weight: 400;
+    font-weight: $fw-base;
   }
 }
 
@@ -153,133 +152,112 @@ $popup-width: 480px;
 
   .venue__title {
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     .venue__name {
-      margin-bottom: 0.25rem;
+      margin-bottom: 0;
       font-size: 1.75rem;
     }
 
     .rating {
+      margin-left: 0.5rem;
       display: inline-block;
       line-height: 1;
       border-radius: 0.15rem;
       padding: 0.25rem 0.2rem;
+      color: white;
     }
+  }
+
+
+  .venue__description {
+    margin-top: 0.5rem;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    text-align: center;
   }
 
 
   .venue__contact {
+    text-align: center;
+    margin-top: 0.75rem;
+
+    a {
+      margin-right: $icon-spacing*2;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+
     svg {
-      width: 16px;
+      width: $icon-size;
+      fill: $icon-fill;
     }
   }
+
+  .venue__address {
+    text-align: center;
+    margin-top: 0.25rem;
+    // font-style: italic;
+    font-size: 1rem;
+    color: $gray-600;
+
+    .street + .zip:before {
+      content: ', ';
+    }
+    .zip + .city:before {
+      content: ', ';
+    }
+
+    .google-maps {
+      font-style: normal;
+      font-size: 0.85rem;
+      margin-left: 0.15rem;
+      opacity: 0.75;
+      &:before {
+        content: '(';
+        color: $body-color;
+      }
+      &:after {
+        content: ')';
+        color: $body-color;
+      }
+    }
+  }
+
+  .venue__tips {
+    text-align: center;
+    margin-top: 1.25rem;
+  }
+
+  .tip {
+    margin-top: 0.75rem;
+
+    .tip__text {
+      margin-top: 0;
+      margin-bottom: 0.25rem;
+      padding: 0;
+      font-style: italic;
+      &:before {
+        content: '“';
+      }
+      &:after {
+        content: '”';
+      }
+    }
+
+    img {
+      border-radius: 50%;
+      border: 1px solid $gray-300;
+    }
+    .name {
+      margin-left: 0.25rem;
+      font-weight: $fw-medium;
+    }
+  }
+
+
 }
-
-// // event title related css
-// .event__event_title {
-//   font-size: 125%;
-//   font-weight: bold;
-//   margin-bottom: 2vh;
-//   font-style: italic;
-//   text-align: center;
-//   // background-color: #fcd000;
-// }
-// .event__event_title a{
-//   color: #50a882;
-// }
-// .event__title h2 {
-//   font-size: 125%;
-//   font-weight: bold;
-// }
-
-// // event artist related css
-// .event__artist {
-//   margin: 4vw 0;
-//   font-weight: bold;
-//   text-align: right;
-//   position: relative;
-// }
-// .event__artist img{
-//   width: 4vw;
-//   height:4vw;
-//   display: inline-block;
-//   vertical-align: middle;
-//   position: absolute;
-//   left: 0vw;
-//   bottom: 0;
-// }
-// .event__artist_section h3{
-//   font-size: 150%;
-//   font-weight: bold;
-//   text-align: left;
-//   color: #fff;
-//   border-bottom: solid 3px#50a882;
-//   display: inline-block;
-
-// }
-// .event__artist h4 {
-//   font-size: 125%;
-//   display: inline-block;
-//   position: absolute;
-//   left: 5vw;
-//   bottom: 2vh;
-//   color: #fff;
-//   font-family: 'Roboto', sans-serif;
-// }
-// .event__artist_section {
-//   margin: 4vh 0;
-// }
-// .event__artist_songkick{
-//   padding: 0.75vw;
-//   margin: 0vh 0.25vw 0;
-//   background-image: url("../../../assets_src/img/songkick_logo.jpeg");
-//   background-size:cover;
-//   display: inline-block;
-//   vertical-align: bottom;
-// }
-// .event__artist_spotify{
-//   padding: 0.75vw;
-//   margin: 0vh 0.25vw 0;
-//   background-image: url("../../../assets_src/img/spotify_logo.jpeg");
-//   background-size:cover;
-//   display: inline-block;
-//   vertical-align: bottom;
-// }
-// .event__artist_lastfm{
-//   padding: 0.75vw;
-//   margin: 0vh 1vw 0 0.25vw;
-//   background-image: url("../../../assets_src/img/lastfm_logo.jpeg");
-//   background-size:cover;
-//   display: inline-block;
-//   vertical-align: bottom;
-// }
-
-// // event venue related css
-// .event__venue_section h3{
-//   font-size: 150%;
-//   font-weight: bold;
-//   text-align: left;
-//   color: #fff;
-//   border-bottom: solid 3px#50a882;
-//   font-family: 'Roboto', sans-serif;
-//   display: inline-block;
-// }
-// .event__venue_name h4{
-//   font-size: 125%;
-//   margin-top: 2vh;
-//   // margin-left: 1vh;
-//   font-weight: bold;
-//   color: #fff;
-//   font-family: 'Roboto', sans-serif;
-//   display: inline-block;
-// }
-// .event__venue_name h4:hover{
-//   color: #50a882;
-// }
-// .event__venue_section h5{
-//   font-size: 125%;
-//   margin-left: 6vh;
-//   font-family: 'Roboto', sans-serif;
-//   color: #fff;
-//   display: inline-block;
-// }
