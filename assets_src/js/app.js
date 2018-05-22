@@ -14,6 +14,8 @@ new Vue({
     map: null,
     tileLayer: null,
     layerSwitch: null,
+    energyAve: null, 
+    danceabilityAve: null,
     layers: [
       {
         name: 'Turn on the vibes',
@@ -55,9 +57,9 @@ new Vue({
       .then(response => {
         this.isLoaded = true
         this.events = response.data;
+        this.getAve()
         this.plotEvents()
         this.initLayer()
-        this.getAve()
       })
       .catch(error => {
         console.log(error);
@@ -70,6 +72,15 @@ new Vue({
       var events = this.events;
       var map = this.map;
       var _this = this;
+      var energyAve = this.energyAve
+      var danceabilityAve = this.danceabilityAve
+      var loudnessAve = this.loudnessAve
+      var speechinessAve = this.speechinessAve
+      var acousticnessAve = this.acousticnessAve
+      var livenessAve = this.livenessAve
+      var instrumentalnessAve = this.instrumentalnessAve
+      var valenceAve = this.valenceAve
+      var tempoAve = this.tempoAve
       
       this.asyncForEach(events, function(event) {
         var lat = event.location.lat;
@@ -90,11 +101,11 @@ new Vue({
           }));
         });
         
-
         // add spider chart
         marker.on('mouseover', async function () {
           if (document.getElementById('vibe-checkbox').checked) {
             // create spider chart
+
 
             // prepare data for spider chat
             var energy_data = event.spotify.energy_median
@@ -106,6 +117,7 @@ new Vue({
             var instrumentalness_data = event.spotify.instrumentalness_median
             var valence_data = event.spotify.valence_median
             var tempo_data = (event.spotify.tempo_median-80)/70
+
 
             // construct spider chart
             var canvas = document.createElement('canvas');
@@ -128,7 +140,7 @@ new Vue({
                   data: [energy_data,danceability_data,loudness_data
                     ,speechiness_data,acousticness_data,liveness_data
                     ,instrumentalness_data,valence_data,],
-                } ],
+                }, ],
                 options: {
                   title: {
                     display: true,
@@ -179,25 +191,92 @@ new Vue({
       }
     },
 
-    calcAve(list) {
-      var sum = list.reduce(function(x, y) { return x + y; });
-      var ave = sum / list.length
-      return ave
-    },
 
     async getAve (){
       var events = this.events
+
+      // get average of energy
       var energyList = []
-      this.asyncForEach(events, function(event) {
-        if (typeof event.spotify !== "undefined"){
-          energyList.push(event.spotify.energy_median)
-        }
+      events.forEach(async function(event) {
+        if (event.spotify){
+          await energyList.push(event.spotify.energy_median)
+        } 
       })
-      this.aveEnergy = energyList[0].reduce(async function(a, b) { return a + b; }) / energyList.length
-      console.log(this.aveEnergy)
+      this.energyAve = energyList.reduce(function(a, b) { return a + b; }) / energyList.length
+
+      // get average of danceability
+      var danceabilityList = []
+      events.forEach(async function(event) {
+        if (event.spotify){
+          await danceabilityList.push(event.spotify.danceability_median)
+        } 
+      })
+      this.danceabilityAve = danceabilityList.reduce(function(a, b) { return a + b; }) / danceabilityList.length
+      
+      // get average of loudness
+      var loudnessList = []
+      events.forEach(async function(event) {
+        if (event.spotify){
+          await loudnessList.push(event.spotify.loudness_median)
+        } 
+      })
+      this.loudnessAve = loudnessList.reduce(function(a, b) { return a + b; }) / loudnessList.length
+
+      // get average of speechiness
+      var speechinessList = []
+      events.forEach(async function(event) {
+        if (event.spotify){
+          await speechinessList.push(event.spotify.speechiness_median)
+        } 
+      })
+      this.speechinessAve = speechinessList.reduce(function(a, b) { return a + b; }) / speechinessList.length
+
+      // get average of acousticness
+      var acousticnessList = []
+      events.forEach(async function(event) {
+        if (event.spotify){
+          await acousticnessList.push(event.spotify.acousticness_median)
+        } 
+      })
+      this.acousticnessAve = acousticnessList.reduce(function(a, b) { return a + b; }) / acousticnessList.length
+
+      // get average of liveness
+      var livenessList = []
+      events.forEach(async function(event) {
+        if (event.spotify){
+          await livenessList.push(event.spotify.liveness_median)
+        } 
+      })
+      this.livenessAve = livenessList.reduce(function(a, b) { return a + b; }) / livenessList.length
+
+      // get average of instrumentalness
+      var instrumentalnessList = []
+      events.forEach(async function(event) {
+        if (event.spotify){
+          await instrumentalnessList.push(event.spotify.instrumentalness_median)
+        } 
+      })
+      this.instrumentalnessAve = instrumentalnessList.reduce(function(a, b) { return a + b; }) / instrumentalnessList.length
+
+      // get average of valence
+      var valenceList = []
+      events.forEach(async function(event) {
+        if (event.spotify){
+          await valenceList.push(event.spotify.valence_median)
+        } 
+      })
+      this.valenceAve  = valenceList.reduce(function(a, b) { return a + b; }) / valenceList.length
+
+      // get average of tempo
+      var tempoList = []
+      events.forEach(async function(event) {
+        if (event.spotify){
+          await tempoList.push(event.spotify.tempo_median)
+        } 
+      })
+      this.tempoAve = tempoList.reduce(function(a, b) { return a + b; }) / tempoList.length
     },
-
-
+    
     async asyncForEach(array, callback) {
       for (let index = 0; index < array.length; index++) {
         await callback(array[index], index, array)
