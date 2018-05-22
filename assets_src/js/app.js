@@ -13,7 +13,7 @@ new Vue({
     currentArtists: null,
     map: null,
     tileLayer: null,
-    heatmapLayer: null,
+    layerSwitch: null,
     layers: [
       {
         name: 'Vibes',
@@ -44,7 +44,7 @@ new Vue({
 
       // position zoom button
       L.control.zoom({
-        position: 'bottomright'
+        position: 'bottomleft'
       }).addTo(this.map);
     },
 
@@ -141,46 +141,142 @@ new Vue({
 
     // create heatmap
     initLayer() {
-      var cfg = {
-        "radius": 0.01,
-        "maxOpacity": .8,
-        "scaleRadius": true,
-        "useLocalExtrema": true,
-        latField: 'lat',
-        lngField: 'lng',
-        valueField: 'count'
-      };
+
+      // set heatmap
       const heatmapData = []
+      var heatmapConfig = {
+        max:0.1,
+        radius: 50,
+        blur:10,
+        gradient:{0.0: 'green', 0.5: 'yellow', 1.0: 'red'}
+      }
       this.events.forEach(function(event, i) {
         if (typeof event.spotify !== "undefined"){
           heatmapData[i] = {
             lat: event.location.lat,
             lng: event.location.lng,
-            count: event.spotify.danceability_median
+            // store vibes data
+            energy: event.spotify.energy_median,
+            danceability: event.spotify.danceability_median,
+            loudness: event.spotify.loudness_median,
+            speechiness: event.spotify.speechiness_median,
+            acousticness: event.spotify.acousticness_median,
+            liveness: event.spotify.liveness_median,
+            instrumentalness: event.spotify.instrumentalness_median,
+            valence: event.spotify.valence_median,
+            tempo: event.spotify.tempo_median
           }
         } else {
           heatmapData[i] = {
             lat: event.location.lat,
             lng: event.location.lng,
-            count: 0
+            // store vibes data
+            energy: 0,
+            danceability: 0,
+            loudness: 0,
+            speechiness: 0,
+            acousticness: 0,
+            liveness: 0,
+            instrumentalness: 0,
+            valence: 0,
+            tempo: 0
           }
         }
       });
-      var vibesData = {
-        max: 1.0,
-        data: heatmapData,
-      };
-      this.heatmapLayer = new HeatmapOverlay(cfg);
-      this.heatmapLayer.setData(vibesData);
+      // construct energy layer
+      var energyData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.energy];
+      });
+      this.energyLayer = L.heatLayer(energyData, heatmapConfig)
+
+      // construct danceability layer
+      var danceabilityData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.danceability];
+      });
+      this.danceabilityLayer = L.heatLayer(danceabilityData, heatmapConfig)
+
+      // construct loudness layer
+      var loudnessData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.loudness/60 + 1]; // loudness ranges from around -60 to 0
+      });
+      this.loudnessLayer = L.heatLayer(loudnessData, heatmapConfig)
+
+      // construct speechiness layer
+      var speechinessData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, (a.speechiness-0.33)/0.33]; //  speechiness ranges from 0.33 to 0.66
+      });
+      this.speechinessLayer = L.heatLayer(speechinessData, heatmapConfig)
+
+      // construct acousticness layer
+      var acousticnessData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.acousticness];
+      });
+      this.acousticnessLayer = L.heatLayer(acousticnessData, heatmapConfig)
+
+      // construct liveness layer
+      var livenessData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.liveness];
+      });
+      this.livenessLayer = L.heatLayer(livenessData, heatmapConfig)
+
+      // construct instrumentalness layer
+      var instrumentalnessData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.instrumentalness];
+      });
+      this.instrumentalnessLayer = L.heatLayer(instrumentalnessData, heatmapConfig)
+
+      // construct valence layer
+      var valenceData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, a.valence];
+      });
+      this.valenceLayer = L.heatLayer(valenceData, heatmapConfig)
+
+      // construct tempo layer
+      var tempoData = heatmapData.map(function(a) {
+        return [a.lat, a.lng, (a.tempo-80)/70]; // tempo ranges from around 80 to 150
+      });
+      this.tempoLayer = L.heatLayer(tempoData, heatmapConfig)
+
+      // set the layer list property to the map object
+      this.map._layers = []
+
+      // construct the layer switch buttons
+      var layer_list = {
+        "Energy": this.energyLayer,
+        "Danceability": this.danceabilityLayer,
+        "Loudness": this.loudnessLayer,
+        "Speechiness": this.speechinessLayer,
+        "Acousticness": this.acousticnessLayer,
+        "Liveness": this.livenessLayer,
+        "Instrumentalness": this.instrumentalnessLayer,
+        "Valence": this.valenceLayer,
+        "Tempo": this.tempoLayer,
+      }
+      this.layerSwitch = L.control.layers(layer_list);
+
     },
 
     // layer change
     layerChanged(active) {
+      // construct layer list
       if (active) {
-        this.heatmapLayer.addTo(this.map);
+        this.energyLayer.addTo(this.map);
+        this.layerSwitch.addTo(this.map);
       } else {
-        this.heatmapLayer.removeFrom(this.map);
+        this.layerSwitch.remove(this.map);
+        this.energyLayer.removeFrom(this.map);
+        this.danceabilityLayer.removeFrom(this.map);
+        this.loudnessLayer.removeFrom(this.map);
+        this.speechinessLayer.removeFrom(this.map);
+        this.acousticnessLayer.removeFrom(this.map);
+        this.livenessLayer.removeFrom(this.map);
+        this.instrumentalnessLayer.removeFrom(this.map);
+        this.valenceLayer.removeFrom(this.map);
+        this.tempoLayer.removeFrom(this.map);
       }
     }
   }
 });
+
+
+
