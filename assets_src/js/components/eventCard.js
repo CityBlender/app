@@ -102,7 +102,7 @@ function getTopTracksWidget(artist) {
     var top_tracks_widget =
       // more
       '<div class="artist__more">'
-        + '<a class="show-more badge badge-dark" data-toggle="collapse" href="#panel-' + artist.id + '" role="button" aria-expanded="false" aria-controls="' + artist.id + '">Show top tracks</a>'
+        + '<a class="show-more badge badge-dark" data-toggle="collapse" href="#panel-' + artist.id + '" role="button" aria-expanded="false" aria-controls="' + artist.id + '">Play top tracks</a>'
         // panel
         + '<div class="collapse" id="panel-' + artist.id + '">'
           + top_tracks
