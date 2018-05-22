@@ -28,7 +28,6 @@ new Vue({
     // initialize a Leaflet instance
     initMap() {
       
-
       // configure map
       this.map = L.map('map', {
         zoomControl: false // disable default zoom
@@ -141,10 +140,10 @@ new Vue({
       });
 
       // construct liveness layer
-      var livenessData = heatmapData.map(function(a) {
-        return [a.lat, a.lng, a.liveness];
-      });
-      this.livenessLayer = L.heatLayer(livenessData, heatmapConfig)
+      // var livenessData = heatmapData.map(function(a) {
+      //   return [a.lat, a.lng, a.liveness];
+      // });
+      // this.livenessLayer = L.heatLayer(livenessData, heatmapConfig)
 
       // construct energy layer
       var energyData = heatmapData.map(function(a) {
@@ -201,7 +200,7 @@ new Vue({
 
       // construct the layer switch buttons
       var layer_list = {
-        "Liveness": this.livenessLayer,
+        // "Liveness": this.livenessLayer,
         "Energy": this.energyLayer,
         "Danceability": this.danceabilityLayer,
         "Loudness": this.loudnessLayer,
