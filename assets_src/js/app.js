@@ -22,6 +22,7 @@ new Vue({
     ],
     daySelected: { date: getDate(0)[0], string: getDate(0)[1] },
     loading: true,
+    markersLayer: L.layerGroup(),
     errored: false,
     isLoaded: false,
     events: null,
@@ -66,9 +67,10 @@ new Vue({
     },
 
     getEvents() {
+      // console.log(this.map.getLayers())
       this.isLoaded = false
       axios
-      .get('https://fuinki-api.herokuapp.com/london/events/2018-05-22')
+        .get('https://fuinki-api.herokuapp.com/london/events/' + this.daySelected.date)
       .then(response => {
         this.isLoaded = true
         this.events = response.data;
@@ -97,6 +99,8 @@ new Vue({
       var valenceAve = this.valenceAve
       var tempoAve = this.tempoAve
 
+      this.removeLayers();
+
       this.asyncForEach(events, function(event) {
         var lat = event.location.lat;
         var lng = event.location.lng;
@@ -105,7 +109,8 @@ new Vue({
         var pulsingIcon = L.icon.pulse({ iconSize: [10, 10], color: '#C70039' });
 
         // add marker to the map
-        var marker = L.marker([lat, lng], { icon: pulsingIcon }).addTo(map);
+        var marker = L.marker([lat, lng], { icon: pulsingIcon });
+        _this.markersLayer.addLayer(marker);
 
         // add onClick event
         marker.on('click', async function () {
@@ -174,6 +179,9 @@ new Vue({
           map.closePopup()
         })
       })
+
+      // plot all the layers
+      this.map.addLayer(this.markersLayer);
     },
 
     async getEventCard(event) {
@@ -204,6 +212,12 @@ new Vue({
       } catch(error) {
         console.log(error);
       }
+    },
+
+    removeLayers() {
+      // clear markers layer first
+      this.markersLayer.clearLayers();
+      // this.removeFeatureLayers();
     },
 
 

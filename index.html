@@ -52,7 +52,9 @@
               :searchable="false"
               label="string"
               v-model="daySelected"
-              :options="dayOptions">
+              :options="dayOptions"
+              @input="getEvents()"
+              >
             </v-select>
           </div>
           <!-- /day-switch -->
