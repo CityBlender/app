@@ -27,9 +27,10 @@
 
     <section class="section_about">
 
-    <h3>About the vibe of a city</h3>
+    <h3>The vibe of a city</h3>
 
     <p>
+        <br/>
     Each city has a set of characteristics that make it unique.
     One of the ways of exploring this is through the musical ecosystem.
     </p>
@@ -43,8 +44,12 @@
     <section class="section_about">
 
       <h4>When should you go out?</h4>
-      <p>Every single city has it's own identity, how does it change throughout the week?
-        Fridays and Saturdays are the busiest days of the week for to live music in London, Mondays the least.
+      <p>
+          <br/>
+        Every single city has it's own identity, how does it change throughout the week?
+          Between the 13th of April and the 26th of May, a total of 1863 gigs were recorded and as expected, as the weekday approaches to the weekend, the average amount of gigs increases. On average, Fridays host the most events (100), followed by Saturdays with 96. On average, Sunday were less active than the Thursdays by almost 10 gigs. 
+          
+          The following graph shows these results.  
       </p>
 
 <!-- This is the count graph  -->
@@ -56,7 +61,9 @@
     <section class="section_about">
 
       <h4>Daily Vibe</h4>
-      <p>Using Spotify features, we were able to retreive different characterisitcs of the songs by the performing artists.
+      <p>
+        <br/>
+        Using Spotify features, we were able to retreive different characterisitcs of the songs by the performing artists.
         Go deeper than just looking at the amount of gigs. 
         Check out how the character of the gigs change over the week. <br/>
         All the song data was aggregated by date, and the statitics were computed.
@@ -140,22 +147,27 @@
         </div>
       </div>
 
-        <p>Toggle the days of the week to compare and contrast between any or all of them.
+        <p>Select days of the week below to compare the vibe between any or all of the days.
         </p>
 
         <iframe width="900" height="800" frameborder="0" 
         scrolling="no" src="//plot.ly/~cohenjota/84.embed"></iframe>
 
-
+        <p>
+            The lines in the graph represent the standardized values of the average values of the different characteristics of the songs played by the performing artists. This standardising allows easy comparison amongst the different days of the week.
+          
+            The artists performing on Fridays have the most followers and play the most Live music. Saturdays are the most energetic days, and Sundays seems the day to listen to more lyrical and danceable, music. The most popular bands play on Tuesdays.
+        </p>
       </section>
 
 
   <section class="section_about">
 
   <h4>Where do the gigs happen?</h4>
-  <p>Does the location of the gigs reflect the polycentricity of London?  
-  </p>
-  <p>By making the different API calls, it becomes possible to map the gigs and study their spatial distribution.
+
+  <p>
+    <br/>
+    By making the different API calls, it becomes possible to map the gigs and study their spatial distribution.
     In the following panel, a map of all the gigs gathered during a month was created. Following this, each point was allocated to its
     corresponding borough and ward. These results can be found below.
   </p>
@@ -202,8 +214,8 @@
   </section>
   <section class="section_about">
 
-  <h4>What type of music is out there?</h4>
-  <p>Coming soon</p>
+  <h4>What genres of music are out there?</h4>
+  <p><br/></p>
 
 
   <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -231,8 +243,13 @@
 
   <h4>Where are genres clustered?</h4>
   <p>
-    Clustering analysis has identified where certain genres of musical events happen close to one another.
+      <br/>
+    Cluster analysis has identified where certain genres of musical events happen close to one another.
+    
     Do these musical communities reflect the demographics of the areas where they take place?
+
+    The coloured circles represent the clustered groups, the grey circles represent an event not included in a cluster.
+    The grey polygons represent the wards found by Moran's I to have a high number of gigs as well as being surrounded by other wards with high numbers of gigs.
     </p>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
