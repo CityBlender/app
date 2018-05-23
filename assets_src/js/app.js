@@ -129,11 +129,9 @@ new Vue({
 
           // add onClick event
           marker.on('click', async function () {
-            var event_card = await _this.getEventCard(event);
-            marker.bindPopup(event_card).openPopup();
-            const players = Array.from(document.querySelectorAll('.audio-player')).map(p => new Plyr(p, {
-              controls: ['play', 'progress']
-            }));
+            // var event_card = await _this.getEventCard(event);
+            // marker.bindPopup(event_card).openPopup();
+            _this.openMarker(event);
           });
 
           // add spider chart
@@ -142,8 +140,7 @@ new Vue({
 
               // prepare data for spider chat
               if (typeof event.spotify !== "undefined") {
-                var vibe_card = await _this.getVibeCard(event);
-                marker.bindPopup(vibe_card).openPopup();
+                _this.openVibes(event);
               } else {
                 var noVibe = '<div class="no-vibe">' + "No vibes data available for this event" + '</div>'
                 marker.bindPopup(noVibe).openPopup();
@@ -171,6 +168,16 @@ new Vue({
       var event_card = await this.getEventCard(event);
       var marker = this.markers[event_id];
       marker.bindPopup(event_card).openPopup();
+      const players = Array.from(document.querySelectorAll('.audio-player')).map(p => new Plyr(p, {
+        controls: ['play', 'progress']
+      }));
+    },
+
+    async openVibes(event) {
+      var event_id = event.id
+      var vibe_card = await this.getVibeCard(event);
+      var marker = this.markers[event_id];
+      marker.bindPopup(vibe_card).openPopup();
     },
 
 
