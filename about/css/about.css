@@ -2,3 +2,12 @@ iframe {
     width: 100%;
     min-height: 500px;
 }
+.container {
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+  max-width: 800px !important;
+}
+.section_about {
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+}

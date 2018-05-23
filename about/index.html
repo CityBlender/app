@@ -25,28 +25,36 @@
 
     <h1>Fuinki About </h1>
 
-    <section>
+    <section class="section_about">
+
     <h3>About the vibe of a city</h3>
 
-      <p>Each city has a set of characteristics that make it unique.
-       One of the ways of exploring this is through the musical ecosystem.</p>
+    <p>
+    Each city has a set of characteristics that make it unique.
+    One of the ways of exploring this is through the musical ecosystem.
+    </p>
 
-       <p>
-       The diversity of these events contributes to and reflects the culture and society of a city.
-       </p>
+    <p>
+    The diversity of these events contributes to and reflects the culture and society of a city.
+    </p>
+
+    </section>
+
+    <section class="section_about">
 
       <h4>When should you go out?</h4>
       <p>Every single city has it's own identity, how does it change throughout the week?
         Fridays and Saturdays are the busiest days of the week for to live music in London, Mondays the least.
       </p>
 
+<!-- This is the count graph  -->
+      <iframe width="900" height="800" frameborder="0" 
+      scrolling="no" src="//plot.ly/~cohenjota/77.embed"></iframe>
+
     </section>
 
-<!-- This is the count graph  -->
-  <iframe width="900" height="800" frameborder="0" 
-  scrolling="no" src="//plot.ly/~cohenjota/77.embed"></iframe>
+    <section class="section_about">
 
-    <section>
       <h4>Daily Vibe</h4>
       <p>Using Spotify features, we were able to retreive different characterisitcs of the songs by the performing artists.
         Go deeper than just looking at the amount of gigs. 
@@ -55,141 +63,94 @@
         In the following set of box plots, the distribution of these variables by date is represented.
       </p>
 
-    </section>
-
-<!-- This are going to be panels  -->
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="popularity-tab" data-toggle="tab"
-    href="#popularity" role="tab" aria-controls="popularity" aria-selected="true">Popularity</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="followers-tab" data-toggle="tab"
-    href="#followers" role="tab" aria-controls="followers" aria-selected="false">Followers</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="danceability-tab" data-toggle="tab"
-    href="#danceability" role="tab" aria-controls="danceability" aria-selected="false">Danceability</a>
-  </li>
-  <li class="nav-item">
-      <a class="nav-link" id="energy-tab" data-toggle="tab"
-      href="#energy" role="tab" aria-controls="energy" aria-selected="false">Energy</a>
-    </li>
-  <li class="nav-item">
-      <a class="nav-link" id="loudness-tab" data-toggle="tab"
-      href="#loudness" role="tab" aria-controls="loudness" aria-selected="false">Loudness</a>
-    </li>
-  <li class="nav-item">
-      <a class="nav-link" id="speechness-tab" data-toggle="tab"
-      href="#louspeechnessdness" role="tab" aria-controls="speechness" aria-selected="false">Speechness</a>
-    </li>
-  <li class="nav-item">
-      <a class="nav-link" id="acuosticness-tab" data-toggle="tab"
-      href="#acuosticness" role="tab" aria-controls="acuosticness" aria-selected="false">Acuosticness</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" id="instrumentalness-tab" data-toggle="tab"
-        href="#instrumentalness" role="tab" aria-controls="instrumentalness" aria-selected="false">Instrumentalness</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" id="liveness-tab" data-toggle="tab"
-          href="#liveness" role="tab" aria-controls="liveness" aria-selected="false">Liveness</a>
+        
+      <!-- This are going to be panels  -->
+      <ul class="nav nav-tabs iframe-inject" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="popularity-tab" data-iframe="//plot.ly/~cohenjota/49.embed" data-toggle="tab"
+          href="#popularity" role="tab" aria-controls="popularity" aria-selected="true">Popularity</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="followers-tab" data-toggle="tab" data-iframe="//plot.ly/~cohenjota/31.embed"
+          href="#followers" role="tab" aria-controls="followers" aria-selected="false">Followers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="danceability-tab" data-toggle="tab" data-iframe="//plot.ly/~cohenjota/51.embed"
+          href="#danceability" role="tab" aria-controls="danceability" aria-selected="false">Danceability</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="energy-tab" data-toggle="tab" data-iframe="//plot.ly/~cohenjota/53.embed"
+            href="#energy" role="tab" aria-controls="energy" aria-selected="false">Energy</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" id="loudness-tab" data-toggle="tab" data-iframe="//plot.ly/~cohenjota/55.embed"
+            href="#loudness" role="tab" aria-controls="loudness" aria-selected="false">Loudness</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" id="speechness-tab" data-toggle="tab" data-iframe="//plot.ly/~cohenjota/57.embed"
+            href="#speachness" role="tab" aria-controls="speechness" aria-selected="false">Speechness</a>
+          </li>
+        <li class="nav-item">
+          <a class="nav-link" id="acuosticness-tab" data-toggle="tab" data-iframe="//plot.ly/~cohenjota/59.embed"
+            href="#acuosticness" role="tab" aria-controls="acuosticness" aria-selected="false">Acuosticness</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="instrumentalness-tab" data-toggle="tab" data-iframe="//plot.ly/~cohenjota/61.embed"
+              href="#instrumentalness" role="tab" aria-controls="instrumentalness" aria-selected="false">Instrumentalness</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="liveness-tab" data-toggle="tab" data-iframe="//plot.ly/~cohenjota/63.embed"
+            href="#liveness" role="tab" aria-controls="liveness" aria-selected="false">Liveness</a>
         </li>
       </ul>
 
 
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="popularity" role="tabpanel" aria-labelledby="popularity-tab">
-      <iframe
-      width="700"
-      height="500"
-      frameborder="0"
-       scrolling="no"
-        src="//plot.ly/~cohenjota/49.embed">
-      </iframe>
-  </div>
-  <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
-      <iframe
-      width="700"
-      height="500"
-      frameborder="0"
-       scrolling="no"
-        src="//plot.ly/~cohenjota/31.embed">
-      </iframe>
-  </div>
-  <div class="tab-pane fade" id="danceability" role="tabpanel" aria-labelledby="danceability-tab">
-      <iframe
-      width="700"
-      height="500"
-      frameborder="0"
-       scrolling="no"
-        src="//plot.ly/~cohenjota/51.embed">
-      </iframe>
-    </div>
-    <div class="tab-pane fade" id="energy" role="tabpanel" aria-labelledby="energy-tab">
-      <iframe
-      width="700"
-      height="500"
-      frameborder="0"
-       scrolling="no"
-        src="//plot.ly/~cohenjota/53.embed">
-      </iframe>
-    </div>
-    <div class="tab-pane fade" id="loudness" role="tabpanel" aria-labelledby="loudness-tab">
-      <iframe
-      width="700"
-      height="500"
-      frameborder="0"
-       scrolling="no"
-        src="//plot.ly/~cohenjota/55.embed">
-      </iframe>
-    </div>
-    <div class="tab-pane fade" id="speachness" role="tabpanel" aria-labelledby="speachness-tab">
-      <iframe
-      width="700"
-      height="500"
-      frameborder="0"
-       scrolling="no"
-        src="//plot.ly/~cohenjota/57.embed">
-      </iframe>
-    </div>
-    <div class="tab-pane fade" id="acuosticness" role="tabpanel" aria-labelledby="acuosticness-tab">
-      <iframe
-      width="700"
-      height="500"
-      frameborder="0"
-       scrolling="no"
-        src="//plot.ly/~cohenjota/59.embed">
-      </iframe>
-    </div>
-    <div class="tab-pane fade" id="instrumentalness" role="tabpanel" aria-labelledby="instrumentalness-tab">
-      <iframe
-      width="700"
-      height="500"
-      frameborder="0"
-       scrolling="no"
-        src="//plot.ly/~cohenjota/61.embed">
-      </iframe>
-    </div>
-    <div class="tab-pane fade" id="liveness" role="tabpanel" aria-labelledby="liveness-tab">
-      <iframe
-      width="700"
-      height="500"
-      frameborder="0"
-       scrolling="no"
-        src="//plot.ly/~cohenjota/63.embed">
-      </iframe>
-    </div>
-  </div>
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="popularity" role="tabpanel" aria-labelledby="popularity-tab">
+            <iframe
+            width="700"
+            height="500"
+            frameborder="0"
+            scrolling="no"
+              src="//plot.ly/~cohenjota/49.embed">
+            </iframe>
+        </div>
+        <div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="followers-tab">
+        </div>
 
-  <p>Toggle the days of the week to compare and contrast between any or all of them.
-  </p>
+        <div class="tab-pane fade" id="danceability" role="tabpanel" aria-labelledby="danceability-tab">
+        </div>
 
-  <iframe width="900" height="800" frameborder="0" 
-  scrolling="no" src="//plot.ly/~cohenjota/84.embed"></iframe>
+        <div class="tab-pane fade" id="energy" role="tabpanel" aria-labelledby="energy-tab">
+        </div>
+
+        <div class="tab-pane fade" id="loudness" role="tabpanel" aria-labelledby="loudness-tab">
+        </div>
+
+        <div class="tab-pane fade" id="speachness" role="tabpanel" aria-labelledby="speachness-tab">
+        </div>
+
+        <div class="tab-pane fade" id="acuosticness" role="tabpanel" aria-labelledby="acuosticness-tab">
+        </div>
+
+        <div class="tab-pane fade" id="instrumentalness" role="tabpanel" aria-labelledby="instrumentalness-tab">
+        </div>
+        
+        <div class="tab-pane fade" id="liveness" role="tabpanel" aria-labelledby="liveness-tab">
+        </div>
+      </div>
+
+        <p>Toggle the days of the week to compare and contrast between any or all of them.
+        </p>
+
+        <iframe width="900" height="800" frameborder="0" 
+        scrolling="no" src="//plot.ly/~cohenjota/84.embed"></iframe>
 
 
-  <section>
+      </section>
+
+
+  <section class="section_about">
 
   <h4>Where do the gigs happen?</h4>
   <p>Does the location of the gigs reflect the polycentricity of London?  
@@ -201,64 +162,48 @@
 
   <p> In general, more events were found in the North and East of the city. During this period of time, in Hackney there were
     355 events, followed by Islington with 282. Camden and Westminister also showed high level of musical activity.
-    
-
-
-
   </p>
 
 
 
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <ul class="nav nav-tabs iframe-inject" id="myTab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" id="map-tab" data-toggle="tab"
+        <a class="nav-link active" id="map-tab" data-toggle="tab"  data-iframe="/about/map/heatmap-of-gigs.html"
         href="#map" role="tab" aria-controls="map" aria-selected="true">Heatmap</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" id="boroughs-tab" data-toggle="tab"
+          <a class="nav-link" id="boroughs-tab" data-toggle="tab" data-iframe="//plot.ly/~cohenjota/79.embed"
           href="#boroughs" role="tab" aria-controls="boroughs" aria-selected="false">Distribution by Boroughs</a>
         </li>
       <li class="nav-item">
-        <a class="nav-link" id="hist-tab" data-toggle="tab"
+        <a class="nav-link" id="hist-tab" data-toggle="tab" data-iframe="//plot.ly/~cohenjota/75.embed"
         href="#hist" role="tab" aria-controls="hist" aria-selected="false">Distribution by Ward</a>
       </li>
   </ul>
 
   <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="map" role="tabpanel" aria-labelledby="map-tab">
-          <iframe
-      width="700"
-      height="500"
-      frameborder="0"
-       scrolling="no"
-       src="/about/map/heatmap-of-gigs.html">
-      </iframe>
-      </div>
-      <div class="tab-pane fade" id="hist" role="tabpanel" aria-labelledby="hist-tab">
-          <iframe
-          width="700"
-          height="500"
-          frameborder="0"
-           scrolling="no"
-            src="//plot.ly/~cohenjota/75.embed">
-          </iframe>
-      </div>
-
-    <div class="tab-pane fade" id="boroughs" role="tabpanel" aria-labelledby="boroughs-tab">
         <iframe
         width="700"
         height="500"
         frameborder="0"
-         scrolling="no"
-          src="//plot.ly/~cohenjota/79.embed">
+        scrolling="no"
+        src="/about/map/heatmap-of-gigs.html">
         </iframe>
+      </div>
+    <div class="tab-pane fade" id="boroughs" role="tabpanel" aria-labelledby="boroughs-tab">
+
+    </div>
+    <div class="tab-pane fade" id="hist" role="tabpanel" aria-labelledby="hist-tab">
+
     </div>
   </div>
 
-
-      
+  </section>
+  <section class="section_about">
 
   <h4>What type of music is out there?</h4>
+  <p>Coming soon</p>
 
 
   <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -277,15 +222,12 @@
         <img src="/about/map/word_cloud.png" alt="Word Cloud" width="700" height="600">
     </div>
     <div class="tab-pane fade" id="Genre" role="tabpanel" aria-labelledby="Genre-tab">
-      <!-- <iframe
-        width="700"
-        height="500"
-        frameborder="0"
-        scrolling="no"
-        src="//plot.ly/~cohenjota/88.embed">
-      </iframe> -->
+
     </div>
   </div>
+  </section>
+
+  <section class="section_about">
 
   <h4>Where are genres clustered?</h4>
   <p>
