@@ -47,8 +47,5 @@
     "> 1%",
     "last 8 version",
     "IE 10"
-  ],
-  "dependencies": {
-    "babel-preset-stage-2": "^6.24.1"
-  }
+  ]
 }

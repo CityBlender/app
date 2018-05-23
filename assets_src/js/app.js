@@ -4,12 +4,23 @@ import './components/pulsingIcon';
 import { getEventCardTemplate } from './components/eventCard';
 import { getDate } from './components/utils';
 
-getDate(0)
-getDate(7)
+Vue.component('v-select', VueSelect.VueSelect)
+
 
 new Vue({
   el: '#app',
   data: {
+    dayOptions: [
+      { date: getDate(0)[0], string: getDate(0)[1] },
+      { date: getDate(1)[0], string: getDate(1)[1] },
+      { date: getDate(2)[0], string: getDate(2)[1] },
+      { date: getDate(3)[0], string: getDate(3)[1] },
+      { date: getDate(4)[0], string: getDate(4)[1] },
+      { date: getDate(5)[0], string: getDate(5)[1] },
+      { date: getDate(6)[0], string: getDate(6)[1] },
+      { date: getDate(7)[0], string: getDate(7)[1] }
+    ],
+    daySelected: { date: getDate(0)[0], string: getDate(0)[1] },
     loading: true,
     errored: false,
     isLoaded: false,
