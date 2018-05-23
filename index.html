@@ -48,15 +48,14 @@
 
           <!-- day-switch -->
           <div class="day-switch">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <button class="btn btn-primary" type="button">&lt;</button>
-              </div>
-              <input type="text" class="form-control" placeholder="Day of the week" aria-label="" aria-describedby="basic-addon1" readonly="readonly">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">&gt;</button>
-              </div>
-            </div>
+            <v-select
+              :searchable="false"
+              label="string"
+              v-model="daySelected"
+              :options="dayOptions"
+              @input="getEvents()"
+              >
+            </v-select>
           </div>
           <!-- /day-switch -->
 
@@ -97,6 +96,9 @@
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <script src="https://unpkg.com/vue-select@2.4.0/dist/vue-select.js"></script>
+
 
 
   <!-- load custom scripts -->

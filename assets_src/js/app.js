@@ -2,11 +2,27 @@ import { map } from 'asyncro';
 import { config } from './config';
 import './components/pulsingIcon';
 import { getEventCardTemplate } from './components/eventCard';
+import { getDate } from './components/utils';
+
+Vue.component('v-select', VueSelect.VueSelect)
+
 
 new Vue({
   el: '#app',
   data: {
+    dayOptions: [
+      { date: getDate(0)[0], string: getDate(0)[1] },
+      { date: getDate(1)[0], string: getDate(1)[1] },
+      { date: getDate(2)[0], string: getDate(2)[1] },
+      { date: getDate(3)[0], string: getDate(3)[1] },
+      { date: getDate(4)[0], string: getDate(4)[1] },
+      { date: getDate(5)[0], string: getDate(5)[1] },
+      { date: getDate(6)[0], string: getDate(6)[1] },
+      { date: getDate(7)[0], string: getDate(7)[1] }
+    ],
+    daySelected: { date: getDate(0)[0], string: getDate(0)[1] },
     loading: true,
+    markersLayer: L.layerGroup(),
     errored: false,
     isLoaded: false,
     events: null,
@@ -14,7 +30,7 @@ new Vue({
     map: null,
     tileLayer: null,
     layerSwitch: null,
-    energyAve: null, 
+    energyAve: null,
     danceabilityAve: null,
     layers: [
       {
@@ -28,32 +44,33 @@ new Vue({
     this.getEvents();
   },
   methods: {
-    
+
     // initialize a Leaflet instance
     initMap() {
-      
+
       // configure map
       this.map = L.map('map', {
         zoomControl: false // disable default zoom
       }).setView(config.london_center, config.initial_zoom);
-      
+
       // configure custom tiles
       this.tileLayer = L.tileLayer(config.mapbox_tiles, {
         attribution: config.map_attribution,
         maxZoom: config.max_zoom,
         id: config.mapbox_id
       }).addTo(this.map);
-      
+
       // position zoom button
       L.control.zoom({
         position: 'bottomleft'
       }).addTo(this.map);
     },
-    
+
     getEvents() {
+      // console.log(this.map.getLayers())
       this.isLoaded = false
       axios
-      .get('https://fuinki-api.herokuapp.com/london/events/2018-05-22')
+        .get('https://fuinki-api.herokuapp.com/london/events/' + this.daySelected.date)
       .then(response => {
         this.isLoaded = true
         this.events = response.data;
@@ -80,18 +97,21 @@ new Vue({
       var livenessAve = this.livenessAve
       var instrumentalnessAve = this.instrumentalnessAve
       var valenceAve = this.valenceAve
-      var tempoAve = (this.tempoAve-80)/70
-      
+      var tempoAve = (this.tempoAve - 80) / 70
+
+      this.removeLayers();
+
       this.asyncForEach(events, function(event) {
         var lat = event.location.lat;
         var lng = event.location.lng;
         var event_artists = event.artists;
-        
+
         var pulsingIcon = L.icon.pulse({ iconSize: [10, 10], color: '#C70039' });
-        
+
         // add marker to the map
-        var marker = L.marker([lat, lng], { icon: pulsingIcon }).addTo(map);
-        
+        var marker = L.marker([lat, lng], { icon: pulsingIcon });
+        _this.markersLayer.addLayer(marker);
+
         // add onClick event
         marker.on('click', async function () {
           var event_card = await _this.getEventCard(event);
@@ -100,7 +120,7 @@ new Vue({
             controls: ['play', 'progress']
           }));
         });
-        
+
         // add spider chart
         marker.on('mouseover', async function () {
           if (document.getElementById('vibe-checkbox').checked) {
@@ -178,7 +198,7 @@ new Vue({
               var noVibe = '<div class="no-vibe">'+"No vibes data available for this event"+'</div>'
               marker.bindPopup(noVibe).openPopup();
             }
-            
+
           } else {
             // do nothing
           }
@@ -188,13 +208,16 @@ new Vue({
           map.closePopup()
         })
       })
+
+      // plot all the layers
+      this.map.addLayer(this.markersLayer);
     },
-    
+
     async getEventCard(event) {
-      
+
       // get artist array
       var artist_array = await this.getArtistArray(event.artists);
-      
+
       // append artist array to event object
       event.artist_array = await artist_array;
       var event_card = await getEventCardTemplate(event);
@@ -202,7 +225,7 @@ new Vue({
     },
     async getArtistArray(artists) {
       var _this = this;
-      
+
       var artist_array = await map(artists, async function(artist) {
         var artist_info = await _this.getArtist(artist.id, artist.songkick_url);
         return artist_info;
@@ -220,6 +243,12 @@ new Vue({
       }
     },
 
+    removeLayers() {
+      // clear markers layer first
+      this.markersLayer.clearLayers();
+      // this.removeFeatureLayers();
+    },
+
 
     async getAve (){
       var events = this.events
@@ -229,7 +258,7 @@ new Vue({
       events.forEach(async function(event) {
         if (event.spotify){
           await energyList.push(event.spotify.energy_median)
-        } 
+        }
       })
       this.energyAve = energyList.reduce(function(a, b) { return a + b; }) / energyList.length
 
@@ -238,16 +267,16 @@ new Vue({
       events.forEach(async function(event) {
         if (event.spotify){
           await danceabilityList.push(event.spotify.danceability_median)
-        } 
+        }
       })
       this.danceabilityAve = danceabilityList.reduce(function(a, b) { return a + b; }) / danceabilityList.length
-      
+
       // get average of loudness
       var loudnessList = []
       events.forEach(async function(event) {
         if (event.spotify){
           await loudnessList.push(event.spotify.loudness_median)
-        } 
+        }
       })
       this.loudnessAve = loudnessList.reduce(function(a, b) { return a + b; }) / loudnessList.length
 
@@ -256,7 +285,7 @@ new Vue({
       events.forEach(async function(event) {
         if (event.spotify){
           await speechinessList.push(event.spotify.speechiness_median)
-        } 
+        }
       })
       this.speechinessAve = speechinessList.reduce(function(a, b) { return a + b; }) / speechinessList.length
 
@@ -265,7 +294,7 @@ new Vue({
       events.forEach(async function(event) {
         if (event.spotify){
           await acousticnessList.push(event.spotify.acousticness_median)
-        } 
+        }
       })
       this.acousticnessAve = acousticnessList.reduce(function(a, b) { return a + b; }) / acousticnessList.length
 
@@ -274,7 +303,7 @@ new Vue({
       events.forEach(async function(event) {
         if (event.spotify){
           await livenessList.push(event.spotify.liveness_median)
-        } 
+        }
       })
       this.livenessAve = livenessList.reduce(function(a, b) { return a + b; }) / livenessList.length
 
@@ -283,7 +312,7 @@ new Vue({
       events.forEach(async function(event) {
         if (event.spotify){
           await instrumentalnessList.push(event.spotify.instrumentalness_median)
-        } 
+        }
       })
       this.instrumentalnessAve = instrumentalnessList.reduce(function(a, b) { return a + b; }) / instrumentalnessList.length
 
@@ -292,7 +321,7 @@ new Vue({
       events.forEach(async function(event) {
         if (event.spotify){
           await valenceList.push(event.spotify.valence_median)
-        } 
+        }
       })
       this.valenceAve  = valenceList.reduce(function(a, b) { return a + b; }) / valenceList.length
 
@@ -301,25 +330,25 @@ new Vue({
       events.forEach(async function(event) {
         if (event.spotify){
           await tempoList.push(event.spotify.tempo_median)
-        } 
+        }
       })
       this.tempoAve = tempoList.reduce(function(a, b) { return a + b; }) / tempoList.length
     },
-    
+
     async asyncForEach(array, callback) {
       for (let index = 0; index < array.length; index++) {
         await callback(array[index], index, array)
       }
     },
-    
+
     // create heatmap
     initLayer() {
       // set heatmap
       const heatmapData = []
       var heatmapConfig = {
         max:0.1,
-        radius: 100, 
-        blur:30, 
+        radius: 100,
+        blur:30,
         gradient:{0.0: 'green', 0.5: 'yellow', 1.0: 'red'}
       }
       this.events.forEach(function(event, i) {
@@ -360,58 +389,58 @@ new Vue({
         return [a.lat, a.lng, a.energy];
       });
       this.energyLayer = L.heatLayer(energyData, heatmapConfig)
-      
+
       // construct danceability layer
       var danceabilityData = heatmapData.map(function(a) {
         return [a.lat, a.lng, a.danceability];
       });
       this.danceabilityLayer = L.heatLayer(danceabilityData, heatmapConfig)
-      
+
       // construct loudness layer
       var loudnessData = heatmapData.map(function(a) {
         return [a.lat, a.lng, a.loudness/60 + 1]; // loudness ranges from around -60 to 0
       });
       this.loudnessLayer = L.heatLayer(loudnessData, heatmapConfig)
-      
+
       // construct speechiness layer
       var speechinessData = heatmapData.map(function(a) {
         return [a.lat, a.lng, a.speechiness]; //  speechiness ranges from 0 to 1
       });
       this.speechinessLayer = L.heatLayer(speechinessData, heatmapConfig)
-      
+
       // construct acousticness layer
       var acousticnessData = heatmapData.map(function(a) {
         return [a.lat, a.lng, a.acousticness];
       });
       this.acousticnessLayer = L.heatLayer(acousticnessData, heatmapConfig)
-      
+
       // construct liveness layer
       var livenessData = heatmapData.map(function(a) {
         return [a.lat, a.lng, a.liveness];
       });
       this.livenessLayer = L.heatLayer(livenessData, heatmapConfig)
-      
+
       // construct instrumentalness layer
       var instrumentalnessData = heatmapData.map(function(a) {
         return [a.lat, a.lng, a.instrumentalness];
       });
       this.instrumentalnessLayer = L.heatLayer(instrumentalnessData, heatmapConfig)
-      
+
       // construct valence layer
       var valenceData = heatmapData.map(function(a) {
         return [a.lat, a.lng, a.valence];
       });
       this.valenceLayer = L.heatLayer(valenceData, heatmapConfig)
-      
+
       // construct tempo layer
       var tempoData = heatmapData.map(function(a) {
         return [a.lat, a.lng, (a.tempo-80)/70]; // tempo ranges from around 80 to 150
       });
       this.tempoLayer = L.heatLayer(tempoData, heatmapConfig)
-      
+
       // set the layer list property to the map object
       this.map._layers = []
-      
+
       // construct the layer switch buttons
       var layer_list = {
         "Energy": this.energyLayer,
@@ -426,7 +455,7 @@ new Vue({
       }
       this.layerSwitch = L.control.layers(layer_list);
     },
-    
+
     // layer change
     layerChanged(active) {
       // construct layer list
