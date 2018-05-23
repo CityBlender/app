@@ -91,7 +91,49 @@ $fw-bold: 700;
   top: 1rem;
   z-index: 999;
   max-width: 16rem;
+
+  .v-select .dropdown-toggle {
+    background: white;
+  }
 }
+
+.v-select {
+  max-width: 100%;
+}
+
+.v-select .dropdown-toggle {
+  display: flex !important;
+  flex-wrap: wrap;
+  background: white;
+}
+
+.v-select input[type=search],
+.v-select input[type=search]:focus {
+  flex-basis: 20px;
+  flex-grow: 1;
+  height: 33px;
+  padding: 0 20px 0 10px;
+  width: 100% !important;
+}
+
+.v-select .clear {
+  display: none !important;
+}
+
+.v-select input.form-control {
+  width: 0;
+}
+
+.v-select.dropdown {
+  width: 450px;
+}
+.v-select .selected-tag {
+  position: absolute;
+}
+.v-select input.form-control {
+  width: 100%;
+}
+
 .animated-icon {
   width: 20px;
   height: 20px;
