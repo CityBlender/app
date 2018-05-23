@@ -33,7 +33,7 @@
 
             <ul v-else class="list-group event-list">
               <li v-for="event in events" class="list-group-item event">
-                <span @click="getEvent(event.id)">{{ event.name }}</span>
+                <span @click="openMarker(event)">{{ event.name }}</span>
               </li>
             </ul>
 
