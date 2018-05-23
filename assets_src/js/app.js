@@ -479,16 +479,39 @@ new Vue({
     },
 
     removeLayers(){
-      this.layerSwitch.remove(this.map);
-      this.energyLayer.removeFrom(this.map);
-      this.danceabilityLayer.removeFrom(this.map);
-      this.loudnessLayer.removeFrom(this.map);
-      this.speechinessLayer.removeFrom(this.map);
-      this.acousticnessLayer.removeFrom(this.map);
-      this.livenessLayer.removeFrom(this.map);
-      this.instrumentalnessLayer.removeFrom(this.map);
-      this.valenceLayer.removeFrom(this.map);
-      this.tempoLayer.removeFrom(this.map);
+      if (this.layerSwitch){
+        this.layerSwitch.remove(this.map)
+      }
+      if (this.energyLayer){
+        this.energyLayer.remove(this.map)
+      }
+      if (this.danceabilityLayer){
+        this.danceabilityLayer.removeFrom(this.map);
+      }
+      if (this.loudnessLayer){
+        this.loudnessLayer.removeFrom(this.map);
+      }
+      if (this.speechinessLayer){
+        this.speechinessLayer.removeFrom(this.map);
+      }
+      if (this.acousticnessLayer){
+        this.acousticnessLayer.removeFrom(this.map);
+      }
+      if (this.livenessLayer){
+        this.livenessLayer.removeFrom(this.map);
+      }
+      if (this.instrumentalnessLayer){
+        this.instrumentalnessLayer.removeFrom(this.map);
+      }
+      if (this.valenceLayer){
+        this.valenceLayer.removeFrom(this.map);
+      }
+      if (this.tempoLayer){
+        this.tempoLayer.removeFrom(this.map);
+      }
+
+      
+
     },
 
     // layer change
