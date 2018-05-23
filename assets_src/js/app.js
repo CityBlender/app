@@ -23,7 +23,8 @@ new Vue({
     daySelected: { date: getDate(0)[0], string: getDate(0)[1] },
     vibeChecked: false,
     loading: true,
-    markersLayer: L.featureGroup(),
+    markersLayer: L.layerGroup(),
+    vibeChecked: false,
     errored: false,
     isLoaded: false,
     events: null,
@@ -35,6 +36,7 @@ new Vue({
     danceabilityAve: null,
     layers: [
       {
+        id: 0,
         name: 'Turn on the vibes',
         active: false,
       }
@@ -48,7 +50,7 @@ new Vue({
 
     // initialize a Leaflet instance
     initMap() {
-
+      document.getElementById("vibe-checkbox").checked = true
       // configure map
       this.map = L.map('map', {
         zoomControl: false // disable default zoom
@@ -86,6 +88,14 @@ new Vue({
       .finally(() => this.loading = false)
     },
 
+    toggleLayer(layer) {
+      if (layer.active) {
+        layer.active = false
+      } else {
+        layer.active = true
+      }
+    },
+
     async plotEvents() {
       var events = this.events;
       var map = this.map;
@@ -100,7 +110,10 @@ new Vue({
       var valenceAve = this.valenceAve
       var tempoAve = (this.tempoAve - 80) / 70
 
-      this.removeLayers();
+      this.removeMarkers();
+      this.removeLayers()
+      this.vibeChecked = false
+      this.layers[0].active = false
 
       // this.vibeChecked = true;
 
@@ -250,11 +263,13 @@ new Vue({
       }
     },
 
-    removeLayers() {
+    removeMarkers() {
       // clear markers layer first
       this.markersLayer.clearLayers();
       // this.removeFeatureLayers();
     },
+
+
 
 
     async getAve (){
@@ -463,6 +478,19 @@ new Vue({
       this.layerSwitch = L.control.layers(layer_list);
     },
 
+    removeLayers(){
+      this.layerSwitch.remove(this.map);
+      this.energyLayer.removeFrom(this.map);
+      this.danceabilityLayer.removeFrom(this.map);
+      this.loudnessLayer.removeFrom(this.map);
+      this.speechinessLayer.removeFrom(this.map);
+      this.acousticnessLayer.removeFrom(this.map);
+      this.livenessLayer.removeFrom(this.map);
+      this.instrumentalnessLayer.removeFrom(this.map);
+      this.valenceLayer.removeFrom(this.map);
+      this.tempoLayer.removeFrom(this.map);
+    },
+
     // layer change
     layerChanged(active) {
       // construct layer list
@@ -470,16 +498,7 @@ new Vue({
         this.energyLayer.addTo(this.map);
         this.layerSwitch.addTo(this.map);
       } else {
-        this.layerSwitch.remove(this.map);
-        this.energyLayer.removeFrom(this.map);
-        this.danceabilityLayer.removeFrom(this.map);
-        this.loudnessLayer.removeFrom(this.map);
-        this.speechinessLayer.removeFrom(this.map);
-        this.acousticnessLayer.removeFrom(this.map);
-        this.livenessLayer.removeFrom(this.map);
-        this.instrumentalnessLayer.removeFrom(this.map);
-        this.valenceLayer.removeFrom(this.map);
-        this.tempoLayer.removeFrom(this.map);
+        this.removeLayers()
       }
     }
   }
