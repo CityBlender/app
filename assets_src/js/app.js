@@ -23,6 +23,7 @@ new Vue({
     daySelected: { date: getDate(0)[0], string: getDate(0)[1] },
     vibeChecked: false,
     loading: true,
+    markers: {},
     markersLayer: L.layerGroup(),
     vibeChecked: false,
     errored: false,
@@ -111,11 +112,11 @@ new Vue({
       var tempoAve = (this.tempoAve - 80) / 70
 
       this.removeMarkers();
-      this.removeLayers()
+      this.removeLayers();
       this.vibeChecked = false
       this.layers[0].active = false
 
-      // this.vibeChecked = true;
+      // var markers = {};
 
       this.asyncForEach(events, function(event) {
 
@@ -128,8 +129,13 @@ new Vue({
           var pulsingIcon = L.icon.pulse({ iconSize: [10, 10], color: '#C70039' });
 
           // add marker to the map
-          var marker = L.marker([lat, lng], { icon: pulsingIcon });
+          // var marker = L.marker([lat, lng], { icon: pulsingIcon });
+          _this.markers[event.id] = L.marker([lat, lng], { icon: pulsingIcon });
+          _this.markers[event.id].id = event.id;
+          var marker = _this.markers[event.id];
           _this.markersLayer.addLayer(marker);
+
+
 
           // add onClick event
           marker.on('click', async function () {
@@ -222,11 +228,13 @@ new Vue({
               // do nothing
             }
           });
-          // remove all the popup when the check box is clicked
-          document.getElementById("vibe-checkbox").addEventListener("click", function () {
-            map.closePopup()
-          })
+
         }
+      })
+
+      // remove all the popup when the check box is clicked
+      document.getElementById("vibe-checkbox").addEventListener("click", function () {
+        map.closePopup()
       })
 
       // plot all the layers
@@ -264,9 +272,8 @@ new Vue({
     },
 
     removeMarkers() {
-      // clear markers layer first
+      this.markers = {};
       this.markersLayer.clearLayers();
-      // this.removeFeatureLayers();
     },
 
 
@@ -510,7 +517,7 @@ new Vue({
         this.tempoLayer.removeFrom(this.map);
       }
 
-      
+
 
     },
 
