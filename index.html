@@ -66,8 +66,9 @@
               id="vibe-checkbox"
               class="form-check-input"
               type="checkbox"
-              v-model="layer.active"
+              v-model="vibeChecked"
               @change="layerChanged(layer.active)"
+              v-on:click="layer.active"
             />
             <label for="vibe-checkbox" class="form-check-label">
               {{ layer.name }}
