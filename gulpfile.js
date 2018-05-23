@@ -40,6 +40,7 @@ const js_custom_filename = 'app.js'
 const js_custom_dest = './assets/js'
 
 const js_watch = './assets_src/js/**/**/*.js'
+const js_about_watch = './about/js/*.js'
 
 const rollup_file = 'app.js'
 const rollup_src = './assets_src/js/'
@@ -155,6 +156,7 @@ gulp.task('watch', function () {
   gulp.watch(js_watch, ['js']);
   gulp.watch(img_src, ['images']);
   gulp.watch(html_watch, ['reload']);
+  gulp.watch(js_about_watch, ['reload'])
 });
 
 // default task run using 'gulp'
