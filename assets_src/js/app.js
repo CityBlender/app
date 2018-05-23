@@ -120,6 +120,8 @@ new Vue({
               // construct spider chart
 
               var canvas = document.createElement('canvas');
+              canvas.width = 3
+              canvas.height = 2
               var ctx = canvas.getContext('2d');
               var color = 'rgb(244, 53, 48, 0.4)';
               var color_ave = 'rgb(0, 152, 216, 0.4)'
@@ -133,10 +135,12 @@ new Vue({
                     label: "Vibes of this event",
                     pointHitRadius: 2,
                     pointHoverRadius: 3,
-                    // pointHoverBackgroundColor:'rgb(244, 53, 200)',
                     backgroundColor: color,
                     borderColor: color,
                     pointBackgroundColor: color,
+                    gridLines: {
+                      display: false
+                   },
                     data: [energy_data,danceability_data,loudness_data
                       ,speechiness_data,acousticness_data,liveness_data
                       ,instrumentalness_data,valence_data,],
@@ -144,15 +148,30 @@ new Vue({
                     label: "Average vibes",
                     pointHitRadius: 2,
                     pointHoverRadius: 3,
-                    // pointHoverBackgroundColor:'rgb(200, 53, 200)',
                     backgroundColor: color_ave,
                     borderColor: color_ave,
                     pointBackgroundColor: color_ave,
+                    gridLines: {
+                      display: false
+                    },
                     data: [energyAve,danceabilityAve,loudnessAve
                       ,speechinessAve,acousticnessAve,livenessAve
                       ,instrumentalnessAve,valenceAve,],
-                  }],
-                }
+                  }]
+                },
+                options : {
+                  legend: {
+                    position: 'top',
+                    labels: {
+                      stretch: false
+                    }
+                  },
+                  scale: {
+                    ticks: {
+                      display: false
+                   }
+                  }
+                  },
               });
               marker.bindPopup(canvas).openPopup();
             } else {
