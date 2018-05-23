@@ -11,6 +11,8 @@
 
   <!-- load CSS -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css" type="text/css" media="all" /> -->
   <link rel="stylesheet" type="text/css" href="/assets/css/app.css">
 </head>
 
@@ -76,10 +78,55 @@
           </div>
           <!-- /layer-switch -->
 
+          <!-- info-switch -->
+          <!-- <div class="info-switch"> -->
+          <!-- </div> -->
+
+
+          <button type="button" class="info-switch btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+              <i class="fas fa-info-circle icon-yellow"></i>
+          </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <!-- <div class="modal-header"> -->
+                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div> -->
+                  <div class="modal-body">
+                    <div class="text-justify">
+                      <p>This website intends to serve as a platform where gig-goers can explore the music events that are taking place in their city. 
+                          To provide users with a different perspective for searching music events, this platform adapts the map interface with each music
+                           event visualized as a marker on the map. Each marker describes the information of the artists and venue of the event.
+                            Furthermore, this website works as an experimental tool that can visualize the level of the vibes in the city based on the music
+                             event data. All the code is provided in <a class="text-info" href = "https://github.com/CityBlender">github</a> </p> 
+                    </div>
+                    <div class = "text-center">
+                        <a target="_blank" class="btn btn-primary" href="/about">Read more</a>
+                    </div>
+                   
+                      <h3 class="data-title">Data provided by:</h3>
+                      <div class="logos">
+                        
+                        <img src="assets_src/img/Spotify_Logo_RGB_Black.png">
+                        <img src="assets_src/img/powered-by-songkick-black.png">
+                        <img src="assets_src/img/Powered-by-Foursquare-black-600.png">
+                        <img src="assets_src/img/Last.fm_Logo_Black.png">
+                        <img src="https://www.netlify.com/img/global/badges/netlify-dark.svg"/>
+                        <img src="assets_src/img/heroku-logotype-horizontal-black.svg"/>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <!-- info-switch -->
+
           <!-- map -->
           <div id="map" class="map"></div>
-
-
           <!-- /map -->
 
         </div>

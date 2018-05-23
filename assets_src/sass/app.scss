@@ -145,6 +145,61 @@ $fw-bold: 700;
 .no-vibe {
   text-align: center;
 }
+.leaflet-bottom {
+  display: none !important;
+}
+.info-switch{
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 999;
+  width: auto;
+	padding:0;
+	margin:0;
+	background:none;
+	border:0;
+	font-size:0;
+	line-height:0;
 
+}
+.info-switch:hover{
+  background:none;
+}
+.icon-yellow{
+  color: #FDD023;
+  font-size: 1.5rem; 
+}
+.modal-header{
+  border-bottom: 0 !important;
+}
+.modal-body{
+  // margin-left: auto !important;
+  // margin-right: auto !important;
+  padding: 2rem;
+}
+.modal-footer{
+  border-top: 0 !important;
+}
 
+.data-title {
+  font-size: 0.75rem;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
 
+.logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  
+  img {
+    display: block;
+    width: 3rem;
+    // height: 1rem;
+    max-width: 100%;
+    margin: 0 0.75rem;
+  }
+}
