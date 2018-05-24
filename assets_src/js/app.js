@@ -25,6 +25,7 @@ new Vue({
     loading: true,
     markers: {},
     markersLayer: L.layerGroup(),
+    activeMarker: null,
     vibeChecked: false,
     errored: false,
     isLoaded: false,
@@ -97,6 +98,21 @@ new Vue({
       }
     },
 
+    checkActive(event) {
+      var event_id = event.id;
+      // remove all active classes first
+      var target_el = document.querySelectorAll('.event-list .event');
+      target_el.forEach(function(target) {
+        if(target.classList.contains('active')) {
+          target.classList.remove('active')
+        }
+        // target.classList.remove('active');
+        console.log(target);
+      });
+      var active_el = document.getElementById('#list-' + event_id)
+      active_el.classList.add('active');
+    },
+
     async plotEvents() {
       var events = this.events;
       var map = this.map;
@@ -164,6 +180,7 @@ new Vue({
     },
 
     async openMarker(event) {
+      // this.checkActive(event);
       var event_id = event.id
       var event_card = await this.getEventCard(event);
       var marker = this.markers[event_id];
@@ -174,6 +191,7 @@ new Vue({
     },
 
     async openVibes(event) {
+      this.checkActive(event);
       var event_id = event.id
       var vibe_card = await this.getVibeCard(event);
       var marker = this.markers[event_id];

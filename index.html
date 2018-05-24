@@ -32,8 +32,8 @@
             <div v-if="loading" class="loading">Loading...</div>
 
             <ul v-else class="list-group event-list">
-              <li v-for="event in events" class="list-group-item event">
-                <span @click="openMarker(event)">{{ event.name }}</span>
+              <li v-for="event in events"  class="list-group-item event" v-bind:id="'list-' + event.id">
+                <div @click="openMarker(event)">{{ event.name }}</div>
               </li>
             </ul>
 
