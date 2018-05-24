@@ -141,7 +141,7 @@ new Vue({
           var lng = event.location.lng;
           var event_artists = event.artists;
 
-          var pulsingIcon = L.icon.pulse({ iconSize: [10, 10], color: '#C70039' });
+          var pulsingIcon = L.icon.pulse({ iconSize: [11, 11], color: '#C70039' });
 
           // add marker to the map
           // var marker = L.marker([lat, lng], { icon: pulsingIcon });
