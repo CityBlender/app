@@ -33,11 +33,16 @@
           <section v-else>
             <div v-if="loading" class="loading">Loading...</div>
 
-            <ul v-else class="list-group event-list">
-              <li v-for="event in events" class="list-group-item event">
-                <span @click="getEvent(event.id)">{{ event.name }}</span>
-              </li>
-            </ul>
+            <div v-else>
+              <div class="search-wrapper">
+                <input class="form-control form-control-lg rounded-0" type="text" v-model="search" placeholder="Search..." />
+              </div>
+              <ul class="list-group event-list">
+                <li v-for="event in filteredList"  class="list-group-item event" v-bind:id="'list-' + event.id">
+                  <div @click="openMarker(event)">{{ event.name }}</div>
+                </li>
+              </ul>
+            </div>
 
           </section>
         </div>
@@ -141,7 +146,8 @@
   <!-- load libraries -->
   <script src="/assets/js/libraries.js"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
