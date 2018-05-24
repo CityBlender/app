@@ -52,9 +52,10 @@ new Vue({
   computed: {
     filteredList() {
       return this.events.filter(event => {
-        var name = event.name.toLowerCase()
+        var name = event.name
         var tags = ''
 
+        // get spotify genres
         if(event.spotify) {
           if (event.spotify.genres.length > 0) {
             event.spotify.genres.forEach(function(genre) {
@@ -64,6 +65,7 @@ new Vue({
           }
         }
 
+        // get last.fm tags
         if(event.lastfm) {
           if (event.lastfm.tags.length > 0) {
             event.lastfm.tags.forEach(function(tag) {
@@ -73,9 +75,17 @@ new Vue({
           }
         }
 
-        tags = tags.toLowerCase()
+        // get venue
+        if(event.venue.name) {
+          var venue = event.venue.name
+        }
 
-        var searchable = name + tags
+        // lowercase everything
+        name = name.toLowerCase()
+        tags = tags.toLowerCase()
+        venue = venue.toLowerCase()
+
+        var searchable = name + tags + venue
 
         return searchable.includes(this.search.toLowerCase())
       })

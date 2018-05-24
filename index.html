@@ -37,7 +37,7 @@
 
             <div v-else>
               <div class="search-wrapper">
-                <input class="form-control form-control-lg rounded-0" type="text" v-model="search" placeholder="Search..." />
+                <input class="form-control form-control-lg rounded-0" type="text" v-model="search" placeholder="name, venue, genre ..." />
               </div>
               <ul class="list-group event-list">
                 <li v-for="event in filteredList"  class="list-group-item event" v-bind:id="'list-' + event.id">
