@@ -52,7 +52,32 @@ new Vue({
   computed: {
     filteredList() {
       return this.events.filter(event => {
-        return event.name.toLowerCase().includes(this.search.toLowerCase())
+        var name = event.name.toLowerCase()
+        var tags = ''
+
+        if(event.spotify) {
+          if (event.spotify.genres.length > 0) {
+            event.spotify.genres.forEach(function(genre) {
+              tags = tags + ' ' + genre;
+              // tags.push(genre)
+            })
+          }
+        }
+
+        if(event.lastfm) {
+          if (event.lastfm.tags.length > 0) {
+            event.lastfm.tags.forEach(function(tag) {
+              tags = tags + ' ' + tag
+              // tags.push(tag)
+            })
+          }
+        }
+
+        tags = tags.toLowerCase()
+
+        var searchable = name + tags
+
+        return searchable.includes(this.search.toLowerCase())
       })
     }
   },
