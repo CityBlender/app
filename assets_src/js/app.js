@@ -23,6 +23,7 @@ new Vue({
     daySelected: { date: getDate(0)[0], string: getDate(0)[1] },
     vibeChecked: false,
     loading: true,
+    search: '',
     markers: {},
     markersLayer: L.layerGroup(),
     activeMarker: null,
@@ -47,6 +48,13 @@ new Vue({
   mounted() {
     this.initMap();
     this.getEvents();
+  },
+  computed: {
+    filteredList() {
+      return this.events.filter(event => {
+        return event.name.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
   },
   methods: {
 
@@ -191,7 +199,7 @@ new Vue({
     },
 
     async openVibes(event) {
-      this.checkActive(event);
+      // this.checkActive(event);
       var event_id = event.id
       var vibe_card = await this.getVibeCard(event);
       var marker = this.markers[event_id];

@@ -1,9 +1,12 @@
-// .event-list {
-//   .event {
-//     margin-top: 1.5rem;
-//     font-size: 0.9rem;
-//   }
-// }
+.event-list {
+  .event {
+    cursor: pointer;
+  }
+}
 .event-list .event.active {
   background: red;
+}
+
+.search-wrapper input {
+  border-radius: none;
 }
