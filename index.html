@@ -31,7 +31,9 @@
           </section>
 
           <section v-else>
-            <div v-if="loading" class="loading">Loading...</div>
+            <div v-if="loading" class="loading">
+              <div class="loading__text">Loading...</div>
+            </div>
 
             <div v-else>
               <div class="search-wrapper">
@@ -91,7 +93,7 @@
           <button type="button" class="info-switch btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
               <i class="fas fa-info-circle icon-yellow"></i>
           </button>
-            
+
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered" role="document">
@@ -103,19 +105,19 @@
                   </div> -->
                   <div class="modal-body">
                     <div class="text-justify">
-                      <p>This website intends to serve as a platform where gig-goers can explore the music events that are taking place in their city. 
+                      <p>This website intends to serve as a platform where gig-goers can explore the music events that are taking place in their city.
                           To provide users with a different perspective for searching music events, this platform adapts the map interface with each music
                            event visualized as a marker on the map. Each marker describes the information of the artists and venue of the event.
                             Furthermore, this website works as an experimental tool that can visualize the level of the vibes in the city based on the music
-                             event data. All the code is provided in <a class="text-info" href = "https://github.com/CityBlender">github</a> </p> 
+                             event data. All the code is provided in <a class="text-info" href = "https://github.com/CityBlender">github</a> </p>
                     </div>
                     <div class = "text-center">
                         <a target="_blank" class="btn btn-primary" href="/about">Read more</a>
                     </div>
-                   
+
                       <h3 class="data-title">Data provided by:</h3>
                       <div class="logos">
-                        
+
                         <img src="assets_src/img/Spotify_Logo_RGB_Black.png">
                         <img src="assets_src/img/powered-by-songkick-black.png">
                         <img src="assets_src/img/Powered-by-Foursquare-black-600.png">

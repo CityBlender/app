@@ -52,6 +52,18 @@ $fw-bold: 700;
   height: 100vh;
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  height: 100vh;
+  justify-content: center;
+
+  .loading__text {
+    font-size: 1.5rem;
+    font-weight: $fw-medium;
+  }
+}
+
 .main {
   position: relative;
 }
@@ -167,7 +179,7 @@ $fw-bold: 700;
 }
 .icon-yellow{
   color: #FDD023;
-  font-size: 1.5rem; 
+  font-size: 1.5rem;
 }
 .modal-header{
   border-bottom: 0 !important;
@@ -194,7 +206,7 @@ $fw-bold: 700;
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  
+
   img {
     display: block;
     width: 3rem;
