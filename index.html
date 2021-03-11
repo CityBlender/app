@@ -63,8 +63,11 @@
               v-model="daySelected"
               :options="dayOptions"
               @input="getEvents()"
+              disabled
+              class="disabled"
               >
             </v-select>
+            <div class="explainer">The app is no longer maintained. Data is displayed only for 19 July 2019.</div>
           </div>
           <!-- /day-switch -->
 

@@ -215,3 +215,24 @@ $fw-bold: 700;
     margin: 0 0.75rem;
   }
 }
+
+.disabled,
+.disabled * {
+  cursor: not-allowed !important;
+}
+
+.disabled * {
+  background-color: #ddd !important;
+}
+
+.disabled * {
+  color: #999 !important;
+}
+
+.explainer {
+  background-color: #222;
+  padding: 0.25rem;
+  color: #eee;
+  font-size: 0.8em;
+  line-height: 1.5;
+}
