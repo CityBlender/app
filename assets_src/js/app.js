@@ -118,7 +118,8 @@ new Vue({
       // console.log(this.map.getLayers())
       this.isLoaded = false
       axios
-        .get('https://fuinki-api.herokuapp.com/london/events/' + this.daySelected.date)
+       // .get('https://fuinki-api.herokuapp.com/london/events/' + this.daySelected.date)
+      .get('https://fuinki-api.herokuapp.com/london/events/2019-07-19')
       .then(response => {
         this.isLoaded = true
         this.events = response.data;
