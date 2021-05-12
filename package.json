@@ -25,7 +25,7 @@
     "babel-preset-env": "1.7.0",
     "babel-preset-es2015-rollup": "3.0.0",
     "browser-sync": "2.24.4",
-    "chart.js": "2.7.2",
+    "chart.js": "2.9.4",
     "gulp": "3.9.1",
     "gulp-autoprefixer": "5.0.0",
     "gulp-clean-css": "3.9.4",
